@@ -10,7 +10,7 @@ $act=$_GET["act"];
 			<?php  
 				switch($_GET["act"])
 				{
-					default :
+					default:
 						?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
@@ -31,9 +31,12 @@ $act=$_GET["act"];
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 									<?php 
 									$no=1;
+									if (isset($_GET['id'])) {
+										$id = $_GET['id'];
+									}
 									if($_SESSION["level"]=="admin")
 									{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek ORDER BY id_aspek ASC");
+										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek WHERE id_spk='$id' ORDER BY id_aspek ASC");
 									}else{
 										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek WHERE id_user='$_SESSION[id_user]' ORDER BY id_aspek ASC");
 									}

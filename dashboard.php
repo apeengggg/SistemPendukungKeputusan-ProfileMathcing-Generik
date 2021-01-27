@@ -137,7 +137,7 @@ include "config/koneksi.php";
                 </a>
               </li>             
               <li class="nav-item ">
-               <a class="nav-link" href="?module=aspek">
+               <a class="nav-link" href="?module=aspek_spk">
                   <i class="material-icons">apps</i>
                   <p> Aspek </p>
                 </a>
@@ -584,6 +584,9 @@ include "config/koneksi.php";
                     break;
                     case "spk" :
                         include "modul/spk/spk.php";
+                    break;
+                    case "aspek_spk" :
+                        include "modul/aspek/spk.php";
                     break;
                     case "aspek" :
                         include "modul/aspek/aspek.php";
