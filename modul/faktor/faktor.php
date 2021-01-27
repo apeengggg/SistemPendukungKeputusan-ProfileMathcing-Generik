@@ -11,6 +11,12 @@ $act=$_GET["act"];
 						switch($_GET["act"])
 						{
 							default :
+							if (isset($_GET['id'])) {
+								$id = $_GET['id'];
+							}
+							if (isset($_GET['id_spk'])) {
+								$id_ = $_GET['id_spk'];
+							}
 								?>
 									<div class="card-header card-header-rose card-header-text">
 					                  <div class="card-text">
@@ -19,7 +25,7 @@ $act=$_GET["act"];
 					                </div>
 					                
 					                <div class="card-body ">
-										<a href="?module=faktor&act=tambah">
+										<a href="?module=faktor&act=tambah_detail&id_aspek=<?=$id?>&id_spk=<?=$id_?>">
 											<button class="btn  btn-youtube">
 					                          <i class="fa fa-plus-square-o"> </i> Tambah Data Faktor
 					                        </button></a>
@@ -72,8 +78,8 @@ $act=$_GET["act"];
 														<td width='10%'>";
 														?>
 															 <center>
-															 <a href='?module=faktor&act=edit&id=<?php echo $r[id_faktor] ?>'  class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>  
-															 <a href='modul/faktor/aksi_faktor.php?module=faktor&act=hapus&id=<?php echo $r[id_faktor] ?>' class='btn  btn-danger btn-just-icon remove'><i class='material-icons' rel='tooltip' title='Hapus' onclick='return confirm("Anda yakin mau menghapus item ini ?")'>close</i></a>
+															 <a href='?module=faktor&act=edit&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>'  class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>  
+															 <a href='modul/faktor/aksi_faktor.php?module=faktor&act=hapus&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn  btn-danger btn-just-icon remove'><i class='material-icons' rel='tooltip' title='Hapus' onclick='return confirm("Anda yakin mau menghapus item ini ?")'>close</i></a>
 																
 														   </center>
 														<?php 
@@ -133,6 +139,12 @@ $act=$_GET["act"];
 							<?php
 							break;
 							case "tambah_detail":
+							if (isset($_GET['id_aspek'])) {
+								$id = $_GET['id_aspek'];
+							}
+							if (isset($_GET['id_spk'])) {
+								$id_ = $_GET['id_spk'];
+							}
 							?>
 								<div class="card-header card-header-rose card-header-text">
 					                  <div class="card-text">
@@ -143,30 +155,22 @@ $act=$_GET["act"];
 					                <div class="card-body ">
 											<form class="form" method="post" action="modul/faktor/aksi_faktor.php?module=faktor&act=simpan">
 												<div class="content">
-													<input type="hidden" name="id_spk" value="<?php echo $_POST['spk'] ?>">
-												    <div class="input-group">
-														<label class="col-sm-4 control-label text-left">Nama Aspek</label>
-														 <!--aspek-->
-			                                            <select id="id_aspek" name="id_aspek" class='form-control'>
-			                                                <option value="">Pilih</option>
-			                                                <?php
-			                                                    $query = mysqli_query($koneksi, "SELECT * FROM aspek WHERE id_spk='$_POST[spk]' ORDER BY nama_aspek");
-                     												 while ($row = mysqli_fetch_array($query)) { ?>
-
-			                                                    <option id="id_aspek" class="<?php echo $row['id_spk']; ?>" value="<?php echo $row['id_aspek']; ?>">
-			                                                        <?php echo $row['nama_aspek']; ?>
-			                                                    </option>
-
-			                                                <?php } ?>
-			                                            </select>
-													</div>
+													<input type="text" name="id_aspek" value="<?= $id ?>">
+													<input type="text" name="id_spk" value="<?= $id_ ?>">
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Nama Faktor</label>
 														<input type="text" name="nama_faktor"  class='form-control' placeholder="Nama Faktor" required>
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Target</label>
-														<input type="text" name="target" class='form-control' placeholder="Target" required>
+														<select name="target" class='form-control' required>
+								                            <option value=''>Pilih Nilai Target ...</option>
+								                            <option value='1'>1 = Sangat Kurang</option>
+								                            <option value='2'>2 = Kurang</option>
+								                            <option value='3'>3 = Cukup</option>
+								                            <option value='4'>4 = Baik</option>
+								                            <option value='5'>5 = Sangat Baik</option>
+														</select>
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Jenis</label>
@@ -200,28 +204,13 @@ $act=$_GET["act"];
 					                
 					                <div class="card-body ">
 											<form class="form" method="post" action="modul/faktor/aksi_faktor.php?module=faktor&act=update">
-												<input type="hidden" name="id_faktor" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_faktor] ?>" readonly>
-												<input type="hidden" name="id_spk" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_spk] ?>" readonly>
+												<input type="text" name="id_faktor" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_faktor] ?>" readonly>
+												<input type="text" name="id_spk" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_spk] ?>" readonly>
+												<input type="text" name="id_aspek" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_aspek] ?>" readonly>
 												<div class="content">
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Nama SPK</label>
 														<input type="text" name="nama_aspek" placeholder="" class='form-control' value="<?php echo $r[nama_spk] ?>" required readonly>
-													</div>
-												    <div class="input-group">
-														<label class="col-sm-4 control-label text-left">Nama Aspek</label>
-														 <!--aspek-->
-			                                            <select id="id_aspek" name="id_aspek" class='form-control'>
-			                                                <option value="<?php echo $r['id_aspek'] ?>"><?php echo $r["nama_aspek"] ?></option>
-			                                                <?php
-			                                                    $query = mysqli_query($koneksi, "SELECT * FROM aspek WHERE aspek.id_spk='$r[id_spk]' ORDER BY nama_aspek");
-			                                                    while ($row = mysqli_fetch_array($query)) { ?>
-
-			                                                    <option id="id_aspek" class="<?php echo $row['id_spk']; ?>" value="<?php echo $row['id_aspek']; ?>">
-			                                                        <?php echo $row['nama_aspek']; ?>
-			                                                    </option>
-
-			                                                <?php } ?>
-			                                            </select>
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Nama Faktor</label>
@@ -229,7 +218,14 @@ $act=$_GET["act"];
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Target</label>
-														<input type="text" name="target" placeholder="" class='form-control' value="<?php echo $r[target] ?>" required>
+														<select name="target" class='form-control' required>
+								                            <option value=''>Pilih Nilai Target ...</option>
+								                            <option value='1'>1 = Sangat Kurang</option>
+								                            <option value='2'>2 = Kurang</option>
+								                            <option value='3'>3 = Cukup</option>
+								                            <option value='4'>4 = Baik</option>
+								                            <option value='5'>5 = Sangat Baik</option>
+														</select>
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Jenis</label>

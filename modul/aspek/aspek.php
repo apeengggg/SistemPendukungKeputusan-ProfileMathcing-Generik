@@ -132,7 +132,7 @@ $act=$_GET["act"];
 								       
 								       echo "<tr>
 								       			<td>$no</td>
-								       			<td><a href=?module=faktor&id=$r[id_aspek]>$r[nama_aspek]</a>
+								       			<td><a href=?module=faktor&id=$r[id_aspek]&id_spk=$r[id_spk]>$r[nama_aspek]</a>
 								       			</td>
 											</tr>";
 								      $no++;

@@ -14,19 +14,22 @@ else{
 
 	// Hapus faktor
 	if ($module=='faktor' AND $act=='hapus'){
-		$hapus =mysqli_query($koneksi,"DELETE FROM faktor WHERE id_faktor='$_GET[id]'");
+		$idaspek = $_GET['id_aspek'];
+		$idspk = $_GET['id_spk'];
+		$idfaktor = $_GET['id_faktor'];
+		$hapus =mysqli_query($koneksi,"DELETE FROM faktor WHERE id_faktor='$_GET[id_faktor]'");
 	  if ($hapus) {
 			?>
 	  		<script type="text/javascript">
 					window.alert("Data berhasil dihapus");
-					window.location="../../dashboard.php?module=faktor";
+					window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 			</script>
 	  		<?php
 	  		}else{
 	  		?>
 	  		<script type="text/javascript">
 					window.alert("Data gagal dihapus");
-					window.location="../../dashboard.php?module=faktor";
+					window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 		</script>
 	  	<?php
 	}
@@ -34,14 +37,15 @@ else{
 }
 	// tambah faktor
 	elseif ($module=='faktor' AND $act=='simpan'){
+		$idaspek = $_POST['id_aspek'];
 		$name=$_POST['nama_faktor'];
 		$idspk=$_POST['id_spk'];
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM faktor Where nama_faktor='$name' AND id_spk=$idspk");
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM faktor WHERE nama_faktor='$name' AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
 			?>
 		<script type="text/javascript">
 					window.alert("Nama Faktor Sudah Ada, Gagal Menambahkan Faktor!");
-					window.location="../../dashboard.php?module=faktor";
+					window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 		</script>
 			<?php
 		}else{
@@ -62,14 +66,14 @@ else{
 				?>
 					<script type="text/javascript">
 						window.alert("Data berhasil ditambah");
-						window.location="../../dashboard.php?module=faktor";
+						window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 					</script>
 				<?php 
 				}else{
 					?>
 						<script type="text/javascript">
 							window.alert("Data gagal ditambah");
-							window.location="../../dashboard.php?module=faktor";
+							window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 						</script>
 					<?php 
 				}
@@ -79,6 +83,7 @@ else{
 
 	// edit faktor
 	elseif ($module=='faktor' AND $act=='update'){
+			$idaspek = $_POST['id_aspek'];
 			$name=$_POST['nama_faktor'];
 			$idspk=$_POST['id_spk'];
 			$aspek_lama = mysqli_query($koneksi, "SELECT nama_faktor FROM faktor WHERE id_spk='$idspk'");
@@ -90,7 +95,7 @@ else{
 			?>
 				<script type="text/javascript">
 					window.alert("Nama Faktor Sudah Ada, Gagal Menambahkan Faktor!");
-					window.location="../../dashboard.php?module=faktor";
+					window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 				</script>
 			<?php
 			}else{
@@ -104,14 +109,14 @@ else{
 					?>
 						<script type="text/javascript">
 							window.alert("Data berhasil diubah");
-							window.location="../../dashboard.php?module=faktor";
+							window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 						</script>
 					<?php 
 					}else{
 						?>
 							<script type="text/javascript">
 								window.alert("Data gagal diubah");
-								window.location="../../dashboard.php?module=faktor";
+								window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 							</script>
 						<?php 
 					}
@@ -128,14 +133,14 @@ else{
 					?>
 						<script type="text/javascript">
 							window.alert("Data berhasil diubah");
-							window.location="../../dashboard.php?module=faktor";
+							window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 						</script>
 					<?php 
 					}else{
 						?>
 							<script type="text/javascript">
 								window.alert("Data gagal diubah");
-								window.location="../../dashboard.php?module=faktor";
+								window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
 							</script>
 						<?php 
 					}
