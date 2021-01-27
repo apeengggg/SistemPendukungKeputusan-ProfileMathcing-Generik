@@ -28,13 +28,16 @@ $act=$_GET["act"];
 											$no=1;
 											if($_SESSION["level"]=="admin")
 											{
+												if (isset($_GET['id'])) {
+													$id = $_GET['id'];
+												}
 												$tampil = mysqli_query($koneksi,"SELECT * FROM faktor, aspek, spk  
-													WHERE faktor.aspek=aspek.id_aspek  
+													WHERE id_aspek='$id' AND faktor.aspek=aspek.id_aspek  
 													AND aspek.id_spk=spk.id_spk 
 													ORDER BY spk.id_spk, aspek, id_aspek, faktor.id_faktor ASC");
 											}else{
 												$tampil = mysqli_query($koneksi,"SELECT * FROM faktor, aspek, spk 
-													WHERE faktor.aspek=aspek.id_aspek 
+													WHERE id_aspek='$id' AND faktor.aspek=aspek.id_aspek 
 													AND faktor.id_user='$_SESSION[id_user]' 
 													AND aspek.id_spk=spk.id_spk 
 													ORDER BY spk.id_spk, aspek, id_aspek, faktor.id_faktor ASC");

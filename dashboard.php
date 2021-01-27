@@ -143,7 +143,7 @@ include "config/koneksi.php";
                 </a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link" href="?module=faktor">
+                <a class="nav-link" href="?module=faktor_spk">
                   <i class="material-icons">apps</i>
                   <p> Faktor </p>
                 </a>
@@ -593,6 +593,9 @@ include "config/koneksi.php";
                     break;
                     case "faktor" :
                         include "modul/faktor/faktor.php";
+                    break;
+                    case "faktor_spk" :
+                        include "modul/faktor/spk.php";
                     break;
                     case "bobot" :
                         include "modul/bobot/bobot.php";

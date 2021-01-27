@@ -86,6 +86,66 @@ $act=$_GET["act"];
 						<?php
 					break;
 
+					case "view_aspek":
+					?>
+
+					<div class="card-header card-header-rose card-header-text">
+		                  <div class="card-text">
+		                    <h4 class="card-title">Data Aspek</h4>
+		                  </div>
+		                </div>
+		                
+		                <div class="card-body ">
+							<!-- <a href="?module=aspek&act=tambah">
+								<button class="btn  btn-youtube">
+	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Aspek
+	                        	</button>
+	                       	</a>
+	                       <div class="box-body">
+          				<div class="alert alert-success" role="alert">
+         				 		Persentase Aspek Harus 100% dari Jumlah Aspek, dan Jumlah Presentase Bobot Core dan Bobot Secondary Harus 100%
+         				 </div> -->
+							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+									<?php 
+									$no=1;
+									if (isset($_GET['id'])) {
+										$id = $_GET['id'];
+									}
+									if($_SESSION["level"]=="admin")
+									{
+										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek WHERE id_spk='$id' ORDER BY id_aspek ASC");
+									}else{
+										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek WHERE id_user='$_SESSION[id_user]' ORDER BY id_aspek ASC");
+									}
+								      echo "
+								          <thead>
+											<tr>
+												<th width=''>No</th>
+												<th>Nama Aspek</th>
+											</tr>
+										</thead>
+									<tbody>"; 
+								    $no=1;
+								    while ($r=mysqli_fetch_array($tampil)){
+								       
+								       echo "<tr>
+								       			<td>$no</td>
+								       			<td><a href=?module=faktor&id=$r[id_aspek]>$r[nama_aspek]</a>
+								       			</td>
+											</tr>";
+								      $no++;
+								    }
+								    echo "</tbody>
+											
+										</table>";
+									?>
+									</div>
+								</div>
+							</div>
+						?>
+				<?php
+					break;
+
 					case "tambah":
 					?>
 						<div class="card-header card-header-rose card-header-text">
