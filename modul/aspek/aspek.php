@@ -68,8 +68,8 @@ $act=$_GET["act"];
 												<td width='10%'>";
 												?>
 													 <center>
-													 <a href='?module=aspek&act=edit&id=<?php echo $r[id_aspek] ?>' class='btn btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a> 
-													 <a href='modul/aspek/aksi_aspek.php?module=aspek&act=hapus&id=<?php echo $r[id_aspek] ?>' class='btn btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a>
+													 <a href='?module=aspek&act=edit&id=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a> 
+													 <a href='modul/aspek/aksi_aspek.php?module=aspek&act=hapus&id=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a>
 														
 												   </center>
 												   <?php 
@@ -197,7 +197,12 @@ $act=$_GET["act"];
 					break;
 
 					case "edit" :
-
+					if (isset($_GET['id'])) {
+						$id = $_GET['id'];
+					}
+					if (isset($_GET['id_spk'])) {
+						$id_ = $_GET['id_spk'];
+					}
 					$edit=mysqli_query($koneksi,"SELECT * FROM aspek, spk where aspek.id_aspek='$_GET[id]' AND aspek.id_spk=spk.id_spk");
 					$r=mysqli_fetch_array($edit);
 					?>
@@ -211,29 +216,8 @@ $act=$_GET["act"];
 									<form class="form" method="post" action="modul/aspek/aksi_aspek.php?module=aspek&act=update">
 										<div class="content">
 										    
-											<input type="hidden" name="id_aspek" placeholder="Kode Aspek" class='form-control' value="<?php echo $r[id_aspek] ?>">
-											
-											
-											<div class="input-group">
-												<label class="col-sm-4 control-label text-left">SPK</label>
-												<select name="id_spk" class='form-control' required>
-													<option value="<?php echo $r[id_spk] ?>"><?php echo $r[nama_spk] ?></option>
-													<?php  
-													if($_SESSION["level"]=='admin')
-													{
-														$sql="SELECT * FROM spk ORDER BY id_spk ASC";
-													}else{
-														$sql="SELECT * FROM spk WHERE id_user='$_SESSION[id_user]' ORDER BY id_spk ASC";
-													}
-													$query=mysqli_query($koneksi,$sql);
-													while($data=mysqli_fetch_array($query))
-													{
-														?>
-															<option value="<?php echo $data["id_spk"] ?>"><?php echo $data["nama_spk"] ?></option>
-														<?php 																		}
-													?>
-												</select>
-											</div>
+											<input type="text" name="id_aspek" placeholder="Kode Aspek" class='form-control' value="<?=$id ?>">
+											<input type="text" name="id_spk" class='form-control' value="<?=$id_ ?>">
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Nama Aspek</label>
 												<input type="text" name="nama_aspek" class='form-control' value="<?php echo $r[nama_aspek] ?>" required>

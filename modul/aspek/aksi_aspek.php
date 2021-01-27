@@ -13,19 +13,20 @@ else{
 
 	// Hapus aspek
 	if ($module=='aspek' AND $act=='hapus'){
+		$idspk = $_GET['id_spk'];
 		$hapus = mysqli_query($koneksi,"DELETE FROM aspek WHERE id_aspek='$_GET[id]'");
 	  if ($hapus) {
 			?>
 	  		<script type="text/javascript">
 					window.alert("Data berhasil dihapus");
-					window.location="../../dashboard.php?module=aspek";
+					window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 			</script>
 	  		<?php
 	  		}else{
 	  		?>
 	  		<script type="text/javascript">
 					window.alert("Data gagal dihapus");
-					window.location="../../dashboard.php?module=aspek";
+					window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 		</script>
 	  	<?php
 	}
@@ -36,12 +37,14 @@ else{
 	elseif ($module=='aspek' AND $act=='simpan'){
 		$name=$_POST['nama_aspek'];
 		$idspk=$_POST['id_spk'];
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE nama_aspek='$name' OR AND id_spk=$idspk");
+		$init = $_POST['Inisial'];
+		// var_dump($_POST); die;
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
 			?>
 		<script type="text/javascript">
-					window.alert("Nama Aspek Sudah Ada, Gagal Menambahkan Aspek!");
-					window.location="../../dashboard.php?module=aspek";
+					window.alert("Nama Aspek / Initial Nama Sudah Ada, Gagal Menambahkan Aspek!");
+					window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 		</script>
 			<?php
 		}else{
@@ -58,7 +61,7 @@ else{
 														'$_POST[bobot]', 
 														'$_POST[bobot_core]', 
 														'$_POST[bobot_secondary]', 
-														'$_POST[nama_singkat]',
+														'$_POST[Inisial]',
 														'$_POST[id_spk]',
 														'$_SESSION[id_user]')") or die (mysqli_error($koneksi));
 
@@ -66,14 +69,14 @@ else{
 				?>
 					<script type="text/javascript">
 						window.alert("Data berhasil ditambah");
-						window.location="../../dashboard.php?module=aspek";
+						window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 					</script>
 				<?php 
 				}else{
 					?>
 						<script type="text/javascript">
 							window.alert("Data gagal ditambah");
-							window.location="../../dashboard.php?module=aspek";
+							window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 						</script>
 					<?php 
 				}
@@ -92,7 +95,9 @@ else{
 	// edit aspek
 	elseif ($module=='aspek' AND $act=='update'){
 		$name=$_POST['nama_aspek'];
-		$idspk=$_POST['id_spk'];
+		$idspk = $_POST['id_spk'];
+		$id_aspekk = $_POST['id_aspek'];
+		// var_dump($_GET); var_dump($_POST); die;
 		$aspek_lama = mysqli_query($koneksi, "SELECT nama_aspek FROM aspek WHERE id_spk='$idspk'");
 		$res_aspek = mysqli_fetch_array($aspek_lama);
 		$aspek_l = $res_aspek['nama_aspek'];
@@ -101,8 +106,8 @@ else{
 		if (mysqli_num_rows($ceknama)>0) {
 		?>
 			<script type="text/javascript">
-				window.alert("Nama Aspek Sudah Ada, Gagal Menambahkan Aspek!");
-				window.location="../../dashboard.php?module=aspek";
+				window.alert("Nama Aspek Sudah Ada, Gagal Merubah Aspek!");
+				window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 			</script>
 		<?php
 		}else{
@@ -112,21 +117,20 @@ else{
 				  												 bobot 				='$_POST[bobot]',  
 				  												 bobot_core 		='$_POST[bobot_core]', 
 				  												 bobot_secondary	='$_POST[bobot_secondary]',  
-				  												 nama_singkat 		='$_POST[nama_singkat]',
-				  												 id_spk 			='$_POST[id_spk]' 
-									   						  WHERE  id_aspek    	= '$_POST[id_aspek]'")or die (mysqli_error($koneksi));
+				  												 nama_singkat 		='$_POST[nama_singkat]'
+									   						  	 WHERE  id_aspek    	= '$_POST[id_aspek]'")or die (mysqli_error($koneksi));
 				  if($query){
 					?>
 						<script type="text/javascript">
 							window.alert("Data berhasil diubah");
-							window.location="../../dashboard.php?module=aspek";
+							window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 						</script>
 					<?php 
 					}else{
 						?>
 							<script type="text/javascript">
 								window.alert("Data gagal diubah");
-								window.location="../../dashboard.php?module=aspek";
+								window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 							</script>
 						<?php 
 					}
@@ -135,7 +139,7 @@ else{
 				?>
 				<script type="text/javascript">
 					window.alert("Simpan data gagal. Bobot Core + Bobot Secondary Kurang dari 100%");
-					window.location="../../dashboard.php?module=aspek";
+					window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 				</script>
 			<?php 
 	}
@@ -148,20 +152,19 @@ else{
 				  												 bobot_core 		='$_POST[bobot_core]', 
 				  												 bobot_secondary	='$_POST[bobot_secondary]',  
 				  												 nama_singkat 		='$_POST[nama_singkat]',
-				  												 id_spk 			='$_POST[id_spk]' 
 									   						  WHERE  id_aspek    	= '$_POST[id_aspek]'")or die (mysqli_error($koneksi));
 				  if($query){
 					?>
 						<script type="text/javascript">
 							window.alert("Data berhasil diubah");
-							window.location="../../dashboard.php?module=aspek";
+							window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 						</script>
 					<?php 
 					}else{
 						?>
 							<script type="text/javascript">
 								window.alert("Data gagal diubah");
-								window.location="../../dashboard.php?module=aspek";
+								window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 							</script>
 						<?php 
 					}
@@ -170,7 +173,7 @@ else{
 				?>
 				<script type="text/javascript">
 					window.alert("Simpan data gagal. Bobot Core + Bobot Secondary Kurang dari 100%");
-					window.location="../../dashboard.php?module=aspek";
+					window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 				</script>
 			<?php 
 	}
