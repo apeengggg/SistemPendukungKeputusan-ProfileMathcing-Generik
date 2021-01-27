@@ -149,13 +149,13 @@ include "config/koneksi.php";
                 </a>
               </li>
                 <li class="nav-item ">
-                  <a class="nav-link" href="?module=bobot">
+                  <a class="nav-link" href="?module=bobot_spk">
                     <i class="material-icons">apps</i>
                     <p> Bobot </p>
                   </a>
               </li>
                 <li class="nav-item ">
-                  <a class="nav-link" href="?module=alternatif">
+                  <a class="nav-link" href="?module=alternatif_spk">
                     <i class="material-icons">person</i>
                     <p> Kandidat </p>
                   </a>
@@ -600,8 +600,14 @@ include "config/koneksi.php";
                     case "bobot" :
                         include "modul/bobot/bobot.php";
                     break;
+                    case "bobot_spk" :
+                        include "modul/bobot/spk.php";
+                    break;
                     case "alternatif" :
                         include "modul/alternatif/alternatif.php";
+                    break;
+                    case "alternatif_spk" :
+                        include "modul/alternatif/spk.php";
                     break;
                     case "promatch" :
                         include "modul/promatch/promatch.php";

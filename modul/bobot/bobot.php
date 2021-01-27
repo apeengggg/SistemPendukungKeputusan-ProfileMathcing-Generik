@@ -29,9 +29,12 @@ $act=$_GET["act"];
 									$no=1;
 									if($_SESSION["level"]=="admin")
 										{
-											$tampil=mysqli_query($koneksi, "SELECT bobot.*, spk.nama_spk FROM bobot, spk WHERE bobot.id_spk=spk.id_spk ORDER BY bobot.id_spk ASC");
+											if (isset($_GET['id'])) {
+												$id = $_GET['id'];
+											}
+											$tampil=mysqli_query($koneksi, "SELECT bobot.*, spk.nama_spk FROM bobot, spk WHERE bobot.id_spk ='$id' AND bobot.id_spk=spk.id_spk ORDER BY bobot.id_spk ASC");
 										}else{
-											$tampil=mysqli_query($koneksi, "SELECT bobot.*, spk.nama_spk FROM bobot, spk WHERE bobot.id_user='$_SESSION[id_user]' AND bobot.id_spk=spk.id_spk ORDER BY bobot.id_spk ASC");
+											$tampil=mysqli_query($koneksi, "SELECT bobot.*, spk.nama_spk FROM bobot, spk WHERE bobot.id_spk ='$id' AND bobot.id_user='$_SESSION[id_user]' AND bobot.id_spk=spk.id_spk ORDER BY bobot.id_spk ASC");
 										}
 								      echo "
 								          <thead>

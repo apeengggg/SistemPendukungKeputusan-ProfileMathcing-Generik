@@ -11,15 +11,17 @@ $act=$_GET["act"];
 				switch($_GET["act"])
 				{
 					default:
+					if (isset($_GET['id'])) {
+						$id = $_GET['id'];
+					}
 						?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
 		                    <h4 class="card-title">Data Aspek</h4>
 		                  </div>
 		                </div>
-		                
 		                <div class="card-body ">
-							<a href="?module=aspek&act=tambah">
+							<a href="?module=aspek&act=tambah&id=<?=$id?>">
 								<button class="btn  btn-youtube">
 	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Aspek
 	                        	</button>
@@ -147,6 +149,9 @@ $act=$_GET["act"];
 					break;
 
 					case "tambah":
+					if (isset($_GET['id'])) {
+						$id = $_GET['id'];
+					}
 					?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
@@ -157,28 +162,9 @@ $act=$_GET["act"];
 		                <div class="card-body ">
 									<form class="form" method="post" action="modul/aspek/aksi_aspek.php?module=aspek&act=simpan">
 										<div class="content">
-											<div class="input-group">
-												<label class="col-sm-4 control-label text-left">SPK</label>
-												<select name="id_spk" class='form-control' required>
-													<option value="">Pilih SPK</option>
-													<?php  
-													if($_SESSION["level"]=='admin')
-													{
-														$sql="SELECT * FROM spk ORDER BY id_spk ASC";
-													}else{
-														$sql="SELECT * FROM spk WHERE id_user='$_SESSION[id_user]' ORDER BY id_spk ASC";
-													}
-													$query=mysqli_query($koneksi,$sql);
-													while($data=mysqli_fetch_array($query))
-													{
-														?>
-															<option value="<?php echo $data["id_spk"] ?>"><?php echo $data["nama_spk"] ?></option>
-														<?php 																		}
-													?>
-												</select>
-											</div>
 										    <div class="input-group">
 												<label class="col-sm-4 control-label text-left">Nama Aspek</label>
+												<input type="hidden" name="id_spk" class='form-control' value="<?=$id?>" required>
 												<input type="text" name="nama_aspek" class='form-control' placeholder="Nama Aspek" required>
 											</div>
 		

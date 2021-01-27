@@ -36,7 +36,7 @@ else{
 	elseif ($module=='aspek' AND $act=='simpan'){
 		$name=$_POST['nama_aspek'];
 		$idspk=$_POST['id_spk'];
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE nama_aspek='$name' AND id_spk=$idspk");
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE nama_aspek='$name' OR AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
 			?>
 		<script type="text/javascript">

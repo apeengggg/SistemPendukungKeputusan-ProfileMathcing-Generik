@@ -90,7 +90,7 @@ $act=$_GET["act"];
 											AND aspek.id_spk=spk.id_spk
 											AND aspek.id_aspek=faktor.aspek
 											AND nilai.id_spk='$_GET[id_spk]' 
-											ORDER BY alternatif.id_alternatif, aspek.id_aspek, faktor.id_faktor  ASC") or die(mysqli_error($koneksi));
+											ORDER BY alternatif.id_alternatif") or die(mysqli_error($koneksi));
 									}else{
 										$tampil = mysqli_query($koneksi,"SELECT * FROM nilai, spk, aspek, faktor, alternatif 
 											WHERE nilai.faktor=faktor.id_faktor 
@@ -214,7 +214,7 @@ $act=$_GET["act"];
 												<select name="id_alternatif" class='form-control' required>
 													<option value="">Pilih Alternatif</option>
 													<?php  
-													$sql="SELECT * FROM alternatif WHERE id_user='$_SESSION[id_user]' AND id_spk='$_GET[id_spk]' ORDER BY id_alternatif ASC";
+													$sql="SELECT * FROM alternatif WHERE id_spk='$_GET[id_spk]' ORDER BY id_alternatif ASC";
 													$query=mysqli_query($koneksi,$sql);
 													while($data=mysqli_fetch_array($query))
 													{
