@@ -216,8 +216,8 @@ $act=$_GET["act"];
 									<form class="form" method="post" action="modul/aspek/aksi_aspek.php?module=aspek&act=update">
 										<div class="content">
 										    
-											<input type="text" name="id_aspek" placeholder="Kode Aspek" class='form-control' value="<?=$id ?>">
-											<input type="text" name="id_spk" class='form-control' value="<?=$id_ ?>">
+											<input type="hidden" name="id_aspek" placeholder="Kode Aspek" class='form-control' value="<?=$id ?>">
+											<input type="hidden" name="id_spk" class='form-control' value="<?=$id_ ?>">
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Nama Aspek</label>
 												<input type="text" name="nama_aspek" class='form-control' value="<?php echo $r[nama_aspek] ?>" required>

@@ -159,13 +159,7 @@ include "config/koneksi.php";
                     <i class="material-icons">person</i>
                     <p> Kandidat </p>
                   </a>
-              </li> 
-                <li class="nav-item ">
-                  <a class="nav-link" href="?module=nilai">
-                    <i class="material-icons">content_paste</i>
-                    <p> Nilai Profile </p>
-                  </a>
-              </li>             
+              </li>              
                 <li class="nav-item ">
                   <a class="nav-link" href="?module=promatch">
                     <i class="material-icons">star</i>
@@ -191,47 +185,18 @@ include "config/koneksi.php";
             {
                   ?>
                       <ul class="nav">
-                          <li class="nav-item active ">
+                          <li class="nav-item">
                             <a class="nav-link" href="?module=home">
                               <i class="material-icons">dashboard</i>
                               <p> Dashboard </p>
                             </a>
-                          </li>
-                          <li class="nav-item ">
-                            <a class="nav-link" href="?module=spk">
-                              <i class="material-icons">equalizer</i>
-                              <p> SPK
-                              </p>
-                            </a>
-                          </li>
-                          <li class="nav-item ">
-                            <a class="nav-link" href="?module=aspek">
-                              <i class="material-icons">apps</i>
-                              <p> Aspek
-                              </p>
-                            </a>
-                          </li>
-                          <li class="nav-item ">
-                            <a class="nav-link" href="?module=faktor">
-                              <i class="material-icons">apps</i>
-                              <p> Faktor
-                              </p>
-                            </a>
-                          </li>
+                          
                           <li class="nav-item ">
                             <a class="nav-link" href="?module=alternatif">
                               <i class="material-icons">person</i>
-                              <p> Alternatif
-                              </p>
+                              <p> Kandidat </p>
                             </a>
-                          </li> 
-                          <li class="nav-item ">
-                            <a class="nav-link" href="?module=nilai">
-                              <i class="material-icons">content_paste</i>
-                              <p> Nilai Profile
-                              </p>
-                            </a>
-                          </li>             
+                          </li>              
                           <li class="nav-item ">
                             <a class="nav-link" href="?module=promatch">
                               <i class="material-icons">star</i>

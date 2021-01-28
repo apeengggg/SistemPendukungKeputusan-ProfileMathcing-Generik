@@ -72,9 +72,9 @@ $act=$_GET["act"];
 		                </div>
 		                
 		                <div class="card-body ">
-							<a href="?module=nilai&act=tambah">
+							<a href="?module=nilai&act=tambahdetail&id_spk">
 								<button class="btn  btn-youtube">
-	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Nilai
+	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Alternatif
 	                        	</button>
 	                       	</a>
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
@@ -149,7 +149,7 @@ $act=$_GET["act"];
 					?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
-		                    <h4 class="card-title">Form Nilai</h4>
+		                    <h4 class="card-title">Form Data Alternatif</h4>
 		                  </div>
 		                </div>
 		                
@@ -201,7 +201,7 @@ $act=$_GET["act"];
 					?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
-		                    <h4 class="card-title">Form Nilai</h4>
+		                    <h4 class="card-title">Form Data alternatif</h4>
 		                  </div>
 		                </div>
 		                

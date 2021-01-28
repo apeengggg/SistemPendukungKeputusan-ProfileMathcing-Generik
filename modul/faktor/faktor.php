@@ -6,7 +6,7 @@ $act=$_GET["act"];
 <div class="row">
 		<div class="col-md-12">
           <div class="card ">
-								
+								 
 					<?php  
 						switch($_GET["act"])
 						{
@@ -55,7 +55,7 @@ $act=$_GET["act"];
 														<th>SPK</th>
 														<th>Aspek</th>
 														<th>Nama Faktor</th>	
-														<th>Target</th>
+														<th>Nilai Target</th>
 														<th>Jenis</th>
 														<th>Aksi</th>
 													</tr>
@@ -155,8 +155,8 @@ $act=$_GET["act"];
 					                <div class="card-body ">
 											<form class="form" method="post" action="modul/faktor/aksi_faktor.php?module=faktor&act=simpan">
 												<div class="content">
-													<input type="text" name="id_aspek" value="<?= $id ?>">
-													<input type="text" name="id_spk" value="<?= $id_ ?>">
+													<input type="hidden" name="id_aspek" value="<?= $id ?>">
+													<input type="hidden" name="id_spk" value="<?= $id_ ?>">
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Nama Faktor</label>
 														<input type="text" name="nama_faktor"  class='form-control' placeholder="Nama Faktor" required>
@@ -204,14 +204,14 @@ $act=$_GET["act"];
 					                
 					                <div class="card-body ">
 											<form class="form" method="post" action="modul/faktor/aksi_faktor.php?module=faktor&act=update">
-												<input type="text" name="id_faktor" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_faktor] ?>" readonly>
-												<input type="text" name="id_spk" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_spk] ?>" readonly>
-												<input type="text" name="id_aspek" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_aspek] ?>" readonly>
+												<input type="hidden" name="id_faktor" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_faktor] ?>" readonly>
+												<input type="hidden" name="id_spk" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_spk] ?>" readonly>
+												<input type="hidden" name="id_aspek" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_aspek] ?>" readonly>
 												<div class="content">
-													<div class="input-group">
+													<!-- <div class="input-group">
 														<label class="col-sm-4 control-label text-left">Nama SPK</label>
 														<input type="text" name="nama_aspek" placeholder="" class='form-control' value="<?php echo $r[nama_spk] ?>" required readonly>
-													</div>
+													</div> -->
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Nama Faktor</label>
 														<input type="text" name="nama_faktor" value="<?php echo $r['nama_faktor'] ?>" class='form-control' placeholder="Nama Faktor" required>
@@ -237,7 +237,7 @@ $act=$_GET["act"];
 						                                		$jenis="Secondary";
 						                                	}
 						                                ?>
-						                                	<option value="<?php echo $r['jenis'] ?>"><?php echo $jenis ?></option>
+						                                	<option value=''>Pilih Jenis ...</option>
 						                                    <option value="1">Core</option>
 						                                    <option value="2">Secondary</option>
 						                                </select>

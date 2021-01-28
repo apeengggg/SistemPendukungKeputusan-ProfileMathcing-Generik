@@ -69,7 +69,7 @@ else{
 				?>
 					<script type="text/javascript">
 						window.alert("Data berhasil ditambah");
-						window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
+						window.location="../../dashboard.php?module=aspek&act=tambah&id>";
 					</script>
 				<?php 
 				}else{

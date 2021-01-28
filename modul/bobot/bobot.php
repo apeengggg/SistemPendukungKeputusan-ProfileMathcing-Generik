@@ -11,6 +11,9 @@ $act=$_GET["act"];
 				switch($_GET["act"])
 				{
 					default :
+					if (isset($_GET['id'])) {
+						$id = $_GET['id'];
+					}
 						?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
@@ -19,7 +22,7 @@ $act=$_GET["act"];
 		                </div>
 		                
 		                <div class="card-body ">
-							<a href="?module=bobot&act=tambah">
+							<a href="?module=bobot&act=tambah&id=<?=$id?>">
 								<button class="btn  btn-youtube">
 	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Bobot
 	                        	</button>
@@ -62,8 +65,7 @@ $act=$_GET["act"];
 												<td width='10%'>";
 												?>
 													 <center>
-													 <a href='?module=bobot&act=edit&id=<?php echo $r[id_bobot] ?>' class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>  
-													 <a href='modul/bobot/aksi_bobot.php?module=bobot&act=hapus&id=<?php echo $r[id_bobot] ?>' class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a>
+													 <a href='modul/bobot/aksi_bobot.php?module=bobot&act=hapus&id=<?php echo $r[id_bobot]?>&idspk=<?=$r[id_spk]?>' class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a>
 														
 												   </center>
 												   <?php 
@@ -83,6 +85,9 @@ $act=$_GET["act"];
 					break;
 
 					case "tambah":
+					if (isset($_GET['id'])) {
+						$id = $_GET['id'];
+					}
 					?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
@@ -93,34 +98,22 @@ $act=$_GET["act"];
 		                <div class="card-body ">
 									<form class="form" method="post" action="modul/bobot/aksi_bobot.php?module=bobot&act=simpan">
 										<div class="content">
-											<div class="input-group">
-												<label class="col-sm-4 control-label text-left">SPK</label>
-												<select name="id_spk" class='form-control' required>
-													<option value="">Pilih SPK</option>
-													<?php  
-													$sql="SELECT * FROM spk WHERE id_user='$_SESSION[id_user]' ORDER BY id_spk ASC";
-													$query=mysqli_query($koneksi,$sql);
-													while($data=mysqli_fetch_array($query))
-													{
-														?>
-															<option value="<?php echo $data["id_spk"] ?>"><?php echo $data["nama_spk"] ?></option>
-														<?php 																		}
-													?>
-												</select>
-											</div>
 										    <div class="input-group">
-												<label class="col-sm-4 control-label text-left">Selisih</label>
-												<input type="text" name="selisih" class='form-control' placeholder="Selisih" required>
+												<input type="text" name="id_spk" class='form-control' value="<?=$id?>" required>
 											</div>
-		
-											<div class="input-group">
-												<label class="col-sm-4 control-label text-left">Bobot</label>
-												<input type="text" name="bobot" class='form-control' placeholder="Bobot" required>
-											</div>
-											<div class="input-group">
-												<label class="col-sm-4 control-label text-left">Keterangan</label>
-												<input type="text" name="keterangan" class='form-control' placeholder="Keterangan" required>
-											</div>
+											<select name="keterangan" id="keterangan" class='form-control' required>
+												<option value="">Pilih Keterangan ...</option>
+												<option value="0">K- -4</option>
+												<option value="1">K- -3</option>
+												<option value="2">K- -2</option>
+												<option value="3">K- -1</option>
+												<option value="4">K-0</option>
+												<option value="5">K-1</option>
+												<option value="6">K-2</option>
+												<option value="7">K-3</option>
+												<option value="8">K-4</option>
+
+											</select>
 											
 										</div>
 										<div class="footer text-center">
