@@ -190,7 +190,12 @@ include "config/koneksi.php";
                               <i class="material-icons">dashboard</i>
                               <p> Dashboard </p>
                             </a>
-                          
+                            <li class="nav-item ">
+                            <a class="nav-link" href="?module=alternatif_user">
+                              <i class="material-icons">person</i>
+                              <p> SPK </p>
+                            </a>
+                          </li>  
                           <li class="nav-item ">
                             <a class="nav-link" href="?module=alternatif">
                               <i class="material-icons">person</i>
@@ -571,6 +576,9 @@ include "config/koneksi.php";
                     case "alternatif" :
                         include "modul/alternatif/alternatif.php";
                     break;
+                    case "alternatif_user" :
+                      include "modul/alternatif/alternatif_user.php";
+                  break;
                     case "alternatif_spk" :
                         include "modul/alternatif/spk.php";
                     break;
