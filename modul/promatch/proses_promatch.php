@@ -1,13 +1,14 @@
 <?php 
 include "config/koneksi.php";
 //cek tabel nilai
-$sql=mysqli_query($koneksi, "SELECT * FROM spk_user su INNER JOIN spk s ON su.id_spk = s.id_spk WHERE su.id_spkuser='$_POST[id_spkuser]'");
+$sql=mysqli_query($koneksi, "SELECT su.id_spkuser, su.id_user, su.ket, su.tgl, s.nama_spk, s.id_spk, s.keterangan, s.tanggal, s.id_user FROM spk_user su INNER JOIN spk s ON su.id_spk = s.id_spk WHERE su.id_spkuser='$_POST[id_spkuser]'");
 $data=mysqli_fetch_array($sql);
+// echo $data[id_spk]; die;
 $jumlah=mysqli_num_rows($sql);
 
 if($jumlah>0)
 {
-	$sql2=mysqli_query($koneksi, "SELECT * FROM nilai n INNER JOIN alternatif a ON n.id_alternatif=a.id_alternatif INNER JOIN spk_user su ON a.id_spkuser=su.id_spkusers WHERE n.id_alternatif=a.id_alternatif AND alternatif.id_spkuser='$data[id_spkuser]'");
+	$sql2=mysqli_query($koneksi, "SELECT * FROM nilai n INNER JOIN alternatif a ON n.id_alternatif=a.id_alternatif INNER JOIN spk_user su ON a.id_spkuser=su.id_spkuser WHERE n.id_alternatif=a.id_alternatif AND a.id_spkuser='$data[id_spkuser]'");
 	$jumlah2=mysqli_num_rows($sql2);
 	if($jumlah2<1)
 	{
@@ -49,6 +50,7 @@ $act=$_GET["act"];
 				{
 					$bobot[$row['selisih']]=$row['bobot'];
 				}
+			// print_r($bobot); 
 		//---------------------Menyimpan tabel sample dalam array---------------------
 			$sql="SELECT * FROM nilai WHERE id_spkuser='$data[id_spkuser]'";
 			$hasil=mysqli_query($koneksi,$sql);
@@ -56,6 +58,7 @@ $act=$_GET["act"];
 				{
 					$nilai_sample[$row['id_alternatif']][$row['faktor']]=$row['nilai'];
 				}
+			// print_r($nilai_sample); die;
 		//---------------------Menyimpan tabel alternatif dalam array---------------------		
         	$nama_alternatif=array();
 			$nilai_akhir=array();
@@ -66,6 +69,7 @@ $act=$_GET["act"];
 					$nama_alternatif[$row['id_alternatif']]=$row['nama_alternatif'];
 					$nilai_akhir[$row['id_alternatif']]=0;
 				}
+				// print_r($nilai_akhir); die;
 		//---------------------Menyimpan tabel aspek dalam array---------------------		
 			$nama_aspek=array(); 
 			$nama_singkat=array(); 
@@ -74,7 +78,7 @@ $act=$_GET["act"];
 			$ba_cf=array();
 			$ba_sf=array();
 			$sql="SELECT *,(SELECT COUNT(id_faktor) FROM faktor WHERE aspek=id_aspek) AS jum_kolom 
-				 FROM aspek WHERE id_spkuser='$_POST[id_spk]' ORDER BY id_aspek ASC";
+				 FROM aspek WHERE id_spk='$data[id_spk]' ORDER BY id_aspek ASC";
 
 
 
@@ -97,7 +101,9 @@ $act=$_GET["act"];
 							$r_index[$aspek][$kolom]=$row2['id_faktor'];
 							$kolom++;
 						}
+				
 				}
+				// print_r($jumlah_kolom); die;
 	?>
     <!-- <h1>Contoh SPK GAP MP</h1> -->
 		<table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
@@ -115,7 +121,7 @@ $act=$_GET["act"];
 				$no=1;
 				//---------------------Menyimpan tabel faktor dalam array dan menampilkan---------------------
             	$sql="SELECT faktor.*,nama_aspek,IF(jenis='1','c','s') AS nama_jenis
-					FROM faktor LEFT JOIN aspek ON aspek=id_aspek WHERE faktor.id_spk='$_POST[id_spk]' ORDER BY id_aspek,id_faktor ASC";
+					FROM faktor LEFT JOIN aspek ON faktor.aspek=aspek.id_aspek WHERE faktor.id_spk='$data[id_spk]' ORDER BY id_aspek,id_faktor ASC";
 				$hasil=mysqli_query($koneksi,$sql);
 				$target=array();
 				$nama_jenis=array();
@@ -125,7 +131,7 @@ $act=$_GET["act"];
 					$nama_jenis[$row['id_faktor']]=$row['nama_jenis'];
 			?>
         	<tr>
-        	  <td><?php echo $no++;?></td>
+        	  <td><?php echo $no++; ?></td>
         	  <td><?php echo $row['nama_aspek'];?></td>
         	  <td><?php echo $row['nama_faktor'];?></td>
         	  <td><?php echo $row['target'];?></td>
@@ -133,6 +139,7 @@ $act=$_GET["act"];
       	  </tr>
           <?php
 				}
+				// print_r($target); die;
 		  ?>
 		  </tbody>
         </table>

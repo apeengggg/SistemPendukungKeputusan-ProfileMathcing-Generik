@@ -145,7 +145,7 @@ $act=$_GET["act"];
 									}else{
                                         $id_user = $_SESSION['id_user']; 
                                         // echo $id_user; die;
-										$tampil = mysqli_query($koneksi,"SELECT a.nama_alternatif, a.id_alternatif, s.id_spk, n.nilai FROM alternatif a INNER JOIN spk_user u ON a.id_spkuser=u.id_spkuser INNER JOIN spk s ON u.id_spk=s.id_spk INNER JOIN nilai n ON a.id_alternatif=n.id_alternatif WHERE a.id_spkuser='$idspkuser' GROUP BY a.nama_alternatif");
+										$tampil = mysqli_query($koneksi,"SELECT a.nama_alternatif, a.id_alternatif, s.id_spk, n.nilai FROM alternatif a LEFT JOIN spk_user u ON a.id_spkuser=u.id_spkuser LEFT JOIN spk s ON u.id_spk=s.id_spk LEFT JOIN nilai n ON a.id_alternatif=n.id_alternatif WHERE a.id_spkuser='$idspkuser' GROUP BY a.nama_alternatif");
 									}
 									if($_SESSION["level"]=="admin") {
 								      echo "
@@ -204,7 +204,7 @@ $act=$_GET["act"];
                                                         
                                         <?php
                                         $nilai = $r['nilai'];
-                                           if ($nilai === 0 OR $nilai === "") {
+                                           if ($nilai == 0 OR $nilai == "") {
                                            ?>
                                             <td align="center">
                                                 <a href="?module=alternatif_user&act=tambahdetail&id_spkuser=<?=$idspkuser?>&id_alt=<?=$r[id_alternatif]?>&id_spk=<?=$r[id_spk]?>"><span class="badge badge-danger">Nilai Belum Disii</span></a>

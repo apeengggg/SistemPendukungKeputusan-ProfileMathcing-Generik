@@ -27,14 +27,14 @@ $act=$_GET["act"];
 									{
 										$tampil = mysqli_query($koneksi,"SELECT * FROM spk, user WHERE spk.id_user=user.id_user ORDER BY spk.id_spk DESC");
 									}else{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM spk, user WHERE spk.id_user=user.id_user AND user.id_user='$_SESSION[id_user]' ORDER BY id_spk DESC") or die (mysqli_error($koneksi));
+										$tampil = mysqli_query($koneksi,"SELECT * FROM spk_user us INNER JOIN spk s ON us.id_spk=s.id_spk INNER JOIN user u ON us.id_user=u.id_user WHERE us.id_user='$_SESSION[id_user]'") or die (mysqli_error($koneksi));
 									}
 								      echo "
 								          <thead>
 											<tr>
 												<th width=''>No</th>
 												<th>Nama SPK</th>
-												<th>Nama Pembuat</th>
+												<th>Keterangan</th>
 												<th>Tgl Pembuatan</th>
 											</tr>
 										</thead>
@@ -44,15 +44,9 @@ $act=$_GET["act"];
 								       
 								       echo "<tr>
 								       			<td>$no</td>
-								       			<td>
-								       			<a href='?module=hasil&act=detail&id_spk=$r[id_spk]&nama_spk=$r[nama_spk]'>$r[nama_spk]</a>
-								       			</td>
-								       			<td>
-								       			$r[nama]
-								       			</td>
-								       			<td>
-								       			$r[tanggal]
-								       			</td>
+								       			<td> $r[nama_spk] </td>
+												   <td> $r[ket] </td>
+												   <td> $r[tgl] </td>
 											</tr>";
 								      $no++;
 								    }
