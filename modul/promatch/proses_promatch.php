@@ -1,13 +1,13 @@
 <?php 
 include "config/koneksi.php";
 //cek tabel nilai
-$sql=mysqli_query($koneksi, "SELECT * FROM spk WHERE id_spk='$_POST[id_spk]'");
+$sql=mysqli_query($koneksi, "SELECT * FROM spk_user su INNER JOIN spk s ON su.id_spk = s.id_spk WHERE su.id_spkuser='$_POST[id_spkuser]'");
 $data=mysqli_fetch_array($sql);
 $jumlah=mysqli_num_rows($sql);
 
 if($jumlah>0)
 {
-	$sql2=mysqli_query($koneksi, "SELECT * FROM nilai, alternatif WHERE nilai.id_alternatif=alternatif.id_alternatif AND alternatif.id_spk='$data[id_spk]'");
+	$sql2=mysqli_query($koneksi, "SELECT * FROM nilai n INNER JOIN alternatif a ON n.id_alternatif=a.id_alternatif INNER JOIN spk_user su ON a.id_spkuser=su.id_spkusers WHERE n.id_alternatif=a.id_alternatif AND alternatif.id_spkuser='$data[id_spkuser]'");
 	$jumlah2=mysqli_num_rows($sql2);
 	if($jumlah2<1)
 	{
@@ -50,7 +50,7 @@ $act=$_GET["act"];
 					$bobot[$row['selisih']]=$row['bobot'];
 				}
 		//---------------------Menyimpan tabel sample dalam array---------------------
-			$sql="SELECT * FROM nilai WHERE id_spk='$data[id_spk]'";
+			$sql="SELECT * FROM nilai WHERE id_spkuser='$data[id_spkuser]'";
 			$hasil=mysqli_query($koneksi,$sql);
 			while($row=mysqli_fetch_array($hasil))
 				{
@@ -59,7 +59,7 @@ $act=$_GET["act"];
 		//---------------------Menyimpan tabel alternatif dalam array---------------------		
         	$nama_alternatif=array();
 			$nilai_akhir=array();
-			$sql="SELECT * FROM alternatif WHERE id_spk='$data[id_spk]' ORDER BY id_alternatif";
+			$sql="SELECT * FROM alternatif WHERE id_spkuser='$data[id_spkuser]' ORDER BY id_alternatif";
 			$hasil=mysqli_query($koneksi,$sql);
 			while($row=mysqli_fetch_array($hasil))
 				{
@@ -74,7 +74,7 @@ $act=$_GET["act"];
 			$ba_cf=array();
 			$ba_sf=array();
 			$sql="SELECT *,(SELECT COUNT(id_faktor) FROM faktor WHERE aspek=id_aspek) AS jum_kolom 
-				 FROM aspek WHERE id_spk='$_POST[id_spk]' ORDER BY id_aspek ASC";
+				 FROM aspek WHERE id_spkuser='$_POST[id_spk]' ORDER BY id_aspek ASC";
 
 
 

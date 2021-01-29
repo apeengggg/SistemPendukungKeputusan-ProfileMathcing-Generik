@@ -23,20 +23,20 @@ $act=$_GET["act"];
 										<div class="content">
 										    <div class="input-group">
 												<label class="col-sm-4 control-label text-left">SPK</label>
-												<select name="id_spk" class='form-control' required>
+												<select name="id_spkuser" class='form-control' required>
 													<option value="">Pilih SPK</option>
 													<?php  
 													if($_SESSION["level"]=="admin")
 													{
 														$sql="SELECT * FROM spk ORDER BY id_spk ASC";
 													}else{
-														$sql="SELECT * FROM spk WHERE id_user='$_SESSION[id_user]' ORDER BY id_spk ASC";
+														$sql="SELECT * FROM spk_user su INNER JOIN spk s ON su.id_spk=s.id_spk WHERE su.id_user='$_SESSION[id_user]' ORDER BY su.id_spk ASC";
 													}
 													$query=mysqli_query($koneksi,$sql);
 													while($data=mysqli_fetch_array($query))
 													{
 														?>
-															<option value="<?php echo $data["id_spk"] ?>"><?php echo $data["nama_spk"] ?></option>
+															<option value="<?php echo $data["id_spkuser"] ?>"><?php echo $data["nama_spk"] ?> [<?= $data["ket"]?>] [<?=$data["tgl"]?>]</option>
 														<?php 																		}
 													?>
 												</select>
