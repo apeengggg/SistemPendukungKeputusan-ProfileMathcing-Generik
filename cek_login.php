@@ -27,6 +27,7 @@ if ($ketemu > 0){
   $_SESSION['level']       = $r['level'];
   $_SESSION['foto']        = $r['foto'];
   $_SESSION['aktif']       = $r['aktif'];
+  
   // session timeout
   //$_SESSION[login] = 1;
   //timer();
@@ -34,7 +35,7 @@ if ($ketemu > 0){
   ?>
   <br><br><br><br><br><br><br><br>
 <center><img src="updateimg.gif" width="100px"></center>
-  <meta http-equiv="refresh" content="0.5;URL='dashboard.php'" />   
+  <meta http-equiv="refresh" content="0.5;URL='dashboard.php?module=home'" />   
   <?php 
 }else{
   //header('location:index.php?msg=2');

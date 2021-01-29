@@ -3,9 +3,6 @@ session_start();
 error_reporting(0);
 include "config/koneksi.php";
 
-// echo $_SESSION['level']; die;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,10 +120,10 @@ include "config/koneksi.php";
             </div>
           </div>
         </div>
-        <?php 
-          // if($_SESSION["level"] ==="admin")
-          // {
-          //   ?>
+        <?php  
+          if($_SESSION["level"]=="admin")
+          {
+            ?>
             <ul class="nav">
               <li class="nav-item">
                 <a class="nav-link" href="?module=home">
@@ -144,7 +141,7 @@ include "config/koneksi.php";
                   <i class="material-icons">apps</i>
                   <p> Aspek </p>
                 </a>
-              </li> 
+              </li>
               <li class="nav-item ">
                 <a class="nav-link" href="?module=faktor_spk">
                   <i class="material-icons">apps</i>
@@ -182,6 +179,11 @@ include "config/koneksi.php";
                   </a>
               </li>
             </ul>
+            <?php 
+          }elseif($_SESSION["level"]=="user"){
+            if($_SESSION["aktif"]=="Y")
+            {
+                  ?>
                       <ul class="nav">
                           <li class="nav-item">
                             <a class="nav-link" href="?module=home">
@@ -208,6 +210,9 @@ include "config/koneksi.php";
                             </a>
                           </li>
                         </ul>
+                  <?php 
+            }else{
+                ?>
                       <ul class="nav">
                           <li class="nav-item active ">
                             <a class="nav-link" href="?module=home">
@@ -270,7 +275,13 @@ include "config/koneksi.php";
                             </a>
                           </li>
                         </ul>
-          
+                <?php 
+            }
+            ?>
+
+            <?php 
+          }
+        ?>
       </div>
     </div>
     <div class="main-panel">
@@ -320,6 +331,7 @@ include "config/koneksi.php";
             {
                 case "home" :
                 if($_SESSION["level"]!="admin"){
+
                     ?>
                     <div class="callout">
                     <h3><font face ="Arial">Haloo <?php echo $_SESSION['username'] ?>, Selamat datang di Sistem Pendukung Keputusan Generik Metode Profile Matching </font></h3>
@@ -335,6 +347,7 @@ include "config/koneksi.php";
                          <center>
                          <h3><font face="Snell">~ Keputusan Tetap Ditangan Anda ~</font></h3>
                          </center> 
+                        
                     <?php 
                   }else{
                     ?>
