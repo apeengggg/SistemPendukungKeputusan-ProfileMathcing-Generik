@@ -15,11 +15,21 @@ $email = $_POST["email"];
 $date = date('Y-m-d');
 $code = md5($email.$date);
 $nama = $_POST["nama"];
+$uname = $_POST["username"];
 
 // cek email sudah terdaftar ?
 $sql = "SELECT * FROM user WHERE email='$email'";
+$sql2 = "SELECT * FROM user WHERE username='$uname'";
 $query1 =  mysqli_query($koneksi, $sql);
-
+$query2 =  mysqli_query($koneksi, $sql2);
+if (mysqli_num_rows($query2)>0) {
+	?>
+	<script type="text/javascript">
+			window.alert("Username Sudah Terdaftar!");
+			window.location="registrasi.php";
+		</script>
+<?php
+}else{
 if (mysqli_num_rows($query1)>0) {
 	?>
 	<script type="text/javascript">
@@ -127,5 +137,6 @@ if (!$mail->send()) {
 // 		</script>
 // 	<?php 
 // }
+}
 }
 ?>

@@ -1,3 +1,54 @@
+<?php
+include "config/koneksi.php";
+if (isset($_GET['code']) && isset($_GET['id'])) {
+    if (isset($_POST["ubah"])) {
+        $code = $_GET["code"];
+        $id = $_GET["id"];
+        $d_code = base64_decode($code);
+        $d_id = base64_decode($id);
+
+        $pass = $_POST["password"];
+        $conf = $_POST["konfirmasi_password"];
+
+        // var_dump($_POST); die;
+        if ($pass != $conf) {
+            ?>
+            <script type="text/javascript">
+            window.alert("Password dan Konfirmasi Password Tidak Sama");
+            window.location="reset_password.php?code=<?=$code?>&id=<?=$id?>";
+            </script>       
+<?php
+        }else{
+            $hash = md5($pass);
+            $sql = "UPDATE user SET password='$hash' WHERE username='$d_id' AND email='$d_code'";
+            $query = mysqli_query($koneksi, $sql);
+            // die;
+            if ($query) {
+                ?>
+            <script type="text/javascript">
+            window.alert("Password Berhasil Diubah, Silahkan Login Ulang");
+            window.location="index.php";
+            </script>       
+<?php
+            }else{
+                ?>
+                <script type="text/javascript">
+                window.alert("Password Gagal Diubah");
+                window.location="reset_password.php?code=<?=$code?>&id=<?=$id?>";
+                </script>       
+    <?php
+            }
+        }
+        
+    }
+}else{
+    echo "AKSES DICEKAL";
+    die;
+}
+
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +113,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-            <form class="form" method="post" action="aksi_lupa_password.php">
+            <form class="form" method="post">
               <div class="card card-login card-hidden">
                 <div class="card-header card-header-rose text-center">
                   <h4 class="card-title">PROFILE MATCHING GENERIK</h4>
@@ -74,20 +125,20 @@
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text">
-                          <i class="material-icons">person</i>
+                          <i class="material-icons">lock_outline</i>
                         </span>
                       </div>
-                      <input type="text" name="username" class="form-control" placeholder="Username..." required>
+                      <input type="password" name="password" class="form-control" placeholder="password..." required>
                     </div>
                   </span>
                   <span class="bmd-form-group">
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text">
-                          <i class="material-icons">mail</i>
+                          <i class="material-icons">lock_outline</i>
                         </span>
                       </div>
-                      <input type="email" name="email" class="form-control" placeholder="Email..." required>
+                      <input type="password" name="konfirmasi_password" class="form-control" placeholder="konfirmasi_password..." required>
                     </div>
                   </span>
                   <!-- <span class="bmd-form-group">
@@ -102,8 +153,8 @@
                   </span> -->
                 </div>
                 <div class="card-footer justify-content-center">
-                  <button type="submit" class="btn btn-fill btn-rose">Change Password</button>&nbsp;
-                  <button type="button" class="btn btn-fill btn-info" onclick="window.location.href='index.php'">Sign in</button>
+                  <button type="submit" class="btn btn-fill btn-rose" name="ubah" id="ubah">Change Password</button>&nbsp;
+                  <!-- <button type="button" class="btn btn-fill btn-info" onclick="window.location.href='index.php'">Sign in</button> -->
                 </div>
                 <br><br>
 
