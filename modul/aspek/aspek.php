@@ -21,11 +21,32 @@ $act=$_GET["act"];
 		                  </div>
 		                </div>
 		                <div class="card-body ">
-							<a href="?module=aspek&act=tambah&id=<?=$id?>">
+							
+						<?php
+						if (isset($_GET["jenis"])) {
+						?>
+							<a href="?module=aspek&act=tambah&id=<?=$id?>&jenis=spkbaru">
 								<button class="btn  btn-youtube">
 	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Aspek
 	                        	</button>
 	                       	</a>
+							<a href="?module=aspek&act=tambah&id=<?=$id?>">
+								<button class="btn  btn-primary">
+	                          		Lanjut Isi Faktor >>
+	                        	</button>
+	                       	</a>
+						<?php
+						}else{
+							?>
+							<a href="?module=aspek&act=tambah&id=<?=$id?>">
+								<button class="btn  btn-youtube">
+	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Aspek +
+	                        	</button>
+	                       	</a>
+						<?php
+						}						
+						?>
+							   
 	                       <div class="box-body">
           				<div class="alert alert-success" role="alert">
          				 		Persentase Aspek Harus 100% dari Jumlah Aspek, dan Jumlah Presentase Bobot Core dan Bobot Secondary Harus 100%
@@ -160,7 +181,18 @@ $act=$_GET["act"];
 		                </div>
 		                
 		                <div class="card-body ">
-									<form class="form" method="post" action="modul/aspek/aksi_aspek.php?module=aspek&act=simpan">
+						<?php
+							if (isset($_GET['jenis'])) {
+							?>
+						<form class="form" method="post" action="modul/aspek/aksi_aspek.php?module=aspek&act=simpan&jenis=spkbaru">
+						<?php
+						}else{
+							?>
+						<form class="form" method="post" action="modul/aspek/aksi_aspek.php?module=aspek&act=simpan">
+						<?php
+						}					
+						?>
+									
 										<div class="content">
 										    <div class="input-group">
 												<label class="col-sm-4 control-label text-left">Nama Aspek</label>

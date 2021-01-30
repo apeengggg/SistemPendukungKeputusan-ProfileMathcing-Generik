@@ -73,7 +73,7 @@ $act=$_GET["act"];
 													?>
 														 <center>
 														 <a href="?module=alternatif&act=edit&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a> 
-														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_alt_user&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
+														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_spk_user&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
 															
 													   </center>
 													 <?php 
@@ -98,8 +98,7 @@ $act=$_GET["act"];
 													?>
 														 <center>
 														 <a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a> 
-														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_alt_user&id=<?= $r[id_spkuser] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
-															
+														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_spk_user&id=<?= $r[id_spkuser] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
 													   </center>
 													 <?php 
 													   echo "
@@ -145,7 +144,7 @@ $act=$_GET["act"];
 									}else{
                                         $id_user = $_SESSION['id_user']; 
                                         // echo $id_user; die;
-										$tampil = mysqli_query($koneksi,"SELECT a.nama_alternatif, a.id_alternatif, s.id_spk, n.nilai FROM alternatif a LEFT JOIN spk_user u ON a.id_spkuser=u.id_spkuser LEFT JOIN spk s ON u.id_spk=s.id_spk LEFT JOIN nilai n ON a.id_alternatif=n.id_alternatif WHERE a.id_spkuser='$idspkuser' GROUP BY a.nama_alternatif");
+										$tampil = mysqli_query($koneksi,"SELECT a.nama_alternatif, a.id_alternatif, s.id_spk, n.nilai, u.id_spkuser FROM alternatif a LEFT JOIN spk_user u ON a.id_spkuser=u.id_spkuser LEFT JOIN spk s ON u.id_spk=s.id_spk LEFT JOIN nilai n ON a.id_alternatif=n.id_alternatif WHERE a.id_spkuser='$idspkuser' GROUP BY a.nama_alternatif");
 									}
 									if($_SESSION["level"]=="admin") {
 								      echo "
@@ -183,7 +182,7 @@ $act=$_GET["act"];
 													?>
 														 <center>
 														 <a href="?module=alternatif&act=edit&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a> 
-														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
+														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif']?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
 															
 													   </center>
 													 <?php 
@@ -221,7 +220,7 @@ $act=$_GET["act"];
 														<td>
 														 <center>
 														 <a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a> 
-														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
+														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif'] ?>&name=<?= $r['nama_alternatif']?>&u_spk=<?=$r['id_spkuser']?>&id_spk=<?=$r['id_spk']?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
 															
 													   </center>
 													 <?php 
@@ -259,7 +258,7 @@ $act=$_GET["act"];
 													{
 														$sql="SELECT * FROM spk ORDER BY id_spk ASC";
 													}else{
-														$sql="SELECT * FROM spk ORDER BY id_spk ASC";
+														$sql="SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.id_spk=spk.id_spk RIGHT JOIN bobot ON bobot.id_spk=spk.id_spk WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND bobot.id_bobot IS NOT NULL";
 													}
 													$query=mysqli_query($koneksi,$sql);
 													while($data=mysqli_fetch_array($query))

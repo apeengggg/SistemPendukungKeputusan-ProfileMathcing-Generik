@@ -46,11 +46,12 @@ else{
 														  '$keterangan', 
 														  '$tgl', 
 														  '$_SESSION[id_user]')") or die(mysqli_error($koneksi));
+		$id_spk = mysqli_insert_id($koneksi);
 		if($query){
 			?>
 				<script type="text/javascript">
 					window.alert("Data berhasil ditambah");
-					window.location="../../dashboard.php?module=spk";
+					window.location="../../dashboard.php?module=aspek&id=<?=$id_spk?>&jenis=spkbaru";
 				</script>
 			<?php 
 		}else{

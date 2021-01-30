@@ -344,7 +344,7 @@ $act=$_GET["act"];
 				reset($nilai_akhir);
 				arsort($nilai_akhir);
 				//print_r($nilai_akhir);
-				mysqli_query($koneksi,"DELETE FROM hasil");
+				mysqli_query($koneksi,"DELETE FROM hasil WHERE id_spkuser='$data[id_spkuser]'");
 			 ?>
                         
                         <h3 id="hasil_akhir">Nilai Akhir Total Sorting</h3>
@@ -371,15 +371,15 @@ $act=$_GET["act"];
 		                          </tr>
 		            			<?php	
 		            					//Cari hasil sebelumnya berdasarkan spk jika sudah ada timpa dengan yang baru
-		            				$sql_spk=mysqli_query($koneksi, "SELECT * FROM spk WHERE id_spk='$data[id_spk]'");
+		            				$sql_spk=mysqli_query($koneksi, "SELECT * FROM spk_user WHERE id_spk='$data[id_spk]'");
 		            				$jumlah_row=mysqli_num_rows($sql_spk);
 		            				if($jumlah_row>1)
 		            				{
 		            					//hapus data sebelumnya
-		            					mysqli_query($koneksi, "DELETE FROM hasil WHERE id_spk='$data[id_spk]'");
+		            					mysqli_query($koneksi, "DELETE FROM hasil WHERE id_spkuser='$data[id_spk]'");
 		            				}
 
-									mysqli_query($koneksi,"INSERT INTO hasil(nama_alternatif,nilai, id_spk, id_user) VALUES ('$nama_alternatif[$k]', '$nilai_akhir[$k]', '$data[id_spk]', '$_SESSION[id_user]')");				
+									mysqli_query($koneksi,"INSERT INTO hasil(nama_alternatif,nilai, id_spk, id_user, id_spkuser) VALUES ('$nama_alternatif[$k]', '$nilai_akhir[$k]', '$data[id_spk]', '$_SESSION[id_user]', '$data[id_spkuser]')");				
 							}
 						?>
 						</tbody>

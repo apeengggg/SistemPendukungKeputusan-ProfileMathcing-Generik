@@ -15,25 +15,30 @@ else{
 	// hapus alternatif
 	if ($module=='alternatif' AND $act=='hapus'){
 		$hapus = mysqli_query($koneksi,"DELETE FROM alternatif WHERE id_alternatif='$_GET[id]'");
-	  	if ($hapus) {
+		$hapusnilai = mysqli_query($koneksi, "DELETE FROM nilai WHERE id_alternatif='$_GET[id_spk]'");
+		$hapushasil = mysqli_query($koneksi, "DELETE FROM hasil WHERE id_spkuser='$_GET[u_spk]' AND nama_alternatif='$_GET[name]'");
+	  	if ($hapus && $hapusnilai && $hapushasil) {
 	  	?>
 	  	<script type="text/javascript">
 					window.alert("Data berhasil dihapus");
-					window.location="../../dashboard.php?module=alternatif";
+					window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$_GET[u_spk]?>&id_spk=<?=$_GET[id_spk]?>";
 		</script>
 	  	<?php
 	  	}else{
 	  		?>
 	  	<script type="text/javascript">
 					window.alert("Data gagal dihapus");
-					window.location="../../dashboard.php?module=alternatif";
+					window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$_GET[u_spk]?>&id_spk=<?=$_GET[id_spk]?>"";
 		</script>
 	  	<?php
 }
 	}
 
-	if ($module=='alternatif' AND $act=='hapus_alt_user'){
+	if ($module=='alternatif' AND $act=='hapus_spk_user'){
 		$hapus = mysqli_query($koneksi,"DELETE FROM spk_user WHERE id_spkuser='$_GET[id]'");
+		$hapus_alt = mysqli_query($koneksi,"DELETE FROM alternatif WHERE id_spkuser='$_GET[id]'"); ;
+		$hapus_nilai = mysqli_query($koneksi,"DELETE FROM nilai WHERE id_spkuser='$_GET[id]'");;
+		$hapus_hasil = mysqli_query($koneksi,"DELETE FROM hasil WHERE id_spkuser='$_GET[id]'");;
 	  	if ($hapus) {
 	  	?>
 	  	<script type="text/javascript">

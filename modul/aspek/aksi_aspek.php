@@ -35,18 +35,30 @@ else{
 
 	// tambah aspek
 	elseif ($module=='aspek' AND $act=='simpan'){
+		// if (isset($_GET["jenis"])) {
+		// 	echo "Ada Jenis"; die;
+		// }else{
+		// 	echo "Tidak Ada Jenis"; die;
+		// }
 		$name=$_POST['nama_aspek'];
 		$idspk=$_POST['id_spk'];
 		$init = $_POST['Inisial'];
 		// var_dump($_POST); die;
 		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
-			?>
-		<script type="text/javascript">
-					window.alert("Nama Aspek / Initial Nama Sudah Ada, Gagal Menambahkan Aspek!");
-					window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
-		</script>
-			<?php
+			if (isset($_GET["jenis"])) {
+					echo "
+						<script type='text/javascript'>
+							window.alert('Nama Aspek+ / Initial Nama Sudah Ada, Gagal Menambahkan Aspek!');
+							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk&jenis=spkbaru';
+						</script>";
+				}else{
+					echo "		
+						<script type='text/javascript'>
+							window.alert('Nama Aspek / Initial Nama Sudah Ada, Gagal Menambahkan Aspek!');
+							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
+						</script>";
+						}
 		}else{
 			if(($_POST["bobot_core"]+$_POST["bobot_secondary"])==100)
 			{
@@ -66,28 +78,53 @@ else{
 														'$_SESSION[id_user]')") or die (mysqli_error($koneksi));
 
 				if($query){
+					if (isset($_GET["jenis"])) {
+						echo "
+							<script type='text/javascript'>
+								window.alert('Data Berhasil Ditambahkan');
+								window.location='../../dashboard.php?module=aspek&id=$idspk&jenis=spkbaru';
+							</script>";
+					}else{
+						echo "		
+							<script type='text/javascript'>
+								window.alert('Data Berhasil Ditambahkan');
+								window.location='../../dashboard.php?module=aspek&id=$idspk';
+							</script>";
+							}
+
 				?>
-					<script type="text/javascript">
-						window.alert("Data berhasil ditambah");
-						window.location="../../dashboard.php?module=aspek&act=tambah&id>";
-					</script>
+					
 				<?php 
 				}else{
-					?>
-						<script type="text/javascript">
-							window.alert("Data gagal ditambah");
-							window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
-						</script>
-					<?php 
+					if (isset($_GET["jenis"])) {
+						echo "
+							<script type='text/javascript'>
+								window.alert('Data Gagal Ditambahkan');
+								window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk&jenis=spkbaru';
+							</script>";
+					}else{
+						echo "		
+							<script type='text/javascript'>
+								window.alert('Data Gagal Ditambahkan');
+								window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
+							</script>";
+							}
 				}
 				//header('location:../../dashboard.php?module='.$module);
 			}else{
-				?>
-				<script type="text/javascript">
-					window.alert("Simpan data gagal. Bobot Core + Bobot Secondary Kurang dari 100%");
-					window.location="../../dashboard.php?module=aspek";
-				</script>
-			<?php 
+				if (isset($_GET["jenis"])) {
+					echo "
+						<script type='text/javascript'>
+							window.alert('Bobot Core dan Bobot Secondary Harus Sama Dengan 100%, Data Gagal Ditambahkan');
+							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk&jenis=spkbaru';
+						</script>";
+				}else{
+					echo "		
+						<script type='text/javascript'>
+							window.alert('Bobot Core dan Bobot Secondary Harus Sama Dengan 100%, Data Gagal Ditambahkan');
+							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
+						</script>";
+						}
 			}
 	}
 }
