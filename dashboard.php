@@ -154,18 +154,18 @@ include "config/koneksi.php";
                     <p> Bobot </p>
                   </a>
               </li>
-                <li class="nav-item ">
+              <!-- <li class="nav-item ">
                   <a class="nav-link" href="?module=alternatif_spk">
                     <i class="material-icons">person</i>
                     <p> Kandidat </p>
                   </a>
-              </li>              
-                <li class="nav-item ">
+              </li>  -->    
+                <!-- <li class="nav-item ">
                   <a class="nav-link" href="?module=promatch">
                     <i class="material-icons">star</i>
                     <p> Perhitungan </p>
                   </a>
-              </li>
+              </li> -->
                 <li class="nav-item ">
                   <a class="nav-link" href="?module=hasil">
                     <i class="material-icons">timeline</i>

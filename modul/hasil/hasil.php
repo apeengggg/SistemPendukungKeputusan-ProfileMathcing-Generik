@@ -26,34 +26,61 @@ $act=$_GET["act"];
 									$no=1;
 									if($_SESSION["level"]=="admin")
 									{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM spk, user WHERE spk.id_user=user.id_user ORDER BY spk.id_spk DESC");
+										$tampil = mysqli_query($koneksi,"SELECT u.nama, COUNT(su.id_user) AS jumlah_spk FROM user u INNER JOIN spk_user su ON su.id_user=u.id_user WHERE u.id_user=su.id_user");
 									}else{
 										$tampil = mysqli_query($koneksi,"SELECT * FROM spk_user us INNER JOIN spk s ON us.id_spk=s.id_spk INNER JOIN user u ON us.id_user=u.id_user WHERE us.id_user='$_SESSION[id_user]'") or die (mysqli_error($koneksi));
 									}
-								      echo "
-								          <thead>
-											<tr>
-												<th width=''>No</th>
-												<th>Nama SPK</th>
-												<th>Keterangan</th>
-												<th>Tgl Pembuatan</th>
-											</tr>
-										</thead>
-									<tbody>"; 
-								    $no=1;
-								    while ($r=mysqli_fetch_array($tampil)){
-								       
-								       echo "<tr>
-								       			<td>$no</td>
-								       			<td> $r[nama_spk] </td>
-												   <td> $r[ket] </td>
-												   <td> $r[tgl] </td>
-											</tr>";
-								      $no++;
-								    }
-								    echo "</tbody>
-											
-										</table>";
+									if($_SESSION["level"]=="admin"){
+										echo "
+										<thead>
+										  <tr>
+											  <th width=''>No</th>
+											  <th>Nama Operator</th>
+											  <th>Jumlah SPK</th>
+										  </tr>
+									  </thead>
+								  <tbody>";
+									}else{
+										echo "
+										<thead>
+										  <tr>
+											  <th width=''>No</th>
+											  <th>Nama SPK</th>
+											  <th>Keterangan</th>
+											  <th>Tgl Pembuatan</th>
+										  </tr>
+									  </thead>
+								  <tbody>";
+									}
+									if($_SESSION["level"]=="admin"){
+										$no=1;
+										while ($r=mysqli_fetch_array($tampil)){
+										   
+										   echo "<tr>
+													   <td>$no</td>
+													   <td><a href='#'>$r[nama]</a></td>
+													   <td> $r[jumlah_spk] </td>
+												</tr>";
+										  $no++;
+										}
+										echo "</tbody>
+											</table>";
+									}else{
+										$no=1;
+										while ($r=mysqli_fetch_array($tampil)){
+										   
+										   echo "<tr>
+													   <td>$no</td>
+													   <td> $r[nama_spk] </td>
+													   <td> $r[ket] </td>
+													   <td> $r[tgl] </td>
+												</tr>";
+										  $no++;
+										}
+										echo "</tbody>
+											</table>";
+									}
+								   
 									?>
 			</div>
 		</div>
