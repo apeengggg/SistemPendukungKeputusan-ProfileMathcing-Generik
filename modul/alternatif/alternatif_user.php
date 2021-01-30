@@ -279,7 +279,7 @@ $act=$_GET["act"];
 											<input name="action" type="button" value="Cancel" onclick="window.history.back();" class="btn btn-danger pull-left">
 										</div>
 									</form>
-								</div>
+							</div>
 					<?php
 					break;
 
