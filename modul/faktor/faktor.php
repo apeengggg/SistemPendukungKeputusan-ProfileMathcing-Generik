@@ -25,10 +25,36 @@ $act=$_GET["act"];
 					                </div>
 					                
 					                <div class="card-body ">
+												<?php
+									if (isset($_GET["jenis"])) {
+									?>
+										<a href="?module=aspek&id=35&jenis=spkbaru">
+											<button class="btn  btn-warning">
+												<< Kembali Tambah Aspek
+											</button>
+										</a>
+										<a href="?module=faktor&act=tambah_detail&id_aspek=<?=$id?>&id_spk=<?=$id_?>&jenis=baru">
+											<button class="btn  btn-youtube">
+					                          <i class="fa fa-plus-square-o"> </i> Tambah Data Faktor
+					                        </button>
+										</a>
+										<a href="?module=bobot&id=<?=$id_?>&jenis=baru">
+											<button class="btn  btn-primary">
+												Lanjut Isi Bobot >>
+											</button>
+										</a>
+									<?php
+									}else{
+										?>
 										<a href="?module=faktor&act=tambah_detail&id_aspek=<?=$id?>&id_spk=<?=$id_?>">
 											<button class="btn  btn-youtube">
 					                          <i class="fa fa-plus-square-o"> </i> Tambah Data Faktor
-					                        </button></a>
+					                        </button>
+										</a>
+									<?php
+									}						
+									?>
+										
 										<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 											<?php 
 											$no=1;
@@ -153,7 +179,17 @@ $act=$_GET["act"];
 					                </div>
 					                
 					                <div class="card-body ">
-											<form class="form" method="post" action="modul/faktor/aksi_faktor.php?module=faktor&act=simpan">
+											<?php
+											if (isset($_GET['jenis'])) {
+												?>
+												<form class="form" method="post" action="modul/faktor/aksi_faktor.php?module=faktor&act=simpan&jenis=baru">
+											<?php
+											}else{
+												?>
+												<form class="form" method="post" action="modul/faktor/aksi_faktor.php?module=faktor&act=simpan">
+											<?php
+											}	
+											?>
 												<div class="content">
 													<input type="hidden" name="id_aspek" value="<?= $id ?>">
 													<input type="hidden" name="id_spk" value="<?= $id_ ?>">

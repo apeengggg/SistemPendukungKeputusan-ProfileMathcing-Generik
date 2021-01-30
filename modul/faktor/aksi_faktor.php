@@ -42,11 +42,19 @@ else{
 		$idspk=$_POST['id_spk'];
 		$ceknama=mysqli_query($koneksi,"SELECT * FROM faktor WHERE nama_faktor='$name' AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
+				if (isset($_GET["jenis"])) {
+					echo "<script type='text/javascript'>
+					window.alert('Nama Faktor Sudah Ada, Gagal Menambahkan Faktor!');
+					window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk&jenis=baru';
+							</script>";
+				}else{
+					echo "<script type='text/javascript'>
+					window.alert('Nama Faktor Sudah Ada, Gagal Menambahkan Faktor!');
+					window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk';
+							</script>";
+				}
 			?>
-		<script type="text/javascript">
-					window.alert("Nama Faktor Sudah Ada, Gagal Menambahkan Faktor!");
-					window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
-		</script>
+		
 			<?php
 		}else{
 			$query=mysqli_query($koneksi,"INSERT INTO faktor(nama_faktor, 
@@ -63,18 +71,31 @@ else{
 													   '$_SESSION[id_user]')") or die (mysql_error());
 
 				if($query){
-				?>
-					<script type="text/javascript">
-						window.alert("Data berhasil ditambah");
-						window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
-					</script>
-				<?php 
+					if (isset($_GET["jenis"])) {
+						echo "<script type='text/javascript'>
+						window.alert('Data berhasil ditambah');
+						window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk&jenis=baru';
+					</script>";
+					}else{
+						echo "<script type='text/javascript'>
+						window.alert('Data berhasil ditambah');
+						window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk';
+					</script>";
+					} 
 				}else{
+					if (isset($_GET["jenis"])) {
+						echo "<script type='text/javascript'>
+						window.alert('Data gagal ditambah');
+						window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk&jenis=baru';
+					</script>";
+					}else{
+						echo "<script type='text/javascript'>
+						window.alert('Data gagal ditambah');
+						window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk';
+					</script>";
+					}
 					?>
-						<script type="text/javascript">
-							window.alert("Data gagal ditambah");
-							window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
-						</script>
+						
 					<?php 
 				}
 			// header('location:../../dashboard.php?module='.$module);

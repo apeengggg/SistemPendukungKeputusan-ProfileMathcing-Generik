@@ -35,11 +35,6 @@ else{
 
 	// tambah aspek
 	elseif ($module=='aspek' AND $act=='simpan'){
-		// if (isset($_GET["jenis"])) {
-		// 	echo "Ada Jenis"; die;
-		// }else{
-		// 	echo "Tidak Ada Jenis"; die;
-		// }
 		$name=$_POST['nama_aspek'];
 		$idspk=$_POST['id_spk'];
 		$init = $_POST['Inisial'];
@@ -79,10 +74,11 @@ else{
 
 				if($query){
 					if (isset($_GET["jenis"])) {
+					$id_aspek= mysqli_insert_id($koneksi);
 						echo "
 							<script type='text/javascript'>
 								window.alert('Data Berhasil Ditambahkan');
-								window.location='../../dashboard.php?module=aspek&id=$idspk&jenis=spkbaru';
+								window.location='../../dashboard.php?module=faktor&id=$id_aspek&id_spk=$idspk&jenis=baru';
 							</script>";
 					}else{
 						echo "		
@@ -91,10 +87,6 @@ else{
 								window.location='../../dashboard.php?module=aspek&id=$idspk';
 							</script>";
 							}
-
-				?>
-					
-				<?php 
 				}else{
 					if (isset($_GET["jenis"])) {
 						echo "

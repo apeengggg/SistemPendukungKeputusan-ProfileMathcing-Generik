@@ -30,11 +30,11 @@ $act=$_GET["act"];
 	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Aspek
 	                        	</button>
 	                       	</a>
-							<a href="?module=aspek&act=tambah&id=<?=$id?>">
+							<!-- <a href="?module=aspek&act=tambah&id=<?=$id?>">
 								<button class="btn  btn-primary">
 	                          		Lanjut Isi Faktor >>
 	                        	</button>
-	                       	</a>
+	                       	</a> -->
 						<?php
 						}else{
 							?>
@@ -49,7 +49,8 @@ $act=$_GET["act"];
 							   
 	                       <div class="box-body">
           				<div class="alert alert-success" role="alert">
-         				 		Persentase Aspek Harus 100% dari Jumlah Aspek, dan Jumlah Presentase Bobot Core dan Bobot Secondary Harus 100%
+         				 		* Persentase Aspek Harus 100% dari Jumlah Aspek, dan Jumlah Presentase Bobot Core dan Bobot Secondary Harus 100%<br>
+								* Untuk Melihat Faktor Silahkan Klik Pada Nama Aspek Yang Dipilih
          				 </div>
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 									<?php 
@@ -81,7 +82,7 @@ $act=$_GET["act"];
 								       
 								       echo "<tr>
 								       			<td>$no</td>
-								       			<td>$r[nama_aspek]</td>
+								       			<td><a href='?module=faktor&id=$r[id_aspek]&id_spk=$_GET[id]'>$r[nama_aspek]</a></td>
 												<td>$r[bobot]</td>
 												<td>$r[bobot_core]</td>
 												<td>$r[bobot_secondary]</td>
