@@ -35,6 +35,7 @@ $act=$_GET["act"];
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
 		                    <h4 class="card-title">Proses Profile Matcing</h4>
+								<a href="#hasil_akhir" class="btn btn-success">Lihat Hasil Akhir</a>
 		                  </div>
 		                </div>
 		                
@@ -346,7 +347,7 @@ $act=$_GET["act"];
 				mysqli_query($koneksi,"DELETE FROM hasil");
 			 ?>
                         
-                        <h3>Nilai Akhir Total Sorting</h3>
+                        <h3 id="hasil_akhir">Nilai Akhir Total Sorting</h3>
                         <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                         	<thead>
                         		<tr>
