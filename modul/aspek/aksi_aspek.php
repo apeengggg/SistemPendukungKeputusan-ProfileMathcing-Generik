@@ -142,6 +142,8 @@ else{
 		$aspek_lama = mysqli_query($koneksi, "SELECT nama_aspek FROM aspek WHERE id_spk='$idspk'");
 		$res_aspek = mysqli_fetch_array($aspek_lama);
 		$aspek_l = $res_aspek['nama_aspek'];
+		// echo $name; 
+		// echo $aspek_l; die;
 		if ($name != $aspek_l) {
 		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE nama_aspek='$name' AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
@@ -186,6 +188,15 @@ else{
 	}
 		}
 	}else{
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE nama_aspek='$name' AND id_spk=$idspk");
+		if (mysqli_num_rows($ceknama)>0) {
+			?>
+			<script type="text/javascript">
+				window.alert("Nama Aspek Sudah Ada, Gagal Merubah Aspek!");
+				window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
+			</script>
+		<?php
+		}else{
 		if(($_POST["bobot_core"]+$_POST["bobot_secondary"])==100)
 			{
 				  $query=mysqli_query($koneksi,"UPDATE aspek SET nama_aspek 		= '$_POST[nama_aspek]', 
@@ -220,5 +231,6 @@ else{
 	}
 	}
 }
+	}
 }
 ?>
