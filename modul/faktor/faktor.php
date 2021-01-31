@@ -28,7 +28,7 @@ $act=$_GET["act"];
 												<?php
 									if (isset($_GET["jenis"])) {
 									?>
-										<a href="?module=aspek&id=35&jenis=spkbaru">
+										<a href="?module=aspek&id=<?=$id_?>&jenis=spkbaru">
 											<button class="btn  btn-warning">
 												<< Kembali Tambah Aspek
 											</button>

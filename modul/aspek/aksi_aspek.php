@@ -38,6 +38,18 @@ else{
 		$name=$_POST['nama_aspek'];
 		$idspk=$_POST['id_spk'];
 		$init = $_POST['Inisial'];
+		$ceklebih = mysqli_query($koneksi, "SELECT SUM(bobot) as jumlah FROM aspek WHERE id_spk='$idspk'");
+		$a = mysqli_fetch_array($ceklebih);
+		$b = $a['jumlah'];
+		$c = $b + $_POST['bobot'];
+		if ($b > 100 OR $c > 100) {
+			echo "
+						<script type='text/javascript'>
+							window.alert('Jumlah Dari Bobot Aspek Lebih Dari 100, Gagal Menambahkan Aspek!');
+							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
+						</script>";
+						die;
+		}
 		// var_dump($_POST); die;
 		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {

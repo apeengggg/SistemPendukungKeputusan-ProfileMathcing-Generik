@@ -95,19 +95,31 @@ else{
 													  '$_SESSION[id_user]')") or die (mysqli_error($koneksi));
 
 		 if($query){
+			//  cek apakah bobot sudaha ada 9 ?
+			$cekbobot = mysqli_query($koneksi, "SELECT * FROM bobot WHERE id_spk='$id'");
+				if (mysqli_num_rows($cekbobot)==9) {
 					?>
 						<script type="text/javascript">
 							window.alert("Data berhasil ditambah");
 							window.location="../../dashboard.php?module=bobot&id=<?=$id?>";
 						</script>
-					<?php 
+					<?php
+				}else{
+					?>
+						<script type="text/javascript">
+							window.alert("Data berhasil ditambah");
+							window.location="../../dashboard.php?module=bobot&act=tambah&id=<?=$id?>";
+						</script>
+					<?php
+				}
+					 
 					}else{
 						?>
 							<script type="text/javascript">
 								window.alert("Data gagal ditambah");
 								window.location="../../dashboard.php?module=bobot&id=<?=$id?>";
 							</script>
-						<?php 
+						<?php	 
 					}
 			// header('location:../../dashboard.php?module='.$module);
 	}

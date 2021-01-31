@@ -19,7 +19,24 @@ if($jumlah>0)
             </script>
         <?php 
 	}
+} 
+
+$cekaspek = mysqli_query($koneksi, "SELECT SUM(bobot) as jumlah FROM aspek WHERE id_spk='$data[id_spk]'");
+$j = mysqli_fetch_array($cekaspek);
+$k = $j['jumlah'];
+// echo $k ; die;
+if ($k > 100 OR $k < 100) {
+	?>
+            <script type="text/javascript">
+                window.alert("Gagal Melakukan Perhitungan, Jumlah Bobot Aspek Tidak Sama Dengan 100");
+                window.location="?module=promatch";
+            </script>
+		<?php 
+		die;
 }
+
+
+
 
 $act=$_GET["act"];
  ?>	

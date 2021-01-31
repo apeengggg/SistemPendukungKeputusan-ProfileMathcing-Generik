@@ -120,6 +120,7 @@ include "config/koneksi.php";
             </div>
           </div>
         </div>
+
         <?php  
           if($_SESSION["level"]=="admin")
           {
@@ -181,8 +182,6 @@ include "config/koneksi.php";
             </ul>
             <?php 
           }elseif($_SESSION["level"]=="user"){
-            if($_SESSION["aktif"]=="Y")
-            {
                   ?>
                       <ul class="nav">
                           <li class="nav-item">
@@ -196,16 +195,16 @@ include "config/koneksi.php";
                               <p> SPK </p>
                             </a>
                           </li>  
-                          <li class="nav-item ">
+                          <!-- <li class="nav-item ">
                             <a class="nav-link" href="?module=alternatif">
                               <i class="material-icons">person</i>
                               <p> Kandidat </p>
                             </a>
-                          </li>              
+                          </li>               -->
                           <li class="nav-item ">
                             <a class="nav-link" href="?module=promatch">
                               <i class="material-icons">star</i>
-                              <p> Perhitungan </p>
+                              <p> Seleksi </p>
                             </a>
                           </li>
                           <li class="nav-item ">
@@ -215,75 +214,6 @@ include "config/koneksi.php";
                             </a>
                           </li>
                         </ul>
-                  <?php 
-            }else{
-                ?>
-                      <ul class="nav">
-                          <li class="nav-item active ">
-                            <a class="nav-link" href="?module=home">
-                              <i class="material-icons">dashboard</i>
-                              <p> Dashboard </p>
-                            </a>
-                          </li>
-                          <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                              <i class="material-icons">equalizer</i>
-                              <p> SPK
-                              </p>
-                            </a>
-                          </li>
-                          <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                              <i class="material-icons">apps</i>
-                              <p> Aspek
-                              </p>
-                            </a>
-                          </li>
-                          <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                              <i class="material-icons">apps</i>
-                              <p> Faktor
-                              </p>
-                            </a>
-                          </li>
-                          <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                              <i class="material-icons">apps</i>
-                              <p> Bobot
-                              </p>
-                            </a>
-                          </li>
-                          <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                              <i class="material-icons">person</i>
-                              <p> Alternatif
-                              </p>
-                            </a>
-                          </li> 
-                          <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                              <i class="material-icons">content_paste</i>
-                              <p> Nilai Profile
-                              </p>
-                            </a>
-                          </li>             
-                          <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                              <i class="material-icons">star</i>
-                              <p> Perhitungan </p>
-                            </a>
-                          </li>
-                          <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                              <i class="material-icons">timeline</i>
-                              <p> History </p>
-                            </a>
-                          </li>
-                        </ul>
-                <?php 
-            }
-            ?>
-
             <?php 
           }
         ?>

@@ -1,4 +1,5 @@
-<?php ob_start(); ?>
+<?php ob_start();
+session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,20 +58,17 @@
 		<h2>HASIL PERHITUNGAN METODE PROFILE MATCHING</h2>
 		<h2><?php echo strtoupper($_GET["nama_spk"]) ?></h2>
 	</center>
+    <h3>Nama Operator : <?= $_GET["user"]?></h3>
+    <h3>Keterangan : <?= $_GET["ket"]?></h3>
 	<table border="1" cellspacing="0" width="100%" style="width:100%">
 <?php
 
 	include "config/koneksi.php";
         if($_GET["level"]=="admin")
 		{
-			$sql = mysqli_query($koneksi,"SELECT * FROM hasil, spk 
-				WHERE hasil.id_spk=spk.id_spk AND hasil.id_spk='$_GET[id_spk]'
-				ORDER BY hasil.nilai DESC");
+			$sql = mysqli_query($koneksi,"SELECT * FROM hasil h INNER JOIN spk_user su ON su.id_spkuser=h.id_spkuser INNER JOIN spk s ON s.id_spk=su.id_spk WHERE h.id_spkuser='$_GET[id_spkuser]' ORDER BY h.nilai DESC");
 		}else{
-			$sql = mysqli_query($koneksi,"SELECT * FROM hasil, spk 
-				WHERE hasil.id_spk=spk.id_spk 
-				AND hasil.id_spk='$_GET[id_spk]'
-				ORDER BY hasil.nilai DESC") or die (mysqli_error($koneksi));
+			$sql = mysqli_query($koneksi,"SELECT * FROM hasil h INNER JOIN spk_user su ON su.id_spkuser=h.id_spkuser INNER JOIN spk s ON s.id_spk=su.id_spk WHERE h.id_user='$_SESSION[id_user]' AND h.id_spkuser='$_GET[id_spkuser]' ORDER BY h.nilai DESC") or die (mysqli_error($koneksi));
 		}
 
 	    echo "
