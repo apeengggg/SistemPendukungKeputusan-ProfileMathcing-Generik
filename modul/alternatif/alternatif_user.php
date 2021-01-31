@@ -414,7 +414,7 @@ $act=$_GET["act"];
                                                             <div class="input-group">
                                                                 <input type="hidden" name="faktor[]" value="<?php echo $r[id_faktor] ?>">
                                                                 <label class="col-sm-4 control-label text-left"><?php echo $no2.". ".$r["nama_faktor"]; ?></label>
-                                                                    <input type="text" name="nilai[]" required class="form-control" placeholder="">
+                                                                    <input type="number" name="nilai[]" required class="form-control" placeholder="1-5" min="1" max="5">
                                                             </div>     
                                                         <?php 
                                                         $no++;
@@ -482,7 +482,7 @@ $act=$_GET["act"];
                                                                 <div class="input-group">
                                                                     <input type="hidden" name="faktor[]" value="<?php echo $r[id_faktor] ?>">
                                                                     <label class="col-sm-4 control-label text-left"><?php echo $no2.". ".$r["nama_faktor"]; ?></label>
-                                                                        <input type="text" name="nilai[]" required class="form-control" value="<?=$r['nilai']?>">
+                                                                        <input type="number" name="nilai[]" required class="form-control" value="<?=$r['nilai']?>" placeholder="1-5" min="1" max="5">
                                                                 </div>     
                                                             <?php 
                                                             $no++;
