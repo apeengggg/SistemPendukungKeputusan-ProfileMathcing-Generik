@@ -92,10 +92,11 @@ else{
 			$alt = $_POST['nama_alternatif'];
 			$insert_alt = mysqli_query($koneksi, "INSERT INTO alternatif (nama_alternatif, id_spkuser) VALUES ('$alt', 	'$idspkuser')");
 			if($insert_alt){
+				$id_alt = mysqli_insert_id($koneksi);
 				?>
 					<script type="text/javascript">
 						window.alert("Data berhasil ditambah");
-						window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$idspkuser?>";
+						window.location="../../dashboard.php?module=alternatif_user&act=tambahdetail&id_spkuser=<?=$idspkuser?>&id_alt=<?=$id_alt?>&id_spk=<?=$idspk?>";
 					</script>
 				<?php 
 				}else{

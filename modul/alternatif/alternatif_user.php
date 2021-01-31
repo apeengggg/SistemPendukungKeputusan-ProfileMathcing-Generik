@@ -350,8 +350,8 @@ $act=$_GET["act"];
                             <div class="card-body ">
                                         <form class="form" method="post" action="modul/alternatif/aksi_alternatif.php?module=alternatif&act=input_nilai_alt">
                                             <div class="content">
-                                                <input type="text" name="id_spk" placeholder="Kode Alternatif" class='form-control' value="<?php echo $idspk ?>">
-                                                <input type="text" name="id_spkuser" placeholder="Kode Alternatif" class='form-control' value="<?php echo $idspkuser ?>">
+                                                <input type="hidden" name="id_spk" placeholder="Kode Alternatif" class='form-control' value="<?php echo $idspk ?>">
+                                                <input type="hidden" name="id_spkuser" placeholder="Kode Alternatif" class='form-control' value="<?php echo $idspkuser ?>">
                                                 
                                                 <div class="input-group">
                                                     <label class="col-sm-4 control-label text-left">Alternatif</label>
@@ -387,9 +387,9 @@ $act=$_GET["act"];
                                 
                                 <div class="card-body ">
                                             <form class="form" method="post" action="modul/alternatif/aksi_alternatif.php?module=alternatif&act=simpan_nilai">
-                                                <input type="text" name="id_spkuser" value="<?=$idspkuser?>">
-                                                <input type="text" name="id_alternatif" value="<?=$idalt?>">
-                                                <input type="text" name="id_spk" value="<?=$idspk?>">
+                                                <input type="hidden" name="id_spkuser" value="<?=$idspkuser?>">
+                                                <input type="hidden" name="id_alternatif" value="<?=$idalt?>">
+                                                <input type="hidden" name="id_spk" value="<?=$idspk?>">
                                                 <div class="content">
                                                     <div class="input-group">
                                                         <label class="col-sm-12 control-label text-left"><b>Aspek</b></label>
@@ -455,9 +455,9 @@ $act=$_GET["act"];
                                     
                                     <div class="card-body ">
                                                 <form class="form" method="post" action="modul/alternatif/aksi_alternatif.php?module=alternatif&act=ubah_nilai">
-                                                    <input type="text" name="id_spkuser" value="<?=$idspkuser?>">
-                                                    <input type="text" name="id_alternatif" value="<?=$idalt?>">
-                                                    <input type="text" name="id_spk" value="<?=$idspk?>">
+                                                    <input type="hidden" name="id_spkuser" value="<?=$idspkuser?>">
+                                                    <input type="hidden" name="id_alternatif" value="<?=$idalt?>">
+                                                    <input type="hidden" name="id_spk" value="<?=$idspk?>">
                                                     <div class="content">
                                                         <div class="input-group">
                                                             <label class="col-sm-12 control-label text-left"><b>Aspek</b></label>
