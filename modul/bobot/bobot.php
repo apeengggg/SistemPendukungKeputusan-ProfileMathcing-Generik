@@ -64,8 +64,11 @@ $act=$_GET["act"];
 												
 												<td width='10%'>";
 												?>
-													 <center>
-													 <a href='modul/bobot/aksi_bobot.php?module=bobot&act=hapus&id=<?php echo $r[id_bobot]?>&idspk=<?=$r[id_spk]?>' class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a>
+													<center>
+													<a href="modul/bobot/aksi_bobot.php?module=bobot&act=hapus&id=<?php echo $r[id_bobot]?>&idspk=<?=$r[id_spk]?>" class="btn-sm btn-danger" onclick='return confirm("Anda yakin mau menghapus item ini ?")'>
+														<i class="fa fa-trash"></i>
+													</a>
+													<!-- <a href='modul/bobot/aksi_bobot.php?module=bobot&act=hapus&id=<?php echo $r[id_bobot]?>&idspk=<?=$r[id_spk]?>' class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a> -->
 														
 												   </center>
 												   <?php 

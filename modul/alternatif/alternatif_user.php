@@ -72,8 +72,14 @@ $act=$_GET["act"];
                                                         <td width='10%'>";
 													?>
 														 <center>
-														 <a href="?module=alternatif&act=edit&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a> 
-														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_spk_user&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
+															<a href="?module=alternatif&act=edit&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-info">
+																	<i class="fa fa-edit"></i>
+															</a>
+															<a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_spk_user&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+																	<i class="fa fa-trash"></i>
+															</a>
+														 <!-- <a href="?module=alternatif&act=edit&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a>  -->
+														 <!-- <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_spk_user&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a> -->
 															
 													   </center>
 													 <?php 
@@ -96,9 +102,15 @@ $act=$_GET["act"];
 														<td>$r[tgl]</td>
 														<td width='10%'>";
 													?>
-														 <center>
-														 <a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a> 
-														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_spk_user&id=<?= $r[id_spkuser] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
+														<center>
+															<a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info">
+																<i class="fa fa-edit"></i>
+															</a>
+															<a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_spk_user&id=<?= $r[id_spkuser] ?>" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+																<i class="fa fa-trash"></i>
+															</a>
+														 <!-- <a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a>  -->
+														 <!-- <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_spk_user&id=<?= $r[id_spkuser] ?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a> -->
 													   </center>
 													 <?php 
 													   echo "
@@ -180,9 +192,15 @@ $act=$_GET["act"];
                                                         <td>$r[nama_spk]</td>
                                                         <td width='10%'>";
 													?>
-														 <center>
-														 <a href="?module=alternatif&act=edit&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a> 
-														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif']?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
+														<center>
+														<a href="?module=alternatif&act=edit&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-info">
+																<i class="fa fa-edit"></i>
+															</a>
+														<a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif']?>" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+															<i class="fa fa-trash"></i>
+														</a>
+														 <!-- <a href="?module=alternatif&act=edit&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a>  -->
+														 <!-- <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif']?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a> -->
 															
 													   </center>
 													 <?php 
@@ -219,8 +237,14 @@ $act=$_GET["act"];
                                                     ?>
 														<td>
 														 <center>
-														 <a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a> 
-														 <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif'] ?>&name=<?= $r['nama_alternatif']?>&u_spk=<?=$r['id_spkuser']?>&id_spk=<?=$r['id_spk']?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a>
+															<a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info">
+																<i class="fa fa-edit"></i>
+															</a>
+															<a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif'] ?>&name=<?= $r['nama_alternatif']?>&u_spk=<?=$r['id_spkuser']?>&id_spk=<?=$r['id_spk']?>" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+																<i class="fa fa-trash"></i>
+															</a>
+														 <!-- <a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info btn-just-icon edit"><i class="material-icons" rel="tooltip" title='Edit'>edit</i></a>  -->
+														 <!-- <a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif'] ?>&name=<?= $r['nama_alternatif']?>&u_spk=<?=$r['id_spkuser']?>&id_spk=<?=$r['id_spk']?>" class="btn btn-danger btn-just-icon remove" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="material-icons" rel="tooltip" title="Hapus">close</i></a> -->
 															
 													   </center>
 													 <?php 

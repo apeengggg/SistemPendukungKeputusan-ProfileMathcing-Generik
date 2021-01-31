@@ -48,13 +48,13 @@ $act=$_GET["act"];
 		                       		<?php
 									}
 								      echo "
-								          <thead>
+								          <thead align='center'>
 											<tr>
 												<th width=''>No</th>
 												<th>Nama SPK</th>
 												<th>Keterangan</th>
 												<th>Tgl Dibuat</th>
-												<th>Aksi</th>
+												<th width='110px'>Aksi</th>
 											</tr>
 										</thead>
 									<tbody>"; 
@@ -66,11 +66,17 @@ $act=$_GET["act"];
 												<td>$r[nama_spk]</td>
 												<td>$r[keterangan]</td>
 												<td>$r[tanggal]</td>
-												<td width='10%'>";
+												<td width='110px'>";
 												?>
 													 <center>
-													 <a href='?module=spk&act=edit&id=<?php echo $r[id_spk] ?>' class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>  
-													 <a href='modul/spk/aksi_spk.php?module=spk&act=hapus&id=<?php echo $r[id_spk] ?>'  class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a>
+													 <a href="?module=spk&act=edit&id=<?php echo $r[id_spk] ?>" class="btn-sm btn-primary">
+													 	<i class="fa fa-edit"></i>
+													 </a>
+													 <a href="modul/spk/aksi_spk.php?module=spk&act=hapus&id=<?php echo $r[id_spk] ?>" class="btn-sm btn-danger" onclick='return confirm("Anda yakin mau menghapus item ini ?")'>
+													 	<i class="fa fa-trash"></i>
+													 </a>
+													 <!-- <a href='?module=spk&act=edit&id=<?php echo $r[id_spk] ?>' class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>  
+													 <a href='modul/spk/aksi_spk.php?module=spk&act=hapus&id=<?php echo $r[id_spk] ?>'  class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a> -->
 														
 												   </center>
 												   <?php 

@@ -65,7 +65,7 @@ $act=$_GET["act"];
 										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek WHERE id_user='$_SESSION[id_user]' ORDER BY id_aspek ASC");
 									}
 								      echo "
-								          <thead>
+								          <thead align='center'>
 											<tr>
 												<th width=''>No</th>
 												<th>Nama Aspek</th>
@@ -87,11 +87,17 @@ $act=$_GET["act"];
 												<td>$r[bobot_core]</td>
 												<td>$r[bobot_secondary]</td>
 												<td>$r[nama_singkat]</td>
-												<td width='10%'>";
+												<td width='120px'>";
 												?>
 													 <center>
-													 <a href='?module=aspek&act=edit&id=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a> 
-													 <a href='modul/aspek/aksi_aspek.php?module=aspek&act=hapus&id=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a>
+													<a href="?module=aspek&act=edit&id=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>" class="btn-sm btn-info">
+														<i class="fa fa-edit"></i>
+													</a>
+													<a href="modul/aspek/aksi_aspek.php?module=aspek&act=hapus&id=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>" class="btn-sm btn-danger" onclick='return confirm("Anda yakin mau menghapus item ini ?")'>
+														<i class="fa fa-trash"></i>
+													</a>
+													 <!-- <a href='?module=aspek&act=edit&id=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a> 
+													 <a href='modul/aspek/aksi_aspek.php?module=aspek&act=hapus&id=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a> -->
 														
 												   </center>
 												   <?php 
