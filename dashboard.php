@@ -266,23 +266,68 @@ include "config/koneksi.php";
             {
                 case "home" :
                 if($_SESSION["level"]!="admin"){
-
                     ?>
                     <div class="callout">
                     <h3><font face ="Arial">Haloo <?php echo $_SESSION['username'] ?>, Selamat datang di Sistem Pendukung Keputusan Generik Metode Profile Matching </font></h3>
-                    <div><font face="Times">Gunakan sistem ini untuk membantu menyelesaikan masalah yang anda hadapi dan merekomendasikan hasil keputusan yang terbaik,</font></div>
-                     <p><font face= "Times">1.Masukkan Tema SPK sesuai kasus anda<br />
-                         2.Masukkan data aspek (prosentase aspek harus 100% dari jumlah aspek dan prosentase bobot core dan secondary factor harus 100 %)<br />
-                         3.Masukkan data faktor, nilai target dan tipenya sesuai dengan kebutuhan kasus anda (dengan catatan setiap faktor harus ada tipe core dan secondary faktornya <br />
-                         4.Masukkan bobot sesuai dengan kasus anda<br/>
-                         5.Masukkan alternatif<br/>
-                         6.Masukkan nilai alternatif sesuai kebutuhan kasus anda<br/>
-                         7.Pilih menu perhitungan.</font></p>
+                    <div><font face="Times">Gunakan sistem ini untuk membantu menyelesaikan masalah yang anda hadapi dan merekomendasikan hasil keputusan yang terbaik, dengan cara :</font></div>
+                     <p><font face= "Times">
+                         1.Pilih SPK Yang Tersedia Untuk Menyelesaikan Kasus Anda Pada Menu SPK<br />
+                         2.Tambah Kandidat (Alternatif) Yang Akan Anda Seleksi<br />
+                         3.Masukan Nilai Untuk Kandidat Yang Akan Diseleksi Sesuai Dengan Kriteria Yang Ada <br />
+                         4.Pilih Menu Seleksi<br/>
+                         5.Hasil Keputusan Menggunakan Metode Profile Matching Dapat Dilihat Pada Menu History Atau Setelah Anda Melakukan Penyeleksian Pada Menu Seleksi<br/>
+                         </font></p>
                          <hr color="black"/>
                          <center>
                          <h3><font face="Snell">~ Keputusan Tetap Ditangan Anda ~</font></h3>
                          </center> 
-                        
+                         <hr color="black"/>
+                         <div class="card ">
+                            <div class="card-body ">
+                                <div class="card-header card-header-success card-header-icon">
+                                    <div class="card-icon">
+                                      <i class="material-icons"></i>
+                                    </div>
+                                    <h4 class="card-title">Data SPK Yang Tersedia</h4>
+                                </div>
+                                <div class="table-responsive table-sales">
+                                    <?php  
+                                    if($_SESSION["level"]=="admin")
+                                    {
+                                      $sql=mysqli_query($koneksi,"SELECT * FROM spk ORDER BY id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
+                                    }else{
+                                      $sql=mysqli_query($koneksi,"SELECT * FROM spk ORDER BY id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
+                                    }
+                                    ?>
+                                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                      <thead>
+                                          <tr>
+                                            <th width="40px">No</th>
+                                            <th width="150px">Nama SPK</th>
+                                            <th width="250px">Keterangan</th>
+                                          </tr>
+                                        </thead>
+                                       <tbody>
+                                      <?php  
+                                      $no = 1;
+                                      while($data=mysqli_fetch_array($sql)){
+                                      ?>
+                                      <tr>
+                                        <td><?php echo $no++ ?></td>
+                                        <td><?php echo $data["nama_spk"] ?></td>
+                                        <td><?php echo $data["keterangan"] ?></td>
+                                      </tr>
+                                    <?php } ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                              </div>
+                              <hr>
+                              <div class="card-footer">
+                              <div class="stats">
+                              </div>
+                            </div>
+                            </div>
                     <?php 
                   }else{
                     ?>
