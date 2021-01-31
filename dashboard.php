@@ -296,7 +296,7 @@ include "config/koneksi.php";
                                     {
                                       $sql=mysqli_query($koneksi,"SELECT * FROM spk ORDER BY id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
                                     }else{
-                                      $sql=mysqli_query($koneksi,"SELECT * FROM spk ORDER BY id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
+                                      $sql=mysqli_query($koneksi,"SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal, spk.id_spk FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.id_spk=spk.id_spk RIGHT JOIN bobot ON bobot.id_spk=spk.id_spk WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND bobot.id_bobot IS NOT NULL ORDER BY spk.id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
                                     }
                                     ?>
                                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
