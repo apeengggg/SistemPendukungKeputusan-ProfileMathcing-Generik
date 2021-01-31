@@ -9,14 +9,22 @@ require 'PHPMailer/src/OAuth.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/POP3.php';
 
-
+$pwd1 = $_POST["password"];
+$pwd2 = $_POST["password_u"]; 
 $pass=md5($_POST["password"]);
 $email = $_POST["email"];
 $date = date('Y-m-d');
 $code = md5($email.$date);
 $nama = $_POST["nama"];
 $uname = $_POST["username"];
-
+if ($pwd1 != $pwd2) {
+	?>
+	<script type="text/javascript">
+			window.alert("Kolom Password dan Kolom Ulangi Password Tidak Sama!!");
+			window.location="registrasi.php";
+		</script>
+<?php
+}else{
 // cek email sudah terdaftar ?
 $sql = "SELECT * FROM user WHERE email='$email'";
 $sql2 = "SELECT * FROM user WHERE username='$uname'";
@@ -38,8 +46,8 @@ if (mysqli_num_rows($query1)>0) {
 		</script>
 <?php
 	}else{
-		$query=mysqli_query($koneksi,"INSERT INTO user(username,password, nama, alamat, tlp, email, level, aktif, verif_code) 
-								VALUES('$_POST[username]', '$pass', '$_POST[nama]',   '$_POST[alamat]', '$_POST[tlp]',  '$_POST[email]', 'user','T', '$code')") or die (mysqli_error($koneksi));
+		$query=mysqli_query($koneksi,"INSERT INTO user(username,password, nama, email, level, aktif, verif_code) 
+								VALUES('$_POST[username]', '$pass', '$_POST[nama]', '$_POST[email]', 'user','T', '$code')") or die (mysqli_error($koneksi));
 
 /**
  * This example shows settings to use when sending via Google's Gmail servers.
@@ -137,6 +145,7 @@ if (!$mail->send()) {
 // 		</script>
 // 	<?php 
 // }
+}
 }
 }
 ?>

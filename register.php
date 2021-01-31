@@ -100,7 +100,7 @@
                           <input type="text" name="nama" class="form-control" placeholder="Nama..." required>
                         </div>
                       </div>
-                      <div class="form-group has-default">
+                      <!-- <div class="form-group has-default">
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -109,8 +109,8 @@
                           </div>
                           <input type="text" name="alamat" class="form-control" placeholder="Alamat..." required>
                         </div>
-                      </div>
-                      <div class="form-group has-default">
+                      </div> -->
+                      <!-- <div class="form-group has-default">
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -119,7 +119,7 @@
                           </div>
                           <input type="text" name="tlp" class="form-control" placeholder="Tlp..." required>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="form-group has-default">
                         <div class="input-group">
                           <div class="input-group-prepend">
@@ -155,6 +155,16 @@
                             </span>
                           </div>
                           <input type="password" name="password" placeholder="Password..." class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="form-group has-default">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">lock_outline</i>
+                            </span>
+                          </div>
+                          <input type="password_u" name="password_u" placeholder="Ulangi Passowrd..." class="form-control" required>
                         </div>
                       </div>
                     <div class="text-center">
