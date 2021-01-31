@@ -138,8 +138,10 @@ else{
 		$name=$_POST['nama_aspek'];
 		$idspk = $_POST['id_spk'];
 		$id_aspekk = $_POST['id_aspek'];
-		// var_dump($_GET); var_dump($_POST); die;
-		$aspek_lama = mysqli_query($koneksi, "SELECT nama_aspek FROM aspek WHERE id_spk='$idspk'");
+		$init = $_POST['nama_singkat'];
+		// var_dump($_GET); 
+		// var_dump($_POST); die;
+		$aspek_lama = mysqli_query($koneksi, "SELECT nama_aspek FROM aspek WHERE id_spk='$idspk' AND id_aspek='$id_aspekk'");
 		$res_aspek = mysqli_fetch_array($aspek_lama);
 		$aspek_l = $res_aspek['nama_aspek'];
 		// echo $name; 
@@ -188,22 +190,22 @@ else{
 	}
 		}
 	}else{
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
-		if (mysqli_num_rows($ceknama)>0) {
-			?>
-			<script type="text/javascript">
-				window.alert("Nama Aspek Sudah Ada, Gagal Merubah Aspek!");
-				window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
-			</script>
-		<?php
-		}else{
+		// $ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
+		// if (mysqli_num_rows($ceknama)>0) {
+		// 	?>
+		// 	<script type="text/javascript">
+		// 		window.alert("Nama Aspek Sudah Ada, Gagal Merubah Aspek!");
+		// 		window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
+		// 	</script>
+		// <?php
+		// }else{
 		if(($_POST["bobot_core"]+$_POST["bobot_secondary"])==100)
 			{
 				  $query=mysqli_query($koneksi,"UPDATE aspek SET nama_aspek 		= '$_POST[nama_aspek]', 
 				  												 bobot 				='$_POST[bobot]',  
 				  												 bobot_core 		='$_POST[bobot_core]', 
 				  												 bobot_secondary	='$_POST[bobot_secondary]',  
-				  												 nama_singkat 		='$_POST[nama_singkat]',
+				  												 nama_singkat 		='$_POST[nama_singkat]'
 									   						  WHERE  id_aspek    	= '$_POST[id_aspek]'")or die (mysqli_error($koneksi));
 				  if($query){
 					?>
@@ -232,5 +234,4 @@ else{
 	}
 }
 	}
-}
 ?>

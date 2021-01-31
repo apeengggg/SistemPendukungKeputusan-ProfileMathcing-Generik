@@ -17,12 +17,37 @@ $act=$_GET["act"];
 							if (isset($_GET['id_spk'])) {
 								$id_ = $_GET['id_spk'];
 							}
+							// cek apakah sudah ada faktor core
+							$cekfaktor = mysqli_query($koneksi, "SELECT * FROM faktor WHERE aspek='$id' AND jenis=1");
+							$result1 = mysqli_num_rows($cekfaktor);
+							// cek apakah sudah ada faktor secondary
+							$cekfaktor1 = mysqli_query($koneksi, "SELECT * FROM faktor WHERE aspek='$id' AND jenis=2");
+							$result2 = mysqli_num_rows($cekfaktor1);
 								?>
 									<div class="card-header card-header-rose card-header-text">
 					                  <div class="card-text">
 					                    <h4 class="card-title">Data Faktor</h4>
 					                  </div>
 					                </div>
+								<?php
+								
+								if ($result1===0) {
+									?>
+									<br>
+									<div class="alert alert-danger" role="alert">
+											* Anda Belum Memasukan Faktor Dengan Jenis <b>CORE</b>
+									</div>
+									<?php
+								}
+								if ($result2===0) {
+									?>
+									<br>
+									<div class="alert alert-danger" role="alert">
+										* Anda Belum Memasukan Faktor Dengan Jenis <b>SECONDARY</b>
+									</div>
+									<?php
+								}
+								?>
 					                
 					                <div class="card-body ">
 												<?php
@@ -99,13 +124,24 @@ $act=$_GET["act"];
 										       			<td>$r[nama_spk]</td>
 										       			<td>$r[nama_aspek]</td>
 										       			<td>$r[nama_faktor]</td>
-										       			<td>$r[target]</td>
-														<td>$jenis</td>
-														<td width='10%'>";
+										       			<td width='90px'>$r[target]</td>
+														<td width='90px'>$jenis</td>
+														<td width='110px'>";
 														?>
 															 <center>
-															 <a href='?module=faktor&act=edit&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>'  class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>  
-															 <a href='modul/faktor/aksi_faktor.php?module=faktor&act=hapus&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn  btn-danger btn-just-icon remove'><i class='material-icons' rel='tooltip' title='Hapus' onclick='return confirm("Anda yakin mau menghapus item ini ?")'>close</i></a>
+															 <!-- edit -->
+															 <a href="?module=faktor&act=edit&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>"
+															 class="btn-sm btn-info">
+															 <i class="fa fa-edit"></i>
+															 </a>
+															 <!-- hapus -->
+															 <a href="modul/faktor/aksi_faktor.php?module=faktor&act=hapus&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>" 
+															 class="btn-sm btn-danger" 
+															 onclick='return confirm("Anda yakin mau menghapus item ini?")'>
+															 <i class="fa fa-trash"></i>
+															 </a>
+															 <!-- <a href="?module=faktor&act=edit&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>" class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>   -->
+															 <!-- <a href='modul/faktor/aksi_faktor.php?module=faktor&act=hapus&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn  btn-danger btn-just-icon remove'><i class='material-icons' rel='tooltip' title='Hapus' onclick='return confirm('Anda yakin mau menghapus item ini ?')">close</i></a> -->
 																
 														   </center>
 														<?php 

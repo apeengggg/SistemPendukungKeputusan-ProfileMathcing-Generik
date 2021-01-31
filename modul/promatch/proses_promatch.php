@@ -35,6 +35,51 @@ if ($k > 100 OR $k < 100) {
 		die;
 }
 
+////////////////////////////////////// cek faktor core ///////////////////////////////////////////
+// ambil jumlah row pada query dibawah untuk menampilkan faktor core=1
+$cek1 = mysqli_query($koneksi, "SELECT faktor.id_faktor, faktor.jenis FROM faktor INNER JOIN aspek ON aspek.id_aspek=faktor.aspek WHERE faktor.id_spk='$data[id_spk]' AND faktor.jenis=1");
+// hasil $cek1
+$jml1 = mysqli_num_rows($cek1);
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// hitung jumlah aspek dengan query dibawah
+$cek1a =mysqli_query($koneksi, "SELECT COUNT(aspek.id_aspek) AS jml_aspek FROM aspek WHERE aspek.id_spk='$data[id_spk]'");
+// hasil $cek1a
+$jml1a = mysqli_fetch_array($cek1a);
+$a = $jml1a['jml_aspek'];
+// mulai cek
+if ($jml1 < $a) {
+	echo  '
+            <script type="text/javascript">
+                window.alert("Beberapa Aspek Tidak Memiliki Faktor Dengan Jenis Core, Silahkan Cek Faktor Pada Tiap Aspek Pada SPK Ini");
+                window.location="?module=promatch";
+            </script>
+		';
+		die;
+}
+//////////////////////////////////////// cek faktor core /////////////////////////////////////////
+
+////////////////////////////////////// cek faktor SECONDARY ///////////////////////////////////////////
+// ambil jumlah row pada query dibawah untuk menampilkan faktor SECONDARY=2
+$cek1 = mysqli_query($koneksi, "SELECT faktor.id_faktor, faktor.jenis FROM faktor INNER JOIN aspek ON aspek.id_aspek=faktor.aspek WHERE faktor.id_spk='$data[id_spk]' AND faktor.jenis=2");
+// hasil $cek1
+$jml1 = mysqli_num_rows($cek1);
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// hitung jumlah aspek dengan query dibawah
+$cek1a =mysqli_query($koneksi, "SELECT COUNT(aspek.id_aspek) AS jml_aspek FROM aspek WHERE aspek.id_spk='$data[id_spk]'");
+// hasil $cek1a
+$jml1a = mysqli_fetch_array($cek1a);
+$a = $jml1a['jml_aspek'];
+// mulai cek
+if ($jml1 < $a) {
+	echo  '
+            <script type="text/javascript">
+                window.alert("Beberapa Aspek Tidak Memiliki Faktor Dengan Jenis Secondary, Silahkan Cek Faktor Pada Tiap Aspek Pada SPK Ini");
+                window.location="?module=promatch";
+            </script>
+		';
+		die;
+}
+//////////////////////////////////////// cek faktor SECONDARY /////////////////////////////////////////
 
 
 
