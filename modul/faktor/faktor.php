@@ -227,9 +227,9 @@ $act=$_GET["act"];
 								</div>
 							<?php
 							break;
-							case "edit" :
 
-							$edit=mysqli_query($koneksi,"SELECT * FROM faktor, aspek, spk where faktor.id_faktor='$_GET[id]' AND faktor.aspek=aspek.id_aspek AND aspek.id_spk=spk.id_spk");
+							case "edit" :
+							$edit=mysqli_query($koneksi,"SELECT f.id_faktor, a.id_aspek, s.id_spk, f.nama_faktor FROM faktor f INNER JOIN aspek a ON a.id_aspek=f.aspek INNER JOIN spk s ON s.id_spk=f.id_spk WHERE f.id_faktor='$_GET[id_faktor]'");
 							$r=mysqli_fetch_array($edit);
 							?>
 								<div class="card-header card-header-rose card-header-text">
@@ -240,9 +240,9 @@ $act=$_GET["act"];
 					                
 					                <div class="card-body ">
 											<form class="form" method="post" action="modul/faktor/aksi_faktor.php?module=faktor&act=update">
-												<input type="hidden" name="id_faktor" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_faktor] ?>" readonly>
-												<input type="hidden" name="id_spk" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_spk] ?>" readonly>
-												<input type="hidden" name="id_aspek" placeholder="Kode Produk" class='form-control' value="<?php echo $r[id_aspek] ?>" readonly>
+												<input type="hidden" name="id_faktor" placeholder="Kode Produk" class='form-control' value="<?php echo $r['id_faktor'] ?>" readonly>
+												<input type="hidden" name="id_spk" placeholder="Kode Produk" class='form-control' value="<?php echo $r['id_spk'] ?>" readonly>
+												<input type="hidden" name="id_aspek" placeholder="Kode Produk" class='form-control' value="<?php echo $r['id_aspek'] ?>" readonly>
 												<div class="content">
 													<!-- <div class="input-group">
 														<label class="col-sm-4 control-label text-left">Nama SPK</label>
