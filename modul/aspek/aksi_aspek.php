@@ -145,7 +145,7 @@ else{
 		// echo $name; 
 		// echo $aspek_l; die;
 		if ($name != $aspek_l) {
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE nama_aspek='$name' AND id_spk=$idspk");
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
 		?>
 			<script type="text/javascript">
@@ -188,7 +188,7 @@ else{
 	}
 		}
 	}else{
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE nama_aspek='$name' AND id_spk=$idspk");
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
 			?>
 			<script type="text/javascript">
