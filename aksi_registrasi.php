@@ -87,13 +87,13 @@ $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = 'mirfanmanaf0804@gmail.com';
+$mail->Username = 'suhardiman645@gmail.com';
 
 //Password to use for SMTP authentication
-$mail->Password = 'apenggmail8';
+$mail->Password = 'hardyman645';
 
 //Set who the message is to be sent from
-$mail->setFrom('mirfanmanaf0804@gmail.com', 'Admin Aplikasi SPK PM Generik');
+$mail->setFrom('suhardiman645@gmail.com', 'Admin Aplikasi SPK PM Generik');
 
 //Set an alternative reply-to address
 // $mail->addReplyTo('mohirfanmanaf0804@gmail.com', 'Admin Aplikasi SPK PM Generik');

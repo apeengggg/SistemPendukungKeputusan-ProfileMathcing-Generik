@@ -164,7 +164,7 @@
                               <i class="material-icons">lock_outline</i>
                             </span>
                           </div>
-                          <input type="password_u" name="password_u" placeholder="Ulangi Passowrd..." class="form-control" required>
+                          <input type="password" name="password_u" placeholder="Ulangi Passowrd..." class="form-control" required>
                         </div>
                       </div>
                     <div class="text-center">

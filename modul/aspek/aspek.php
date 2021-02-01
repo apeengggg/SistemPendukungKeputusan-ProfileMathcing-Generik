@@ -209,15 +209,15 @@ $act=$_GET["act"];
 		
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot</label>
-												<input type="number" name="bobot" class='form-control' placeholder="Bobot" required>
+												<input type="number" name="bobot" class='form-control' placeholder="Bobot" min="1" max="100" required >
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot Core</label>
-												<input type="number" name="bobot_core" class='form-control' placeholder="Bobot Core" required>
+												<input type="number" name="bobot_core" class='form-control' placeholder="Bobot Core" min="1" max="100" required>
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot Secondary</label>
-												<input type="number" name="bobot_secondary" class='form-control' placeholder="Bobot Secondary" required>
+												<input type="number" name="bobot_secondary" class='form-control' placeholder="Bobot Secondary" min="1" max="100" required>
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Nama Singkat/Inisial</label>
