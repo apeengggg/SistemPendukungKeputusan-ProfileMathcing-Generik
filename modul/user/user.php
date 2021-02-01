@@ -13,7 +13,7 @@ $act=$_GET["act"];
 											?>
 												<div class="card-header card-header-rose card-header-text">
 								                  <div class="card-text">
-								                    <h4 class="card-title">Data User</h4>
+							
 								                  </div>
 								                </div>
 								                
@@ -163,8 +163,7 @@ $act=$_GET["act"];
 										break;
 
 										case "edit" :
-
-										$edit=mysqli_query($koneksi,"SELECT * FROM user where username='$_GET[id]'");
+										$edit=mysqli_query($koneksi,"SELECT * FROM user WHERE id_user='$_GET[id]'");
     									$r=mysqli_fetch_array($edit);
     									?>
 											<div class="card-header card-header-rose card-header-text">
@@ -179,6 +178,7 @@ $act=$_GET["act"];
 															    <div class="input-group">
 																	<label class="col-sm-4 control-label text-left">Username</label>
 																	<input type="text" name="username" placeholder="User Name" class='form-control' value="<?php echo $r[username] ?>" readonly>
+																	<input type="hidden" name="id_user" placeholder="User Name" class='form-control' value="<?php echo $r[id_user] ?>" readonly>
 																</div>
 																<div class="input-group">
 																	<label class="col-sm-4 control-label text-left">Password</label>

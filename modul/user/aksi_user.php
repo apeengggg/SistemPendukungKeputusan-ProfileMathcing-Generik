@@ -120,144 +120,236 @@ else{
 	elseif ($module=='user' AND $act=='update'){
 		$email = $_POST['email'];
 		$username = $_POST['username'];
-		$cekemail = mysqli_query($koneksi, "SELECT * FROM user WHERE email='$email'");
-		// cek aakah query di atas menghasilkan email yang sama / > 1
-		if (mysqli_num_rows($cekemail)>0) {
-		?>
-					<script type="text/javascript">
-						window.alert("Email Sudah Terdaftar, Gagal Mengupdate User");
-						window.location="../../dashboard.php?module=home";
-					</script>
-		<?php
-		}else{ 
-	 	if(empty($_POST["password"])){
-		if($_FILES['file']['size']==0)
-		{
-			$query=mysqli_query($koneksi,"UPDATE user SET nama  	= '$_POST[nama]',
-		  										          alamat  	= '$_POST[alamat]',
-		  										          tlp  		= '$_POST[tlp]',
-		  										          email  	= '$_POST[email]'
-							                  WHERE  username    	= '$_POST[username]'")or die (mysqli_error($koneksi));
-					if($query){
-						?>
-							<script type="text/javascript">
-								window.alert("Data berhasil disimpan");
-								window.location="../../dashboard.php?module=home";
-							</script>
-						<?php 
-					}else{
-						?>
-							<script type="text/javascript">
-								window.alert("Data gagal disimpan");
-								window.location="../../dashboard.php?module=home";
-							</script>
-						<?php 
-					}
-		}else{
-			$ekstensi_diperbolehkan	= array('png','jpg','jpeg');
-			$foto = $_FILES['file']['name'];
-			$x = explode('.', $foto);
-			$ekstensi = strtolower(end($x));
-			$ukuran	= $_FILES['file']['size'];
-			$file_tmp = $_FILES['file']['tmp_name'];
-			if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
-				if($ukuran < 1044070){			
-					move_uploaded_file($file_tmp, './../../foto/'.$foto);
-					$query=mysqli_query($koneksi,"UPDATE user SET nama      = '$_POST[nama]',
-		  										  				  alamat  	= '$_POST[alamat]',
-		  										          		  tlp  		= '$_POST[tlp]',
-		  										          		  email  	= '$_POST[email]',
-		  										  				  foto  	= '$foto' 
-							                  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
-					if($query){
-						?>
-							<script type="text/javascript">
-								window.alert("Data berhasil disimpan");
-								window.location="../../dashboard.php?module=home";
-							</script>
-						<?php 
-					}else{
-						?>
-							<script type="text/javascript">
-								window.alert("Data gagal disimpan");
-								window.location="../../dashboard.php?module=home";
-							</script>
-						<?php 
-					}
-				}else{
-					?>
-						<script type="text/javascript">
-							window.alert("Ukuran Gambar terlalu besar");
-							window.location="../../dashboard.php?module=home";
-						</script>
-					<?php 
-				}
-			}else{
+		$id = $_POST['id_user'];
+		$data_lama = mysqli_query($koneksi, "SELECT username, email FROM user WHERE id_user='$id'");
+		$res = mysqli_fetch_array($data_lama);
+		$e = $res['email'];
+		$u = $res['username'];
+		// echo $username.'='.$u; 
+		// echo '<br>';
+		// echo $email.'='.$e; die;
+		if ($e != $email) {
+			// cek apakah email atau username sudah ada?
+			$cekemail = mysqli_query($koneksi, "SELECT * FROM user WHERE email='$email' AND id_user='$id'");
+			if (mysqli_num_rows($cekemail)>0) {
 				?>
-					<script type="text/javascript">
-						window.alert("Data ekstensi gambar tidak sesuai");
-						window.location="../../dashboard.php?module=home";
-					</script>
-				<?php 
-			}
-		}
-		}else{
-			$pass=md5($_POST["password"]);
-			mysqli_query($koneksi,"UPDATE admin SET nama  = '$_POST[nama]', password='$pass', level = '$_POST[level]' 
-							   WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
-			if($_FILES['file']['size']==0)
-			{
-				$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
-																  alamat  	= '$_POST[alamat]',
-		  										          		  tlp  		= '$_POST[tlp]',
-		  										          		  email  	= '$_POST[email]',
-													  			  password 	= '$pass',
-			  										  			  level 	= '$_POST[level]' 
-								                  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
-						if($query){
-							?>
-								<script type="text/javascript">
-									window.alert("Data berhasil disimpan");
-									window.location="../../dashboard.php?module=home";
-								</script>
-							<?php 
+							<script type="text/javascript">
+								window.alert("Data gagal disimpan, username dan email sudah terdaftar");
+								window.location="../../dashboard.php?module=home";
+							</script>
+						<?php 
+						die;
+			}else{
+				if(empty($_POST["password"])){
+					if($_FILES['file']['size']==0)
+					{
+						$query=mysqli_query($koneksi,"UPDATE user SET nama  	= '$_POST[nama]',
+																		alamat  	= '$_POST[alamat]',
+																		tlp  		= '$_POST[tlp]',
+																		email  	= '$_POST[email]'
+														  WHERE  username    	= '$_POST[username]'")or die (mysqli_error($koneksi));
+								if($query){
+									?>
+										<script type="text/javascript">
+											window.alert("Data berhasil disimpan");
+											window.location="../../dashboard.php?module=home";
+										</script>
+									<?php 
+								}else{
+									?>
+										<script type="text/javascript">
+											window.alert("Data gagal disimpan");
+											window.location="../../dashboard.php?module=home";
+										</script>
+									<?php 
+								}
+					}else{
+						$ekstensi_diperbolehkan	= array('png','jpg','jpeg');
+						$foto = $_FILES['file']['name'];
+						$x = explode('.', $foto);
+						$ekstensi = strtolower(end($x));
+						$ukuran	= $_FILES['file']['size'];
+						$file_tmp = $_FILES['file']['tmp_name'];
+						if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+							if($ukuran < 1044070){			
+								move_uploaded_file($file_tmp, './../../foto/'.$foto);
+								$query=mysqli_query($koneksi,"UPDATE user SET nama      = '$_POST[nama]',
+																				  alamat  	= '$_POST[alamat]',
+																				  tlp  		= '$_POST[tlp]',
+																				  email  	= '$_POST[email]',
+																				  foto  	= '$foto' 
+														  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
+								if($query){
+									?>
+										<script type="text/javascript">
+											window.alert("Data berhasil disimpan");
+											window.location="../../dashboard.php?module=home";
+										</script>
+									<?php 
+								}else{
+									?>
+										<script type="text/javascript">
+											window.alert("Data gagal disimpan");
+											window.location="../../dashboard.php?module=home";
+										</script>
+									<?php 
+								}
+							}else{
+								?>
+									<script type="text/javascript">
+										window.alert("Ukuran Gambar terlalu besar");
+										window.location="../../dashboard.php?module=home";
+									</script>
+								<?php 
+							}
 						}else{
 							?>
 								<script type="text/javascript">
-									window.alert("Data gagal disimpan");
+									window.alert("Data ekstensi gambar tidak sesuai");
 									window.location="../../dashboard.php?module=home";
 								</script>
 							<?php 
 						}
-			}else{
-				$ekstensi_diperbolehkan	= array('png','jpg','jpeg');
-				$foto = $_FILES['file']['name'];
-				$x = explode('.', $foto);
-				$ekstensi = strtolower(end($x));
-				$ukuran	= $_FILES['file']['size'];
-				$file_tmp = $_FILES['file']['tmp_name'];
-				if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
-					if($ukuran < 1044070){			
-						move_uploaded_file($file_tmp, './../../foto/'.$foto);
-						$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
-													  password 	= '$password',
-													  alamat  	= '$_POST[alamat]',
-		  										      tlp  		= '$_POST[tlp]',
-		  										      email  	= '$_POST[email]',
-			  										  level 	= '$_POST[level]',
-			  										  foto  	= '$foto' 
-								                  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
-						if($query){
-							?>
-								<script type="text/javascript">
-									window.alert("Data berhasil disimpan");
-									window.location="../../dashboard.php?module=home";
-								</script>
-							<?php 
+					}
+					}else{
+						$pass=md5($_POST["password"]);
+						mysqli_query($koneksi,"UPDATE admin SET nama  = '$_POST[nama]', password='$pass', level = '$_POST[level]' 
+										   WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
+						if($_FILES['file']['size']==0)
+						{
+							$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
+																			  alamat  	= '$_POST[alamat]',
+																				  tlp  		= '$_POST[tlp]',
+																				  email  	= '$_POST[email]',
+																				password 	= '$pass',
+																				  level 	= '$_POST[level]' 
+															  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
+									if($query){
+										?>
+											<script type="text/javascript">
+												window.alert("Data berhasil disimpan");
+												window.location="../../dashboard.php?module=home";
+											</script>
+										<?php 
+									}else{
+										?>
+											<script type="text/javascript">
+												window.alert("Data gagal disimpan");
+												window.location="../../dashboard.php?module=home";
+											</script>
+										<?php 
+									}
+						}else{
+							$ekstensi_diperbolehkan	= array('png','jpg','jpeg');
+							$foto = $_FILES['file']['name'];
+							$x = explode('.', $foto);
+							$ekstensi = strtolower(end($x));
+							$ukuran	= $_FILES['file']['size'];
+							$file_tmp = $_FILES['file']['tmp_name'];
+							if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+								if($ukuran < 1044070){			
+									move_uploaded_file($file_tmp, './../../foto/'.$foto);
+									$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
+																  password 	= '$password',
+																  alamat  	= '$_POST[alamat]',
+																	tlp  		= '$_POST[tlp]',
+																	email  	= '$_POST[email]',
+																	level 	= '$_POST[level]',
+																	foto  	= '$foto' 
+															  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
+									if($query){
+										?>
+											<script type="text/javascript">
+												window.alert("Data berhasil disimpan");
+												window.location="../../dashboard.php?module=home";
+											</script>
+										<?php 
+									}else{
+										?>
+											<script type="text/javascript">
+												window.alert("Data gagal disimpan");
+												window.location="../../dashboard.php?module=home";
+											</script>
+										<?php 
+									}
+								}else{
+									?>
+										<script type="text/javascript">
+											window.alert("Ukuran Gambar terlalu besar");
+											window.location="../../dashboard.php?module=home";
+										</script>
+									<?php 
+								}
+							}else{
+								?>
+									<script type="text/javascript">
+										window.alert("Data ekstensi gambar tidak sesuai");
+										window.location="../../dashboard.php?module=home";
+									</script>
+								<?php 
+							}
+						}
+					}
+			}
+		}else{
+			if(empty($_POST["password"])){
+				if($_FILES['file']['size']==0)
+				{
+					$query=mysqli_query($koneksi,"UPDATE user SET nama  	= '$_POST[nama]',
+																	alamat  	= '$_POST[alamat]',
+																	tlp  		= '$_POST[tlp]',
+																	email  	= '$_POST[email]'
+													  WHERE  username    	= '$_POST[username]'")or die (mysqli_error($koneksi));
+							if($query){
+								?>
+									<script type="text/javascript">
+										window.alert("Data berhasil disimpan");
+										window.location="../../dashboard.php?module=home";
+									</script>
+								<?php 
+							}else{
+								?>
+									<script type="text/javascript">
+										window.alert("Data gagal disimpan");
+										window.location="../../dashboard.php?module=home";
+									</script>
+								<?php 
+							}
+				}else{
+					$ekstensi_diperbolehkan	= array('png','jpg','jpeg');
+					$foto = $_FILES['file']['name'];
+					$x = explode('.', $foto);
+					$ekstensi = strtolower(end($x));
+					$ukuran	= $_FILES['file']['size'];
+					$file_tmp = $_FILES['file']['tmp_name'];
+					if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+						if($ukuran < 1044070){			
+							move_uploaded_file($file_tmp, './../../foto/'.$foto);
+							$query=mysqli_query($koneksi,"UPDATE user SET nama      = '$_POST[nama]',
+																			  alamat  	= '$_POST[alamat]',
+																			  tlp  		= '$_POST[tlp]',
+																			  email  	= '$_POST[email]',
+																			  foto  	= '$foto' 
+													  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
+							if($query){
+								?>
+									<script type="text/javascript">
+										window.alert("Data berhasil disimpan");
+										window.location="../../dashboard.php?module=home";
+									</script>
+								<?php 
+							}else{
+								?>
+									<script type="text/javascript">
+										window.alert("Data gagal disimpan");
+										window.location="../../dashboard.php?module=home";
+									</script>
+								<?php 
+							}
 						}else{
 							?>
 								<script type="text/javascript">
-									window.alert("Data gagal disimpan");
+									window.alert("Ukuran Gambar terlalu besar");
 									window.location="../../dashboard.php?module=home";
 								</script>
 							<?php 
@@ -265,24 +357,95 @@ else{
 					}else{
 						?>
 							<script type="text/javascript">
-								window.alert("Ukuran Gambar terlalu besar");
+								window.alert("Data ekstensi gambar tidak sesuai");
 								window.location="../../dashboard.php?module=home";
 							</script>
 						<?php 
 					}
-				}else{
-					?>
-						<script type="text/javascript">
-							window.alert("Data ekstensi gambar tidak sesuai");
-							window.location="../../dashboard.php?module=home";
-						</script>
-					<?php 
 				}
-			}
+				}else{
+					$pass=md5($_POST["password"]);
+					mysqli_query($koneksi,"UPDATE admin SET nama  = '$_POST[nama]', password='$pass', level = '$_POST[level]' 
+									   WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
+					if($_FILES['file']['size']==0)
+					{
+						$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
+																		  alamat  	= '$_POST[alamat]',
+																			  tlp  		= '$_POST[tlp]',
+																			  email  	= '$_POST[email]',
+																			password 	= '$pass',
+																			  level 	= '$_POST[level]' 
+														  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
+								if($query){
+									?>
+										<script type="text/javascript">
+											window.alert("Data berhasil disimpan");
+											window.location="../../dashboard.php?module=home";
+										</script>
+									<?php 
+								}else{
+									?>
+										<script type="text/javascript">
+											window.alert("Data gagal disimpan");
+											window.location="../../dashboard.php?module=home";
+										</script>
+									<?php 
+								}
+					}else{
+						$ekstensi_diperbolehkan	= array('png','jpg','jpeg');
+						$foto = $_FILES['file']['name'];
+						$x = explode('.', $foto);
+						$ekstensi = strtolower(end($x));
+						$ukuran	= $_FILES['file']['size'];
+						$file_tmp = $_FILES['file']['tmp_name'];
+						if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+							if($ukuran < 1044070){			
+								move_uploaded_file($file_tmp, './../../foto/'.$foto);
+								$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
+															  password 	= '$password',
+															  alamat  	= '$_POST[alamat]',
+																tlp  		= '$_POST[tlp]',
+																email  	= '$_POST[email]',
+																level 	= '$_POST[level]',
+																foto  	= '$foto' 
+														  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
+								if($query){
+									?>
+										<script type="text/javascript">
+											window.alert("Data berhasil disimpan");
+											window.location="../../dashboard.php?module=home";
+										</script>
+									<?php 
+								}else{
+									?>
+										<script type="text/javascript">
+											window.alert("Data gagal disimpan");
+											window.location="../../dashboard.php?module=home";
+										</script>
+									<?php 
+								}
+							}else{
+								?>
+									<script type="text/javascript">
+										window.alert("Ukuran Gambar terlalu besar");
+										window.location="../../dashboard.php?module=home";
+									</script>
+								<?php 
+							}
+						}else{
+							?>
+								<script type="text/javascript">
+									window.alert("Data ekstensi gambar tidak sesuai");
+									window.location="../../dashboard.php?module=home";
+								</script>
+							<?php 
+						}
+					}
+				}
 		}
+	 	
 		//header('location:../../dashboard.php?module='.$module);
 		
 	}
-}
 }
 ?>

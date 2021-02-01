@@ -104,7 +104,7 @@ include "config/koneksi.php";
             <div class="collapse" id="collapseExample">
               <ul class="nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="?module=user&act=edit&id=<?php echo $_SESSION[username]; ?>">
+                  <a class="nav-link" href="?module=user&act=edit&id=<?php echo $_SESSION[id_user]; ?>">
                     <span class="sidebar-mini"> MP </span>
                     <span class="sidebar-normal"> My Profile </span>
                   </a>
