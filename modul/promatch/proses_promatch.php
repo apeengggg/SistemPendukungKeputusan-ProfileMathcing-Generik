@@ -338,7 +338,9 @@ $act=$_GET["act"];
                         <td><?php echo $nama_alternatif[$k];?></td>
                         <?php for($kol=1;$kol<=$jumlah_kolom[$key];$kol++) {
 									$pos=$r_index[$key][$kol];
+									// print_r($pos); die;
 									$nilai_bobot[$k][$pos]=$bobot[$nilai_sample[$k][$pos]-$target[$pos]];
+									// var_dump($nilai_bobot[$k][$pos]; die;
 									if($nama_jenis[$pos]=="c")
 										{
 											$jum_cf+=$nilai_bobot[$k][$pos];
