@@ -70,7 +70,7 @@ $act=$_GET["act"];
 									{
 										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek INNER JOIN spk ON spk.id_spk=aspek.id_spk WHERE aspek.id_spk='$id' ORDER BY id_aspek ASC");
 									}else{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek WHERE id_spk='$id' ORDER BY id_aspek ASC");
+										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek INNER JOIN spk ON spk.id_spk=aspek.id_spk WHERE aspek.id_spk='$id' ORDER BY id_aspek ASC");
 									}
 								      echo "
 								          <thead align='center'>

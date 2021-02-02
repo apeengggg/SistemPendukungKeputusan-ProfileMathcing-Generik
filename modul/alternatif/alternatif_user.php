@@ -483,7 +483,7 @@ $act=$_GET["act"];
                                                         {
                                                             echo "<p><b>".$no_aspek.". ".$data_aspek["nama_aspek"]."</b></p>";
             
-                                                            $q=mysqli_query($koneksi, "SELECT * FROM faktor INNER JOIN nilai ON faktor.id_faktor=nilai.faktor WHERE aspek='$data_aspek[id_aspek]' AND id_alternatif='$idalt'ORDER BY id_faktor ASC");
+                                                            $q=mysqli_query($koneksi, "SELECT * FROM faktor LEFT JOIN nilai ON faktor.id_faktor=nilai.faktor WHERE aspek='$data_aspek[id_aspek]' AND id_alternatif='$idalt'ORDER BY id_faktor ASC");
                                                              $no2=1;
                                                             while($r=mysqli_fetch_array($q))
                                                             {

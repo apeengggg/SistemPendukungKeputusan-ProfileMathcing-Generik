@@ -14,8 +14,10 @@ else{
 	// Hapus aspek
 	if ($module=='aspek' AND $act=='hapus'){
 		$idspk = $_GET['id_spk'];
-		$hapus = mysqli_query($koneksi,"DELETE aspek, faktor FROM aspek INNER JOIN faktor ON faktor.aspek=aspek.id_aspek WHERE aspek.id_aspek='$_GET[id]'");
-	  if ($hapus) {
+		$id = $_GET['id'];
+		$hapus = mysqli_query($koneksi,"DELETE FROM aspek WHERE id_aspek='$id'");
+		$hapus2 = mysqli_query($koneksi,"DELETE FROM faktor WHERE aspek='$id'");
+	  if ($hapus && $hapus2) {
 			?>
 	  		<script type="text/javascript">
 					window.alert("Data berhasil dihapus");

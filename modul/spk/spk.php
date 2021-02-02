@@ -165,7 +165,7 @@ $act=$_GET["act"];
 
 								       echo "<tr>
 								       			<td>$no</td>
-												<td>$r[nama_spk]</td>
+												<td><a href='?module=aspek&id=$r[id_spk]'>$r[nama_spk]</a></td>
 												<td>$r[keterangan]</td>
 												<td>$r[tanggal]</td>
 												<td>$jenis</td>

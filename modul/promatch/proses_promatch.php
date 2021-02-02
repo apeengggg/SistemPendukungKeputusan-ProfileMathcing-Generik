@@ -8,7 +8,7 @@ $jumlah=mysqli_num_rows($sql);
 
 if($jumlah>0)
 {
-	$sql2=mysqli_query($koneksi, "SELECT * FROM nilai n INNER JOIN alternatif a ON n.id_alternatif=a.id_alternatif INNER JOIN spk_user su ON a.id_spkuser=su.id_spkuser WHERE n.id_alternatif=a.id_alternatif AND a.id_spkuser='$data[id_spkuser]'");
+	$sql2=mysqli_query($koneksi, "SELECT * FROM nilai n INNER JOIN alternatif a ON n.id_alternatif=a.id_alternatif INNER JOIN spk_user su ON a.id_spkuser=su.id_spkuser INNER JOIN faktor ON n.faktor=faktor.id_faktor WHERE n.id_alternatif=a.id_alternatif AND a.id_spkuser='$data[id_spkuser]'");
 	$jumlah2=mysqli_num_rows($sql2);
 	if($jumlah2<1)
 	{
