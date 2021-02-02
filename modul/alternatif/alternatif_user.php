@@ -103,7 +103,7 @@ $act=$_GET["act"];
 														<td width='10%'>";
 													?>
 														<center>
-															<a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info">
+															<a href="?module=alternatif_user&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info">
 																<i class="fa fa-edit"></i>
 															</a>
 															<a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus_spk_user&id=<?= $r[id_spkuser] ?>" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
@@ -237,7 +237,7 @@ $act=$_GET["act"];
                                                     ?>
 														<td>
 														 <center>
-															<a href="?module=alternatif&act=edit&id=<?php echo $r['id_spkuser'] ?>" class="btn btn-info">
+															<a href="?module=alternatif&act=edit&id=<?php echo $r['id_alternatif'] ?>" class="btn btn-info">
 																<i class="fa fa-edit"></i>
 															</a>
 															<a href="modul/alternatif/aksi_alternatif.php?module=alternatif&act=hapus&id=<?php echo $r['id_alternatif'] ?>&name=<?= $r['nama_alternatif']?>&u_spk=<?=$r['id_spkuser']?>&id_spk=<?=$r['id_spk']?>" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
@@ -282,7 +282,7 @@ $act=$_GET["act"];
 													{
 														$sql="SELECT * FROM spk ORDER BY id_spk ASC";
 													}else{
-														$sql="SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal, spk.id_spk FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.id_spk=spk.id_spk RIGHT JOIN bobot ON bobot.id_spk=spk.id_spk WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND bobot.id_bobot IS NOT NULL";
+														$sql="SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal, spk.id_spk FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.aspek=aspek.id_aspek RIGHT JOIN bobot ON bobot.id_spk=spk.id_spk WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND bobot.id_bobot IS NOT NULL AND (spk.id_user='$_SESSION[id_user]' OR (spk.jenis=0 AND spk.status_verif=1))";
 													}
 													$query=mysqli_query($koneksi,$sql);
 													while($data=mysqli_fetch_array($query))
@@ -308,7 +308,7 @@ $act=$_GET["act"];
 					break;
 
 					case "edit" :
-					$edit=mysqli_query($koneksi,"SELECT * FROM alternatif, spk where alternatif.id_alternatif='$_GET[id]' AND alternatif.id_spk=spk.id_spk");
+					$edit=mysqli_query($koneksi,"SELECT * FROM spk_user WHERE id_spkuser='$_GET[id]'");
 					$r=mysqli_fetch_array($edit);
 					?>
 						<div class="card-header card-header-rose card-header-text">
@@ -318,34 +318,14 @@ $act=$_GET["act"];
 		                </div>
 		                
 		                <div class="card-body ">
-									<form class="form" method="post" action="modul/alternatif/aksi_alternatif.php?module=alternatif&act=update">
+									<form class="form" method="post" action="modul/alternatif/aksi_alternatif.php?module=alternatif&act=update_spkuser">
 										<div class="content">
 										    
-											<input type="hidden" name="id_alternatif" placeholder="Kode Alternatif" class='form-control' value="<?php echo $r[id_alternatif] ?>">
+											<input type="hidden" name="id_spkuser" placeholder="Kode Alternatif" class='form-control' value="<?php echo $r[id_spkuser] ?>">
 											
 											<div class="input-group">
-												<label class="col-sm-4 control-label text-left">SPK</label>
-												<select name="id_spk" class='form-control' required>
-													<option value="<?php echo $r["id_spk"] ?>"><?php echo $r["nama_spk"] ?></option>
-													<?php  
-													if($_SESSION["level"]=='admin')
-													{
-														$sql="SELECT * FROM spk ORDER BY id_spk ASC";
-													}else{
-														$sql="SELECT * FROM spk WHERE id_user='$_SESSION[id_user]' ORDER BY id_spk ASC";
-													}
-													$query=mysqli_query($koneksi,$sql);
-													while($data=mysqli_fetch_array($query))
-													{
-														?>
-															<option value="<?php echo $data["id_spk"] ?>"><?php echo $data["nama_spk"] ?></option>
-														<?php 																		}
-													?>
-												</select>
-											</div>
-											<div class="input-group">
-												<label class="col-sm-4 control-label text-left">Alternatif</label>
-												<input type="text" name="nama_alternatif" placeholder="Nama" class='form-control' value="<?php echo $r[nama_alternatif] ?>" required>
+												<label class="col-sm-4 control-label text-left">Keterangan</label>
+												<input type="text" name="keterangan" placeholder="ket" class='form-control' value="<?php echo $r[ket] ?>" required>
 											</div>
 										</div>
 										<div class="footer text-center">

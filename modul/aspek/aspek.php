@@ -13,7 +13,13 @@ $act=$_GET["act"];
 					default:
 					if (isset($_GET['id'])) {
 						$id = $_GET['id'];
+						// ambil id_user
+						$query = mysqli_query($koneksi, "SELECT * FROM spk WHERE id_spk='$id'");
+						$result = mysqli_fetch_array($query);
+						$r = $result['id_user'];
+						$user = $_SESSION['id_user'];
 					}
+					
 						?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
@@ -23,6 +29,7 @@ $act=$_GET["act"];
 		                <div class="card-body ">
 							
 						<?php
+						if ($r == $user) {
 						if (isset($_GET["jenis"])) {
 						?>
 							<a href="?module=aspek&act=tambah&id=<?=$id?>&jenis=spkbaru">
@@ -44,7 +51,8 @@ $act=$_GET["act"];
 	                        	</button>
 	                       	</a>
 						<?php
-						}						
+						}		
+					}				
 						?>
 							   
 	                       <div class="box-body">
@@ -60,9 +68,9 @@ $act=$_GET["act"];
 									}
 									if($_SESSION["level"]=="admin")
 									{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek WHERE id_spk='$id' ORDER BY id_aspek ASC");
+										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek INNER JOIN spk ON spk.id_spk=aspek.id_spk WHERE aspek.id_spk='$id' ORDER BY id_aspek ASC");
 									}else{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek WHERE id_user='$_SESSION[id_user]' ORDER BY id_aspek ASC");
+										$tampil = mysqli_query($koneksi,"SELECT * FROM aspek WHERE id_spk='$id' ORDER BY id_aspek ASC");
 									}
 								      echo "
 								          <thead align='center'>
@@ -79,7 +87,8 @@ $act=$_GET["act"];
 									<tbody>"; 
 								    $no=1;
 								    while ($r=mysqli_fetch_array($tampil)){
-								       
+									   $a = $r['id_user'];
+									   $u = $_SESSION['id_user'];
 								       echo "<tr>
 								       			<td>$no</td>
 								       			<td><a href='?module=faktor&id=$r[id_aspek]&id_spk=$_GET[id]'>$r[nama_aspek]</a></td>
@@ -88,6 +97,7 @@ $act=$_GET["act"];
 												<td>$r[bobot_secondary]</td>
 												<td>$r[nama_singkat]</td>
 												<td width='120px'>";
+											if ($a == $u) {
 												?>
 													 <center>
 													<a href="?module=aspek&act=edit&id=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>" class="btn-sm btn-info">
@@ -101,6 +111,10 @@ $act=$_GET["act"];
 														
 												   </center>
 												   <?php 
+											}else{
+												echo "Tidak Memiliki Akses";
+											}
+												
 												   echo "
 												</td>
 											</tr>";
@@ -172,7 +186,6 @@ $act=$_GET["act"];
 									</div>
 								</div>
 							</div>
-						?>
 				<?php
 					break;
 

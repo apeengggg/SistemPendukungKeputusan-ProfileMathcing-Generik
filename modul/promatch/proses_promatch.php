@@ -37,7 +37,7 @@ if ($k > 100 OR $k < 100) {
 
 ////////////////////////////////////// cek faktor core ///////////////////////////////////////////
 // ambil jumlah row pada query dibawah untuk menampilkan faktor core=1
-$cek1 = mysqli_query($koneksi, "SELECT faktor.id_faktor, faktor.jenis FROM faktor INNER JOIN aspek ON aspek.id_aspek=faktor.aspek WHERE faktor.id_spk='$data[id_spk]' AND faktor.jenis=1");
+$cek1 = mysqli_query($koneksi, "SELECT faktor.id_faktor, faktor.jenis FROM faktor INNER JOIN aspek ON aspek.id_aspek=faktor.aspek WHERE aspek.id_spk='$data[id_spk]' AND faktor.jenis=1");
 // hasil $cek1
 $jml1 = mysqli_num_rows($cek1);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ if ($jml1 < $a) {
 
 ////////////////////////////////////// cek faktor SECONDARY ///////////////////////////////////////////
 // ambil jumlah row pada query dibawah untuk menampilkan faktor SECONDARY=2
-$cek1 = mysqli_query($koneksi, "SELECT faktor.id_faktor, faktor.jenis FROM faktor INNER JOIN aspek ON aspek.id_aspek=faktor.aspek WHERE faktor.id_spk='$data[id_spk]' AND faktor.jenis=2");
+$cek1 = mysqli_query($koneksi, "SELECT faktor.id_faktor, faktor.jenis FROM faktor INNER JOIN aspek ON aspek.id_aspek=faktor.aspek WHERE aspek.id_spk='$data[id_spk]' AND faktor.jenis=2");
 // hasil $cek1
 $jml1 = mysqli_num_rows($cek1);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -184,7 +184,7 @@ $act=$_GET["act"];
 				$no=1;
 				//---------------------Menyimpan tabel faktor dalam array dan menampilkan---------------------
             	$sql="SELECT faktor.*,nama_aspek,IF(jenis='1','c','s') AS nama_jenis
-					FROM faktor LEFT JOIN aspek ON faktor.aspek=aspek.id_aspek WHERE faktor.id_spk='$data[id_spk]' ORDER BY id_aspek,id_faktor ASC";
+					FROM faktor LEFT JOIN aspek ON faktor.aspek=aspek.id_aspek WHERE aspek.id_spk='$data[id_spk]' ORDER BY id_aspek,id_faktor ASC";
 				$hasil=mysqli_query($koneksi,$sql);
 				$target=array();
 				$nama_jenis=array();
@@ -443,7 +443,7 @@ $act=$_GET["act"];
 		            					mysqli_query($koneksi, "DELETE FROM hasil WHERE id_spkuser='$data[id_spk]'");
 		            				}
 
-									mysqli_query($koneksi,"INSERT INTO hasil(nama_alternatif,nilai, id_spk, id_user, id_spkuser) VALUES ('$nama_alternatif[$k]', '$nilai_akhir[$k]', '$data[id_spk]', '$_SESSION[id_user]', '$data[id_spkuser]')");				
+									mysqli_query($koneksi,"INSERT INTO hasil(nama_alternatif,nilai, id_spkuser) VALUES ('$nama_alternatif[$k]', '$nilai_akhir[$k]', '$data[id_spkuser]')");				
 							}
 						?>
 						</tbody>

@@ -68,7 +68,7 @@ session_start(); ?>
 		{
 			$sql = mysqli_query($koneksi,"SELECT * FROM hasil h INNER JOIN spk_user su ON su.id_spkuser=h.id_spkuser INNER JOIN spk s ON s.id_spk=su.id_spk WHERE h.id_spkuser='$_GET[id_spkuser]' ORDER BY h.nilai DESC");
 		}else{
-			$sql = mysqli_query($koneksi,"SELECT * FROM hasil h INNER JOIN spk_user su ON su.id_spkuser=h.id_spkuser INNER JOIN spk s ON s.id_spk=su.id_spk WHERE h.id_user='$_SESSION[id_user]' AND h.id_spkuser='$_GET[id_spkuser]' ORDER BY h.nilai DESC") or die (mysqli_error($koneksi));
+			$sql = mysqli_query($koneksi,"SELECT * FROM hasil h INNER JOIN spk_user su ON su.id_spkuser=h.id_spkuser INNER JOIN spk s ON s.id_spk=su.id_spk WHERE su.id_user='$_SESSION[id_user]' AND h.id_spkuser='$_GET[id_spkuser]' ORDER BY h.nilai DESC") or die (mysqli_error($koneksi));
 		}
 
 	    echo "

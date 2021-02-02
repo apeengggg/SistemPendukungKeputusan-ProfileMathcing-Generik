@@ -200,21 +200,44 @@ else{
 
 	// edit alternatif
 	elseif ($module=='alternatif' AND $act=='update'){
-		  $query=mysqli_query($koneksi,"UPDATE alternatif SET nama_alternatif 	= '$_POST[nama_alternatif]', 
-		  												 	  id_spk 			='$_POST[id_spk]' 
+		$id_spk = $_POST['id_spkuser'];
+		$idspk = $_POST['id_spk'];
+		  $query=mysqli_query($koneksi,"UPDATE alternatif SET nama_alternatif 	= '$_POST[nama_alternatif]'
 							   						  WHERE  id_alternatif    	= '$_POST[id_alternatif]'")or die (mysqli_error($koneksi));
 		  if($query){
 			?>
 				<script type="text/javascript">
 					window.alert("Data berhasil diubah");
-					window.location="../../dashboard.php?module=alternatif";
+					window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$id_spk?>&id_spk=<?=$idspk?>";
 				</script>
 			<?php 
 			}else{
 				?>
 					<script type="text/javascript">
 						window.alert("Data gagal diubah");
-						window.location="../../dashboard.php?module=alternatif";
+						window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$id_spk?>&id_spk=<?=$idspk?>";
+					</script>
+				<?php 
+			}
+		//header('location:../../dashboard.php?module='.$module);
+		
+	}// edit alternatif
+	elseif ($module=='alternatif' AND $act=='update_spkuser'){
+		$id_spk = $_POST['id_spkuser'];
+		  $query=mysqli_query($koneksi,"UPDATE spk_user SET ket 	= '$_POST[keterangan]'
+							   						  WHERE  id_spkuser    	= '$id_spk'")or die (mysqli_error($koneksi));
+		  if($query){
+			?>
+				<script type="text/javascript">
+					window.alert("Data berhasil diubah");
+					window.location="../../dashboard.php?module=alternatif_user";
+				</script>
+			<?php 
+			}else{
+				?>
+					<script type="text/javascript">
+						window.alert("Data gagal diubah");
+						window.location="../../dashboard.php?module=alternatif_user";
 					</script>
 				<?php 
 			}
@@ -222,4 +245,5 @@ else{
 		
 	}
 }
+
 ?>

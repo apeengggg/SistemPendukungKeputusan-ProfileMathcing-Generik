@@ -83,18 +83,27 @@ else{
 			$bob = '4.5';
 			$sel = '1';
 		}
-		   $query=mysqli_query($koneksi,"INSERT INTO bobot(selisih,
-									 				 bobot, 
-									 				 keterangan,
-									 				 id_spk,
-									 				 id_user) 
-							   				   VALUES('$sel',
-													  '$bob', 
-													  '$ket',
-													  '$_POST[id_spk]',
-													  '$_SESSION[id_user]')") or die (mysqli_error($koneksi));
-
-		 if($query){
+		// cek 
+		$query2 = mysqli_query($koneksi, "SELECT * FROM bobot WHERE id_spk='$_POST[id_spk]' AND selisih='$sel'");
+		if (mysqli_num_rows($query2)>0) {
+			?>
+						<script type="text/javascript">
+							window.alert("Bobot Dengan Selisih <?=$sel?> Sudah Ada, Gagal Menambahkan Bobot");
+							window.location="../../dashboard.php?module=bobot&id=<?=$id?>";
+						</script>
+					<?php
+		}else{
+		$query=mysqli_query($koneksi,"INSERT INTO bobot(selisih,
+														bobot, 
+														keterangan,
+														id_spk) 
+												VALUES('$sel',
+														'$bob', 
+														'$ket',
+														'$_POST[id_spk]')") or die (mysqli_error($koneksi));
+	
+		 
+		if($query){
 			//  cek apakah bobot sudaha ada 9 ?
 			$cekbobot = mysqli_query($koneksi, "SELECT * FROM bobot WHERE id_spk='$id'");
 				if (mysqli_num_rows($cekbobot)==9) {
@@ -123,6 +132,7 @@ else{
 					}
 			// header('location:../../dashboard.php?module='.$module);
 	}
+}
 
 	// edit bobot
 	elseif ($module=='bobot' AND $act=='update'){

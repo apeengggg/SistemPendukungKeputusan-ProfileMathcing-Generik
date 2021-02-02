@@ -119,7 +119,7 @@ $act=$_GET["act"];
 
 					case "edit" :
 
-					$edit=mysqli_query($koneksi,"SELECT * FROM alternatif, spk where alternatif.id_alternatif='$_GET[id]' AND alternatif.id_spk=spk.id_spk");
+					$edit=mysqli_query($koneksi,"SELECT * FROM alternatif INNER JOIN spk_user ON spk_user.id_spkuser=alternatif.id_spkuser WHERE alternatif.id_alternatif='$_GET[id]'");
 					$r=mysqli_fetch_array($edit);
 					?>
 						<div class="card-header card-header-rose card-header-text">
@@ -133,8 +133,9 @@ $act=$_GET["act"];
 										<div class="content">
 										    
 											<input type="hidden" name="id_alternatif" placeholder="Kode Alternatif" class='form-control' value="<?php echo $r[id_alternatif] ?>">
-											
-											<div class="input-group">
+											<input type="hidden" name="id_spkuser" placeholder="Kode Alternatif" class='form-control' value="<?php echo $r[id_spkuser] ?>">
+											<input type="hidden" name="id_spk" placeholder="Kode Alternatif" class='form-control' value="<?php echo $r[id_spk] ?>">
+											<!-- <div class="input-group">
 												<label class="col-sm-4 control-label text-left">SPK</label>
 												<select name="id_spk" class='form-control' required>
 													<option value="<?php echo $r["id_spk"] ?>"><?php echo $r["nama_spk"] ?></option>
@@ -153,10 +154,10 @@ $act=$_GET["act"];
 														<?php 																		}
 													?>
 												</select>
-											</div>
+											</div> -->
 											
 											<div class="input-group">
-												<label class="col-sm-4 control-label text-left">Alternatif</label>
+												<label class="col-sm-4 control-label text-left">Nama Alternatif</label>
 												<input type="text" name="nama_alternatif" placeholder="Nama" class='form-control' value="<?php echo $r[nama_alternatif] ?>" required>
 											</div>
 										</div>

@@ -40,7 +40,7 @@ else{
 		$idaspek = $_POST['id_aspek'];
 		$name=$_POST['nama_faktor'];
 		$idspk=$_POST['id_spk'];
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM faktor WHERE nama_faktor='$name' AND id_spk=$idspk");
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM faktor WHERE nama_faktor='$name' AND aspek=$idaspek");
 		if (mysqli_num_rows($ceknama)>0) {
 				if (isset($_GET["jenis"])) {
 					echo "<script type='text/javascript'>
@@ -60,15 +60,11 @@ else{
 			$query=mysqli_query($koneksi,"INSERT INTO faktor(nama_faktor, 
 													  aspek,
 									 				  target, 
-									 				  jenis, 
-									 				  id_spk, 
-									 				  id_user) 
+									 				  jenis) 
 							   					VALUES('$_POST[nama_faktor]',
 							   						   '$_POST[id_aspek]',
 													   '$_POST[target]', 
-													   '$_POST[jenis]',
-													   '$_POST[id_spk]',
-													   '$_SESSION[id_user]')") or die (mysql_error());
+													   '$_POST[jenis]')") or die (mysql_error());
 
 				if($query){
 					if (isset($_GET["jenis"])) {
@@ -108,13 +104,13 @@ else{
 			$name=$_POST['nama_faktor'];
 			$idspk=$_POST['id_spk'];
 			// var_dump($_POST); die;
-			$aspek_lama = mysqli_query($koneksi, "SELECT nama_faktor FROM faktor WHERE id_spk='$idspk' AND aspek='$idaspek' AND id_faktor='$_POST[id_faktor]'");
+			$aspek_lama = mysqli_query($koneksi, "SELECT nama_faktor FROM faktor WHERE aspek='$idaspek' AND id_faktor='$_POST[id_faktor]'");
 			$res_aspek = mysqli_fetch_array($aspek_lama);
 			$aspek_l = $res_aspek['nama_faktor'];
 			// echo $aspek_l; 
 			// echo $name; die;
 			if ($name != $aspek_l) {
-			$ceknama=mysqli_query($koneksi,"SELECT * FROM faktor WHERE nama_faktor='$name' AND id_spk=$idspk AND aspek='$idaspek'");
+			$ceknama=mysqli_query($koneksi,"SELECT * FROM faktor WHERE nama_faktor='$name' AND aspek='$idaspek'");
 			if (mysqli_num_rows($ceknama)>0) {
 			?>
 				<script type="text/javascript">
@@ -126,8 +122,7 @@ else{
 		  $query=mysqli_query($koneksi,"UPDATE faktor SET nama_faktor 		= '$_POST[nama_faktor]', 
 		  										   aspek 			= '$_POST[id_aspek]', 
 		  										   target 			= '$_POST[target]', 
-		  										   jenis			= '$_POST[jenis]',
-		  										   id_spk 			= '$_POST[id_spk]'
+		  										   jenis			= '$_POST[jenis]'
 				                            WHERE  id_faktor    	= '$_POST[id_faktor]'")or die (mysql_error());
 		  	if($query){
 					?>
@@ -159,8 +154,7 @@ else{
 	// }else{
 	$query=mysqli_query($koneksi,"UPDATE faktor SET aspek 			= '$_POST[id_aspek]', 
 		  										   target 			= '$_POST[target]', 
-		  										   jenis			= '$_POST[jenis]',
-		  										   id_spk 			= '$_POST[id_spk]'
+		  										   jenis			= '$_POST[jenis]'
 				                            WHERE  id_faktor    	= '$_POST[id_faktor]'")or die (mysql_error());
 		  	if($query){
 					?>

@@ -14,19 +14,29 @@ $act=$_GET["act"];
 					if (isset($_GET['id'])) {
 						$id = $_GET['id'];
 					}
+					$query = mysqli_query($koneksi, "SELECT * FROM spk WHERE id_spk='$id'");
+					$result = mysqli_fetch_array($query);
+					$ra = $result['id_user'];
+					$u = $_SESSION['id_user'];
 						?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
 		                    <h4 class="card-title">Data Bobot</h4>
 		                  </div>
 		                </div>
-		                
-		                <div class="card-body ">
+						<div class="card-body ">
+					<?php
+						if ($ra == $u) {
+							?>
 							<a href="?module=bobot&act=tambah&id=<?=$id?>">
 								<button class="btn  btn-youtube">
 	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Bobot
 	                        	</button>
 	                       	</a>
+							<?php
+						}else{
+						}				
+					?>
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 									<?php 
 									$no=1;
@@ -37,7 +47,7 @@ $act=$_GET["act"];
 											}
 											$tampil=mysqli_query($koneksi, "SELECT bobot.*, spk.nama_spk FROM bobot, spk WHERE bobot.id_spk ='$id' AND bobot.id_spk=spk.id_spk ORDER BY bobot.id_spk ASC");
 										}else{
-											$tampil=mysqli_query($koneksi, "SELECT bobot.*, spk.nama_spk FROM bobot, spk WHERE bobot.id_spk ='$id' AND bobot.id_user='$_SESSION[id_user]' AND bobot.id_spk=spk.id_spk ORDER BY bobot.id_spk ASC");
+											$tampil=mysqli_query($koneksi, "SELECT bobot.*, spk.nama_spk FROM bobot, spk WHERE bobot.id_spk ='$id' AND bobot.id_spk=spk.id_spk ORDER BY bobot.id_spk ASC");
 										}
 								      echo "
 								          <thead>
@@ -63,6 +73,7 @@ $act=$_GET["act"];
 												<td>$r[keterangan]</td>
 												
 												<td width='10%'>";
+												if ($ra === $u) {
 												?>
 													<center>
 													<a href="modul/bobot/aksi_bobot.php?module=bobot&act=hapus&id=<?php echo $r[id_bobot]?>&idspk=<?=$r[id_spk]?>" class="btn-sm btn-danger" onclick='return confirm("Anda yakin mau menghapus item ini ?")'>
@@ -72,6 +83,9 @@ $act=$_GET["act"];
 														
 												   </center>
 												   <?php 
+												}else{
+													echo 'Tidak Memiliki Akses';
+												}  
 												   echo "
 												</td>
 											</tr>";
@@ -102,7 +116,7 @@ $act=$_GET["act"];
 									<form class="form" method="post" action="modul/bobot/aksi_bobot.php?module=bobot&act=simpan">
 										<div class="content">
 										    <div class="input-group">
-												<input type="text" name="id_spk" class='form-control' value="<?=$id?>" required>
+												<input type="hidden" name="id_spk" class='form-control' value="<?=$id?>" required>
 											</div>
 											<select name="keterangan" id="keterangan" class='form-control' required>
 												<option value="">Pilih Keterangan ...</option>

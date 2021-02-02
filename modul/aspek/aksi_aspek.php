@@ -14,7 +14,7 @@ else{
 	// Hapus aspek
 	if ($module=='aspek' AND $act=='hapus'){
 		$idspk = $_GET['id_spk'];
-		$hapus = mysqli_query($koneksi,"DELETE FROM aspek WHERE id_aspek='$_GET[id]'");
+		$hapus = mysqli_query($koneksi,"DELETE aspek, faktor FROM aspek INNER JOIN faktor ON faktor.aspek=aspek.id_aspek WHERE aspek.id_aspek='$_GET[id]'");
 	  if ($hapus) {
 			?>
 	  		<script type="text/javascript">
@@ -74,15 +74,13 @@ else{
 										 				 bobot_core, 
 										 				 bobot_secondary, 
 										 				 nama_singkat,
-										 				 id_spk,
-										 				 id_user) 
+										 				 id_spk) 
 								   				  VALUES('$_POST[nama_aspek]',
 														'$_POST[bobot]', 
 														'$_POST[bobot_core]', 
 														'$_POST[bobot_secondary]', 
 														'$_POST[Inisial]',
-														'$_POST[id_spk]',
-														'$_SESSION[id_user]')") or die (mysqli_error($koneksi));
+														'$_POST[id_spk]')") or die (mysqli_error($koneksi));
 
 				if($query){
 					if (isset($_GET["jenis"])) {
@@ -147,7 +145,7 @@ else{
 		// echo $name; 
 		// echo $aspek_l; die;
 		if ($name != $aspek_l) {
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' AND nama_singkat='$init') AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
 		?>
 			<script type="text/javascript">

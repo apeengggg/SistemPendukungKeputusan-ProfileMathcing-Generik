@@ -136,6 +136,12 @@ include "config/koneksi.php";
                   <i class="material-icons">equalizer</i>
                   <p> SPK </p>
                 </a>
+              </li>   
+              <li class="nav-item ">
+                <a class="nav-link" href="?module=spk&act=verif_spk">
+                  <i class="material-icons">gear</i>
+                  <p> Verifikasi SPK Baru </p>
+                </a>
               </li>             
               <li class="nav-item ">
                <a class="nav-link" href="?module=aspek_spk">
@@ -191,6 +197,12 @@ include "config/koneksi.php";
                             </a>
                             <li class="nav-item ">
                             <a class="nav-link" href="?module=alternatif_user">
+                              <i class="material-icons">person</i>
+                              <p> Perhitungan </p>
+                            </a>
+                          </li> 
+                          <li class="nav-item ">
+                            <a class="nav-link" href="?module=spk&act=operator&id_user=<?=$_SESSION[id_user]?>">
                               <i class="material-icons">person</i>
                               <p> SPK </p>
                             </a>
@@ -296,7 +308,7 @@ include "config/koneksi.php";
                                     {
                                       $sql=mysqli_query($koneksi,"SELECT * FROM spk ORDER BY id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
                                     }else{
-                                      $sql=mysqli_query($koneksi,"SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal, spk.id_spk FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.id_spk=spk.id_spk RIGHT JOIN bobot ON bobot.id_spk=spk.id_spk WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND bobot.id_bobot IS NOT NULL ORDER BY spk.id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
+                                      $sql=mysqli_query($koneksi,"SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal, spk.id_spk FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.aspek=aspek.id_aspek RIGHT JOIN bobot ON bobot.id_spk=spk.id_spk WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND bobot.id_bobot IS NOT NULL AND spk.id_user='$_SESSION[id_user]' OR (spk.jenis=0 AND spk.status_verif=1) ORDER BY spk.id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
                                     }
                                     ?>
                                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">

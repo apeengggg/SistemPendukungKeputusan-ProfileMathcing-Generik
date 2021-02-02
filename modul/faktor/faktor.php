@@ -17,6 +17,12 @@ $act=$_GET["act"];
 							if (isset($_GET['id_spk'])) {
 								$id_ = $_GET['id_spk'];
 							}
+							// ambil id_user
+							$query = mysqli_query($koneksi, "SELECT * FROM spk WHERE id_spk='$id_' ");
+							$result = mysqli_fetch_array($query);
+							$ra = $result['id_user'];
+							$u = $_SESSION['id_user'];
+
 							// cek apakah sudah ada faktor core
 							$cekfaktor = mysqli_query($koneksi, "SELECT * FROM faktor WHERE aspek='$id' AND jenis=1");
 							$result1 = mysqli_num_rows($cekfaktor);
@@ -30,7 +36,7 @@ $act=$_GET["act"];
 					                  </div>
 					                </div>
 								<?php
-								
+								if ($ra === $u) {
 								if ($result1===0) {
 									?>
 									<br>
@@ -77,9 +83,11 @@ $act=$_GET["act"];
 					                        </button>
 										</a>
 									<?php
-									}						
+									}		
+								}else{
+									echo '<div class="card-body ">';
+								}	
 									?>
-										
 										<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 											<?php 
 											$no=1;
@@ -88,16 +96,11 @@ $act=$_GET["act"];
 												if (isset($_GET['id'])) {
 													$id = $_GET['id'];
 												}
-												$tampil = mysqli_query($koneksi,"SELECT * FROM faktor, aspek, spk  
-													WHERE id_aspek='$id' AND faktor.aspek=aspek.id_aspek  
-													AND aspek.id_spk=spk.id_spk 
-													ORDER BY spk.id_spk, aspek, id_aspek, faktor.id_faktor ASC");
+												$tampil = mysqli_query($koneksi,"SELECT spk.nama_spk, aspek.nama_aspek, faktor.nama_faktor, faktor.target, faktor.jenis, faktor.id_faktor, aspek.id_aspek, spk.id_spk FROM faktor INNER JOIN aspek ON aspek.id_aspek=faktor.aspek INNER JOIN spk ON spk.id_spk=aspek.id_spk
+												WHERE faktor.aspek='$id'");
 											}else{
-												$tampil = mysqli_query($koneksi,"SELECT * FROM faktor, aspek, spk 
-													WHERE id_aspek='$id' AND faktor.aspek=aspek.id_aspek 
-													AND faktor.id_user='$_SESSION[id_user]' 
-													AND aspek.id_spk=spk.id_spk 
-													ORDER BY spk.id_spk, aspek, id_aspek, faktor.id_faktor ASC");
+												$tampil = mysqli_query($koneksi,"SELECT spk.nama_spk, aspek.nama_aspek, faktor.nama_faktor, faktor.target, faktor.jenis, faktor.id_faktor, aspek.id_aspek, spk.id_spk FROM faktor INNER JOIN aspek ON aspek.id_aspek=faktor.aspek INNER JOIN spk ON spk.id_spk=aspek.id_spk
+												WHERE faktor.aspek='$id'");
 											}
 										      echo "
 										          <thead>
@@ -114,7 +117,9 @@ $act=$_GET["act"];
 											<tbody>"; 
 										    $no=1;
 										    while ($r=mysqli_fetch_array($tampil)){
-										       if ($r['jenis']==1) {
+											   $faktor = $r['jenis'];
+											//    echo $faktor; die;
+												if ($faktor==1) {
 										       		$jenis="Core";
 										       }else{
 										       		$jenis="Secondary";
@@ -127,8 +132,9 @@ $act=$_GET["act"];
 										       			<td width='90px'>$r[target]</td>
 														<td width='90px'>$jenis</td>
 														<td width='110px'>";
-														?>
-															 <center>
+											if ($ra === $u) {
+												?>
+												 <center>
 															 <!-- edit -->
 															 <a href="?module=faktor&act=edit&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>"
 															 class="btn-sm btn-info">
@@ -144,6 +150,13 @@ $act=$_GET["act"];
 															 <!-- <a href='modul/faktor/aksi_faktor.php?module=faktor&act=hapus&id_faktor=<?php echo $r[id_faktor] ?>&id_aspek=<?php echo $r[id_aspek] ?>&id_spk=<?php echo $r[id_spk] ?>' class='btn  btn-danger btn-just-icon remove'><i class='material-icons' rel='tooltip' title='Hapus' onclick='return confirm('Anda yakin mau menghapus item ini ?')">close</i></a> -->
 																
 														   </center>
+												<?php
+											}else{
+												echo "Tidak Memiliki Hak Akses";
+											}
+											?>
+											
+															
 														<?php 
 														echo "
 														</td>
@@ -265,7 +278,7 @@ $act=$_GET["act"];
 							break;
 
 							case "edit" :
-							$edit=mysqli_query($koneksi,"SELECT f.id_faktor, a.id_aspek, s.id_spk, f.nama_faktor FROM faktor f INNER JOIN aspek a ON a.id_aspek=f.aspek INNER JOIN spk s ON s.id_spk=f.id_spk WHERE f.id_faktor='$_GET[id_faktor]'");
+							$edit=mysqli_query($koneksi,"SELECT f.id_faktor, a.id_aspek, s.id_spk, f.nama_faktor, f.target, f.jenis FROM faktor f INNER JOIN aspek a ON a.id_aspek=f.aspek INNER JOIN spk s ON s.id_spk=a.id_spk WHERE f.id_faktor='$_GET[id_faktor]'");
 							$r=mysqli_fetch_array($edit);
 							?>
 								<div class="card-header card-header-rose card-header-text">
@@ -291,7 +304,7 @@ $act=$_GET["act"];
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Target</label>
 														<select name="target" class='form-control' required>
-								                            <option value=''>Pilih Nilai Target ...</option>
+								                            <option value='<?=$r['target']?>'><?=$r['target']?></option>
 								                            <option value='1'>1 = Sangat Kurang</option>
 								                            <option value='2'>2 = Kurang</option>
 								                            <option value='3'>3 = Cukup</option>
@@ -309,7 +322,7 @@ $act=$_GET["act"];
 						                                		$jenis="Secondary";
 						                                	}
 						                                ?>
-						                                	<option value=''>Pilih Jenis ...</option>
+						                                	<option value="<?=$r[jenis]?>""><?=$jenis?></option>
 						                                    <option value="1">Core</option>
 						                                    <option value="2">Secondary</option>
 						                                </select>

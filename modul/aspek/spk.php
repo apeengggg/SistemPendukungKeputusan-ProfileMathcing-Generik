@@ -36,7 +36,7 @@ $act=$_GET["act"];
 									$no=1;
 									if($_SESSION["level"]=="admin")
 									{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM spk ORDER BY id_spk ASC");
+										$tampil = mysqli_query($koneksi,"SELECT * FROM spk WHERE status_verif=1 ORDER BY id_spk ASC");
 									}else{
 										$tampil = mysqli_query($koneksi,"SELECT * FROM spk WHERE id_user='$_SESSION[id_user]' ORDER BY id_spk ASC");
 									?>
