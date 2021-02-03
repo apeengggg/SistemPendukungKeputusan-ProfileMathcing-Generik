@@ -248,14 +248,7 @@ $act=$_GET["act"];
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Target</label>
-														<select name="target" class='form-control' required>
-								                            <option value=''>Pilih Nilai Target ...</option>
-								                            <option value='1'>1 = Sangat Kurang</option>
-								                            <option value='2'>2 = Kurang</option>
-								                            <option value='3'>3 = Cukup</option>
-								                            <option value='4'>4 = Baik</option>
-								                            <option value='5'>5 = Sangat Baik</option>
-														</select>
+														<input type="text" name="target" class="form-control" min="1" max="5" placeholder="Angka 1-5" required>
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Jenis</label>

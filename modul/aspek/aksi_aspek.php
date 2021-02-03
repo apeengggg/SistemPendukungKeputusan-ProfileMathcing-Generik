@@ -44,6 +44,15 @@ else{
 		$a = mysqli_fetch_array($ceklebih);
 		$b = $a['jumlah'];
 		$c = $b + $_POST['bobot'];
+		$bobot_sec = 100-$_POST['bobot_core'];
+		if ($_POST['bobot_core'] > 100) {
+			echo "
+						<script type='text/javascript'>
+							window.alert('Bobot Core Lebih Dari 100, Gagal Menambahkan Aspek Baru');
+							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
+						</script>";
+						die;
+		}
 		if ($b > 100 OR $c > 100) {
 			echo "
 						<script type='text/javascript'>
@@ -69,8 +78,6 @@ else{
 						</script>";
 						}
 		}else{
-			if(($_POST["bobot_core"]+$_POST["bobot_secondary"])==100)
-			{
 				$query=mysqli_query($koneksi,"INSERT INTO aspek(nama_aspek,
 										 				 bobot, 
 										 				 bobot_core, 
@@ -80,7 +87,7 @@ else{
 								   				  VALUES('$_POST[nama_aspek]',
 														'$_POST[bobot]', 
 														'$_POST[bobot_core]', 
-														'$_POST[bobot_secondary]', 
+														'$bobot_sec', 
 														'$_POST[Inisial]',
 														'$_POST[id_spk]')") or die (mysqli_error($koneksi));
 
@@ -115,21 +122,6 @@ else{
 							}
 				}
 				//header('location:../../dashboard.php?module='.$module);
-			}else{
-				if (isset($_GET["jenis"])) {
-					echo "
-						<script type='text/javascript'>
-							window.alert('Bobot Core dan Bobot Secondary Harus Sama Dengan 100%, Data Gagal Ditambahkan');
-							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk&jenis=spkbaru';
-						</script>";
-				}else{
-					echo "		
-						<script type='text/javascript'>
-							window.alert('Bobot Core dan Bobot Secondary Harus Sama Dengan 100%, Data Gagal Ditambahkan');
-							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
-						</script>";
-						}
-			}
 	}
 }
 

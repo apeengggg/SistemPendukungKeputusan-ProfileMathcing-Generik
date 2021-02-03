@@ -40,7 +40,25 @@ else{
 		$idaspek = $_POST['id_aspek'];
 		$name=$_POST['nama_faktor'];
 		$idspk=$_POST['id_spk'];
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM faktor WHERE nama_faktor='$name' AND aspek=$idaspek");
+		// cek angka bukan
+		$cek = is_numeric($_POST['target']);
+		if ($cek == true) {
+			if ($_POST['target'] > 5 OR $_POST['target'] < 1) {
+				if (isset($_GET["jenis"])) {
+					echo "<script type='text/javascript'>
+					window.alert('Nilai Target Lebih Dari Atau Kurang Dari 5');
+					window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk&jenis=baru';
+							</script>";
+							die;
+				}else{
+					echo "<script type='text/javascript'>
+					window.alert('Nilai Target Lebih Dari Atau Kurang Dari 5');
+					window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk';
+							</script>";
+							die;
+				}
+			}
+			$ceknama=mysqli_query($koneksi,"SELECT * FROM faktor WHERE nama_faktor='$name' AND aspek=$idaspek");
 		if (mysqli_num_rows($ceknama)>0) {
 				if (isset($_GET["jenis"])) {
 					echo "<script type='text/javascript'>
@@ -96,6 +114,22 @@ else{
 				}
 			// header('location:../../dashboard.php?module='.$module);
 	}
+		}else{
+			if (isset($_GET["jenis"])) {
+				echo "<script type='text/javascript'>
+				window.alert('Nilai Target Bukan Angka!!');
+				window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk&jenis=baru';
+						</script>";
+						die;
+			}else{
+				echo "<script type='text/javascript'>
+				window.alert('Nilai Target Bukan Angka!!');
+				window.location='../../dashboard.php?module=faktor&id=$idaspek&id_spk=$idspk';
+						</script>";
+						die;
+			}
+		}
+		
 }
 
 	// edit faktor

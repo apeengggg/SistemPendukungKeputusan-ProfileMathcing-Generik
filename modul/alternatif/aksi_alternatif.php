@@ -139,34 +139,41 @@ else{
 			}
 
 			elseif ($module=='alternatif' AND $act=='simpan_nilai'){
-				//$tgl=date("Y/m/d");
-					for ($i=0; $i <$_POST['jumlah_faktor'] ; $i++) { 
-						$faktor 			  = $_POST["faktor"];
-						$nilai 				  = $_POST["nilai"];
-						$id_alternatif        = $_POST['id_alternatif'];
-						$id_spk        		  = $_POST['id_spkuser'];
-						$idspk        		  = $_POST['id_spk'];
-						
-						$sql = "insert into nilai (id_alternatif, faktor, nilai, id_spkuser)values
-						('$id_alternatif', '$faktor[$i]', '$nilai[$i]', '$id_spk')";
-						$query = mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
-					}
-					if($query){
+				$faktor 			  = $_POST["faktor"];
+				$nilai 				  = $_POST["nilai"];
+				$id_alternatif        = $_POST['id_alternatif'];
+				$id_spk        		  = $_POST['id_spkuser'];
+				$idspk        		  = $_POST['id_spk'];
+				$max = max($nilai);
+				$min = min($nilai);
+				if ($max > 5 OR $min < 1  ) {
 					?>
-						<script type="text/javascript">
-							window.alert("Data nilai berhasil ditambah");
-							window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$id_spk?>&id_spk=<?=$idspk?>";
-						</script>
-					<?php 
-					}else{
-						?>
 							<script type="text/javascript">
-								window.alert("Data nilai gagal ditambah");
+								window.alert("Terdapat Nilai Yang Lebih Dari 5 atau kurang dari 1");
 								window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$id_spk?>&id_spk=<?=$idspk?>";
 							</script>
 						<?php 
+				}else{
+					for ($i=0; $i < $_POST['jumlah_faktor']; $i++) { 
+						$sql = "INSERT INTO nilai (id_alternatif, faktor, nilai, id_spkuser) VALUES ('$id_alternatif', '$faktor[$i]', '$nilai[$i]', '$id_spk')";
+						$query = mysqli_query($koneksi, $sql);
+					}	
+					if ($query) {
+						?>
+							<script type="text/javascript">
+								window.alert("Data nilai berhasil ditambah");
+								window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$id_spk?>&id_spk=<?=$idspk?>";
+							</script>
+						<?php 
+					}else{
+						?>
+						<script type="text/javascript">
+							window.alert("Data nilai gagal ditambah");
+							window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$id_spk?>&id_spk=<?=$idspk?>";
+						</script>
+					<?php 
 					}
-					//header('location:../../dashboard.php?module='.$module);
+				}
 			}
 
 	elseif ($module=='alternatif' AND $act=='simpan_spk_baru'){

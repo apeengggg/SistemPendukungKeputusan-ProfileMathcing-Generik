@@ -226,11 +226,11 @@ $act=$_GET["act"];
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot Core</label>
-												<input type="number" name="bobot_core" class='form-control' placeholder="Bobot Core" min="1" max="100" required>
+												<input type="text" name="bobot_core" onkeyup="isi_otomatis()" id="core" class='form-control' placeholder="Bobot Core" required>
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot Secondary</label>
-												<input type="number" name="bobot_secondary" class='form-control' placeholder="Bobot Secondary" min="1" max="100" required>
+												<input type="text" name="bobot_secondary" id="second" class='form-control' placeholder="Bobot Secondary" required readonly value="Bobot Secondary = 100 - Bobot Core">
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Nama Singkat/Inisial</label>
@@ -242,9 +242,24 @@ $act=$_GET["act"];
 											<input name="action" type="button" value="Cancel" onclick="window.history.back();" class="btn btn-danger pull-left">
 										</div>
 									</form>
+									<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+									<script type="text/javascript">
+										function isi_otomatis(){
+											var nim = $("#core").val();
+											$.ajax({
+												url: 'proses-ajax.php',
+												data:"core="+nim ,
+											}).success(function (data) {
+												var json = data,
+												obj = JSON.parse(json);
+												$('#second').val(obj.second);
+											});
+										}
+									</script>
 								</div>
 							</div>
 						</div>
+						
 					<?php
 					break;
 
