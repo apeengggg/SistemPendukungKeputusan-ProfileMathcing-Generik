@@ -21,19 +21,30 @@ if($jumlah>0)
 	}
 } 
 
-$cekaspek = mysqli_query($koneksi, "SELECT SUM(bobot) as jumlah FROM aspek WHERE id_spk='$data[id_spk]'");
-$j = mysqli_fetch_array($cekaspek);
-$k = $j['jumlah'];
-// echo $k ; die;
-if ($k > 100 OR $k < 100) {
-	?>
-            <script type="text/javascript">
-                window.alert("Gagal Melakukan Perhitungan, Jumlah Bobot Aspek Tidak Sama Dengan 100");
-                window.location="?module=promatch";
-            </script>
-		<?php 
-		die;
+/////////////////////////// normalisasi aspek dulu //////////////////////////////////////////////////////////
+$ambil_aspek = mysqli_query($koneksi, "SELECT bobot, id_aspek, (SELECT SUM(bobot) FROM aspek WHERE id_spk='$data[id_spk]') as jumlah FROM aspek WHERE id_spk='$data[id_spk]'");
+foreach ($ambil_aspek as $key => $value) {
+	print_r($value);
+	$hasil = $value['bobot']/$value['jumlah'];
+	// $hasil_ = floor($hasil);
+	$update_bobot = mysqli_query($koneksi, "UPDATE aspek SET bobot='$hasil' WHERE id_aspek='$value[id_aspek]'");
 }
+// die;
+////////////////////////// normalisasi aspek dulu ///////////////////////////////////////////////////////////
+
+// $cekaspek = mysqli_query($koneksi, "SELECT SUM(bobot) as jumlah FROM aspek WHERE id_spk='$data[id_spk]'");
+// $j = mysqli_fetch_array($cekaspek);
+// $k = $j['jumlah'];
+// // echo $k ; die;
+// if ($k > 100 OR $k < 100) {
+// 	?>
+//             <script type="text/javascript">
+//                 window.alert("Gagal Melakukan Perhitungan, Jumlah Bobot Aspek Tidak Sama Dengan 100");
+//                 window.location="?module=promatch";
+//             </script>
+// 		<?php 
+// 		die;
+// }
 
 ////////////////////////////////////// cek faktor core ///////////////////////////////////////////
 // ambil jumlah row pada query dibawah untuk menampilkan faktor core=1
@@ -148,11 +159,13 @@ $act=$_GET["act"];
 			$hasil=mysqli_query($koneksi,$sql);
 			while($row=mysqli_fetch_array($hasil))
 				{
+
+					$norm = $row['bobot']*100;
 					$aspek=$row['id_aspek'];
 					$nama_aspek[$row['id_aspek']]=$row['nama_aspek'];
 					$nama_singkat[$row['id_aspek']]=$row['nama_singkat'];
 					$jumlah_kolom[$row['id_aspek']]=$row['jum_kolom'];
-					$ba_all[$row['id_aspek']]=$row['bobot'];
+					$ba_all[$row['id_aspek']]=$norm;
 					$ba_cf[$row['id_aspek']]=$row['bobot_core'];
 					$ba_sf[$row['id_aspek']]=$row['bobot_secondary'];
 					//------------cari index berdasarkan nomor 
