@@ -46,8 +46,8 @@ if (mysqli_num_rows($query1)>0) {
 		</script>
 <?php
 	}else{
-		$query=mysqli_query($koneksi,"INSERT INTO user(username,password, nama, email, level, aktif, verif_code) 
-								VALUES('$_POST[username]', '$pass', '$_POST[nama]', '$_POST[email]', 'user','T', '$code')") or die (mysqli_error($koneksi));
+		$query=mysqli_query($koneksi,"INSERT INTO user(username,password, nama, email, level, aktif, verif_code, tlp) 
+								VALUES('$_POST[username]', '$pass', '$_POST[nama]', '$_POST[email]', 'user','T', '$code', '$_POST[tlp]')") or die (mysqli_error($koneksi));
 
 /**
  * This example shows settings to use when sending via Google's Gmail servers.

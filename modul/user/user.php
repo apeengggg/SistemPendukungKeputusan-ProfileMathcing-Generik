@@ -69,7 +69,7 @@ $act=$_GET["act"];
 																		 	";
 																		 }
 																		 ?>
-																		 <a href='?module=user&act=edit&id=<?php echo $r[username] ?>' class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>   
+																		 <a href='?module=user&act=edit&id=<?php echo $r[id_user] ?>' class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>   
 																		 <a href='modul/user/aksi_user.php?module=user&act=hapus&id=<?php echo $r[username] ?>' class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a>
 																		 <?php 
 																		 echo "	
@@ -110,10 +110,10 @@ $act=$_GET["act"];
 																	<label class="col-sm-4 control-label text-left">Nama</label>
 																	<input type="text" name="nama" class='form-control' placeholder="" required>
 																</div>
-																<div class="input-group">
+																<!-- <div class="input-group">
 																	<label class="col-sm-4 control-label text-left">Alamat</label>
 																	<input type="text" name="alamat" placeholder="" class='form-control' value="" required>
-																</div>
+																</div> -->
 																<div class="input-group">
 																	<label class="col-sm-4 control-label text-left">No. Tlp</label>
 																	<input type="text" name="tlp" placeholder="" class='form-control' value="" required>
@@ -188,10 +188,10 @@ $act=$_GET["act"];
 																	<label class="col-sm-4 control-label text-left">Nama</label>
 																	<input type="text" name="nama" placeholder="" class='form-control' value="<?php echo $r[nama] ?>" required>
 																</div>
-																<div class="input-group">
+																<!-- <div class="input-group">
 																	<label class="col-sm-4 control-label text-left">Alamat</label>
 																	<input type="text" name="alamat" placeholder="" class='form-control' value="<?php echo $r[alamat] ?>" required>
-																</div>
+																</div> -->
 																<div class="input-group">
 																	<label class="col-sm-4 control-label text-left">No. Tlp</label>
 																	<input type="text" name="tlp" placeholder="" class='form-control' value="<?php echo $r[tlp] ?>" required>

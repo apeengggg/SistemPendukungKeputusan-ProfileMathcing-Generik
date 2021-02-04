@@ -156,7 +156,7 @@ include "config/koneksi.php";
                 </a>
               </li>
                 <li class="nav-item ">
-                  <a class="nav-link" href="?module=bobot_spk">
+                  <a class="nav-link" href="?module=bobot">
                     <i class="material-icons">apps</i>
                     <p> Bobot </p>
                   </a>
@@ -185,6 +185,11 @@ include "config/koneksi.php";
                     <p> Operator </p>
                   </a>
               </li>
+              <li class="nav-item ">
+                  <a class="nav-link" href="?module=user">
+                    <i class="material-icons">people</i>
+                  </a>
+              </li>
             </ul>
             <?php 
           }elseif($_SESSION["level"]=="user"){
@@ -197,7 +202,7 @@ include "config/koneksi.php";
                             </a>
                             <li class="nav-item ">
                             <a class="nav-link" href="?module=alternatif_user">
-                              <i class="material-icons">person</i>
+                              <i class="material-icons">star</i>
                               <p> Perhitungan </p>
                             </a>
                           </li> 
@@ -225,7 +230,15 @@ include "config/koneksi.php";
                               <p> History </p>
                             </a>
                           </li>
-                        </ul>
+                          <center>
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Kontak
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">WA :+6283824021662</a>
+                            </div>
+                            </center>
+        </ul>
             <?php 
           }
         ?>
@@ -308,7 +321,7 @@ include "config/koneksi.php";
                                     {
                                       $sql=mysqli_query($koneksi,"SELECT * FROM spk ORDER BY id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
                                     }else{
-                                      $sql=mysqli_query($koneksi,"SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal, spk.id_spk FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.aspek=aspek.id_aspek RIGHT JOIN bobot ON bobot.id_spk=spk.id_spk WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND bobot.id_bobot IS NOT NULL AND spk.id_user='$_SESSION[id_user]' OR (spk.jenis=0 AND spk.status_verif=1) ORDER BY spk.id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
+                                      $sql=mysqli_query($koneksi,"SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal, spk.id_spk FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.aspek=aspek.id_aspek WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND spk.id_user='$_SESSION[id_user]' OR (spk.jenis=0 AND spk.status_verif=1) ORDER BY spk.id_spk ASC LIMIT 5") or die(mysqli_error($koneksi));
                                     }
                                     ?>
                                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">

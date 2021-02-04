@@ -282,7 +282,7 @@ $act=$_GET["act"];
 													{
 														$sql="SELECT * FROM spk ORDER BY id_spk ASC";
 													}else{
-														$sql="SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal, spk.id_spk FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.aspek=aspek.id_aspek RIGHT JOIN bobot ON bobot.id_spk=spk.id_spk WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND bobot.id_bobot IS NOT NULL AND (spk.id_user='$_SESSION[id_user]' OR (spk.jenis=0 AND spk.status_verif=1))";
+														$sql="SELECT DISTINCT spk.nama_spk, spk.keterangan, spk.tanggal, spk.id_spk FROM spk RIGHT JOIN aspek ON aspek.id_spk=spk.id_spk RIGHT JOIN faktor ON faktor.aspek=aspek.id_aspek WHERE aspek.id_aspek IS NOT NULL AND faktor.id_faktor IS NOT NULL AND (spk.id_user='$_SESSION[id_user]' OR (spk.jenis=0 AND spk.status_verif=1))";
 													}
 													$query=mysqli_query($koneksi,$sql);
 													while($data=mysqli_fetch_array($query))

@@ -210,7 +210,7 @@ $act=$_GET["act"];
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 									<?php 
 									$no=1;
-									$tampil = mysqli_query($koneksi, "SELECT * FROM spk INNER JOIN user ON user.id_user=spk.id_user  WHERE spk.jenis=0 AND spk.id_user !='$_SESSION[id_user]' ORDER BY id_spk ASC");
+									$tampil = mysqli_query($koneksi, "SELECT * FROM spk INNER JOIN user ON user.id_user=spk.id_user  WHERE spk.jenis=0 AND spk.id_user !='$_SESSION[id_user]' ORDER BY id_spk DESC");
 								      echo "
 								          <thead align='center'>
 											<tr>

@@ -70,7 +70,6 @@ else{
 					$query=mysqli_query($koneksi,"INSERT INTO user(username,
 																	password,
 									 								nama, 
-									 								alamat, 
 									 								tlp, 
 									 								email, 
 									 								level,
@@ -78,7 +77,6 @@ else{
 							   								VALUES('$_POST[username]',
 							   										'$pass',
 																	'$_POST[nama]',
-																	'$_POST[alamat]',
 																	'$_POST[tlp]',
 																	'$email',
 																	'$_POST[level]',
@@ -234,7 +232,6 @@ if (!$mail->send()) {
 					if($_FILES['file']['size']==0)
 					{
 						$query=mysqli_query($koneksi,"UPDATE user SET nama  	= '$_POST[nama]',
-																		alamat  	= '$_POST[alamat]',
 																		tlp  		= '$_POST[tlp]',
 																		verif_code = '$hash_email'
 														  WHERE  username    	= '$_POST[username]'")or die (mysqli_error($koneksi));
@@ -264,7 +261,6 @@ if (!$mail->send()) {
 							if($ukuran < 1044070){			
 								move_uploaded_file($file_tmp, './../../foto/'.$foto);
 								$query=mysqli_query($koneksi,"UPDATE user SET nama      = '$_POST[nama]',
-																				  alamat  	= '$_POST[alamat]',
 																				  tlp  		= '$_POST[tlp]',
 																				  foto  	= '$foto',
 																				  verif_code = '$hash_email' 
@@ -308,7 +304,6 @@ if (!$mail->send()) {
 						if($_FILES['file']['size']==0)
 						{
 							$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
-																			  alamat  	= '$_POST[alamat]',
 																				  tlp  		= '$_POST[tlp]',
 																				password 	= '$pass',
 																				  level 	= '$_POST[level]',
@@ -341,7 +336,6 @@ if (!$mail->send()) {
 									move_uploaded_file($file_tmp, './../../foto/'.$foto);
 									$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
 																  password 	= '$password',
-																  alamat  	= '$_POST[alamat]',
 																	tlp  		= '$_POST[tlp]',
 																	level 	= '$_POST[level]',
 																	foto  	= '$foto',
@@ -387,7 +381,6 @@ if (!$mail->send()) {
 				if($_FILES['file']['size']==0)
 				{
 					$query=mysqli_query($koneksi,"UPDATE user SET nama  	= '$_POST[nama]',
-																	alamat  	= '$_POST[alamat]',
 																	tlp  		= '$_POST[tlp]'
 													  WHERE  username    	= '$_POST[username]'")or die (mysqli_error($koneksi));
 							if($query){
@@ -416,7 +409,6 @@ if (!$mail->send()) {
 						if($ukuran < 1044070){			
 							move_uploaded_file($file_tmp, './../../foto/'.$foto);
 							$query=mysqli_query($koneksi,"UPDATE user SET nama      = '$_POST[nama]',
-																			  alamat  	= '$_POST[alamat]',
 																			  tlp  		= '$_POST[tlp]',
 																			  foto  	= '$foto' 
 													  WHERE  username    = '$_POST[username]'")or die (mysqli_error($koneksi));
@@ -459,7 +451,6 @@ if (!$mail->send()) {
 					if($_FILES['file']['size']==0)
 					{
 						$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
-																		  alamat  	= '$_POST[alamat]',
 																			  tlp  		= '$_POST[tlp]',
 																			password 	= '$pass',
 																			  level 	= '$_POST[level]' 
@@ -491,7 +482,6 @@ if (!$mail->send()) {
 								move_uploaded_file($file_tmp, './../../foto/'.$foto);
 								$query=mysqli_query($koneksi,"UPDATE user SET nama  = '$_POST[nama]',
 															  password 	= '$password',
-															  alamat  	= '$_POST[alamat]',
 																tlp  		= '$_POST[tlp]',
 																level 	= '$_POST[level]',
 																foto  	= '$foto' 

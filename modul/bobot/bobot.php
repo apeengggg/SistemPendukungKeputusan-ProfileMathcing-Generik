@@ -25,18 +25,11 @@ $act=$_GET["act"];
 		                  </div>
 		                </div>
 						<div class="card-body ">
-					<?php
-						if ($ra == $u) {
-							?>
-							<a href="?module=bobot&act=tambah&id=<?=$id?>">
+						<a href="?module=bobot&act=tambah&id=<?=$id?>">
 								<button class="btn  btn-youtube">
 	                          		<i class="fa fa-plus-square-o"> </i> Tambah Data Bobot
 	                        	</button>
 	                       	</a>
-							<?php
-						}else{
-						}				
-					?>
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 									<?php 
 									$no=1;
@@ -45,9 +38,9 @@ $act=$_GET["act"];
 											if (isset($_GET['id'])) {
 												$id = $_GET['id'];
 											}
-											$tampil=mysqli_query($koneksi, "SELECT bobot.*, spk.nama_spk FROM bobot, spk WHERE bobot.id_spk ='$id' AND bobot.id_spk=spk.id_spk ORDER BY bobot.id_spk ASC");
+											$tampil=mysqli_query($koneksi, "SELECT * FROM bobot");
 										}else{
-											$tampil=mysqli_query($koneksi, "SELECT bobot.*, spk.nama_spk FROM bobot, spk WHERE bobot.id_spk ='$id' AND bobot.id_spk=spk.id_spk ORDER BY bobot.id_spk ASC");
+											$tampil=mysqli_query($koneksi, "SELECT * FROM bobot");
 										}
 								      echo "
 								          <thead>
@@ -73,7 +66,6 @@ $act=$_GET["act"];
 												<td>$r[keterangan]</td>
 												
 												<td width='10%'>";
-												if ($ra === $u) {
 												?>
 													<center>
 													<a href="modul/bobot/aksi_bobot.php?module=bobot&act=hapus&id=<?php echo $r[id_bobot]?>&idspk=<?=$r[id_spk]?>" class="btn-sm btn-danger" onclick='return confirm("Anda yakin mau menghapus item ini ?")'>
@@ -82,10 +74,7 @@ $act=$_GET["act"];
 													<!-- <a href='modul/bobot/aksi_bobot.php?module=bobot&act=hapus&id=<?php echo $r[id_bobot]?>&idspk=<?=$r[id_spk]?>' class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a> -->
 														
 												   </center>
-												   <?php 
-												}else{
-													echo 'Tidak Memiliki Akses';
-												}  
+												   <?php  
 												   echo "
 												</td>
 											</tr>";
@@ -118,17 +107,18 @@ $act=$_GET["act"];
 										    <div class="input-group">
 												<input type="hidden" name="id_spk" class='form-control' value="<?=$id?>" required>
 											</div>
+											<label for="keterangan">Bobot</label>
 											<select name="keterangan" id="keterangan" class='form-control' required>
 												<option value="">Pilih Keterangan ...</option>
-												<option value="0">K- -4</option>
-												<option value="1">K- -3</option>
-												<option value="2">K- -2</option>
-												<option value="3">K- -1</option>
-												<option value="4">K-0</option>
-												<option value="5">K-1</option>
-												<option value="6">K-2</option>
-												<option value="7">K-3</option>
-												<option value="8">K-4</option>
+												<option value="0">-4 [Kompetensi Individu Kekurangan 4 Level/Tingkat]</option>
+												<option value="1">-3 [Kompetensi Individu Kekurangan 3 Level/Tingkat]</option>
+												<option value="2">-2 [Kompetensi Individu Kekurangan 2 Level/Tingkat]</option>
+												<option value="3">-1 [Kompetensi Individu Kekurangan 1 Level/Tingkat]</option>
+												<option value="4">0 [Tidak Ada Selisih (Sesuai Apa Yang Dibutuhkan) ]</option>
+												<option value="5">4 [Kompetensi Individu Kelebihan 4 Level/Tingkat]</option>
+												<option value="6">3 [Kompetensi Individu Kelebihan 3 Level/Tingkat]</option>
+												<option value="7">2 [Kompetensi Individu Kelebihan 2 Level/Tingkat]</option>
+												<option value="8">1 [Kompetensi Individu Kelebihan 1 Level/Tingkat]</option>
 
 											</select>
 											

@@ -84,7 +84,7 @@ else{
 			$sel = '1';
 		}
 		// cek 
-		$query2 = mysqli_query($koneksi, "SELECT * FROM bobot WHERE id_spk='$_POST[id_spk]' AND selisih='$sel'");
+		$query2 = mysqli_query($koneksi, "SELECT * FROM bobot WHERE selisih='$sel'");
 		if (mysqli_num_rows($query2)>0) {
 			?>
 						<script type="text/javascript">
@@ -95,17 +95,15 @@ else{
 		}else{
 		$query=mysqli_query($koneksi,"INSERT INTO bobot(selisih,
 														bobot, 
-														keterangan,
-														id_spk) 
+														keterangan) 
 												VALUES('$sel',
 														'$bob', 
-														'$ket',
-														'$_POST[id_spk]')") or die (mysqli_error($koneksi));
+														'$ket')") or die (mysqli_error($koneksi));
 	
 		 
 		if($query){
 			//  cek apakah bobot sudaha ada 9 ?
-			$cekbobot = mysqli_query($koneksi, "SELECT * FROM bobot WHERE id_spk='$id'");
+			$cekbobot = mysqli_query($koneksi, "SELECT * FROM bobot");
 				if (mysqli_num_rows($cekbobot)==9) {
 					?>
 						<script type="text/javascript">
@@ -138,8 +136,7 @@ else{
 	elseif ($module=='bobot' AND $act=='update'){
 		  $query=mysqli_query($koneksi,"UPDATE bobot SET selisih = '$_POST[selisih]', 
 		  										  bobot 		= '$_POST[bobot]',  
-		  										  keterangan 	= '$_POST[keterangan]', 
-		  										  id_spk 		= '$_POST[id_spk]'
+		  										  keterangan 	= '$_POST[keterangan]'
 							   				WHERE id_bobot   	= '$_POST[id_bobot]'")or die (mysqli_error($koneksi));
 
 		 if($query){

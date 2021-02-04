@@ -38,6 +38,7 @@ $pass     = md5($_POST['password']);
     $_SESSION['level']       = $r['level'];
     $_SESSION['foto']        = $r['foto'];
     $_SESSION['aktif']       = $r['aktif'];
+    $_SESSION['tlp']         = $r['tlp'];
     
     // session timeout
     //$_SESSION[login] = 1;

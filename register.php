@@ -110,7 +110,7 @@
                           <input type="text" name="alamat" class="form-control" placeholder="Alamat..." required>
                         </div>
                       </div> -->
-                      <!-- <div class="form-group has-default">
+                      <div class="form-group has-default">
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -119,7 +119,7 @@
                           </div>
                           <input type="text" name="tlp" class="form-control" placeholder="Tlp..." required>
                         </div>
-                      </div> -->
+                      </div>
                       <div class="form-group has-default">
                         <div class="input-group">
                           <div class="input-group-prepend">

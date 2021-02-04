@@ -118,7 +118,7 @@ $act=$_GET["act"];
   <?php
 		//---------------------Menyimpan tabel bobot dalam array---------------------
 			$bobot=array();
-			$sql="SELECT * FROM bobot WHERE id_spk='$data[id_spk]'";
+			$sql="SELECT * FROM bobot";
 			$hasil=mysqli_query($koneksi,$sql);
 			while($row=mysqli_fetch_array($hasil))
 				{
