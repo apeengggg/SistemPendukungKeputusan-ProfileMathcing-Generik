@@ -230,14 +230,14 @@ include "config/koneksi.php";
                               <p> History </p>
                             </a>
                           </li>
-                          <center>
+                          <!-- <center>
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Kontak
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <a class="dropdown-item" href="#">WA :+6283824021662</a>
                             </div>
-                            </center>
+                            </center> -->
         </ul>
             <?php 
           }
@@ -265,7 +265,7 @@ include "config/koneksi.php";
           </button>
           <div class="collapse navbar-collapse justify-content-end">
             
-            <ul class="navbar-nav">
+            <!-- <ul class="navbar-nav">
               <li class="nav-item dropdown">
                 <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
@@ -277,6 +277,22 @@ include "config/koneksi.php";
                   <a class="dropdown-item" href="?module=user&act=edit&id=<?php echo $_SESSION[username]; ?>">Profile</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" onclick='return confirm("Anda Yakin Ingin Keluar ?")'href="logout.php">Log out</a>
+                </div>
+              </li>
+            </ul> -->
+            <!--  -->
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">phone</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="#">WA : 083824021622</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">EMAIL : suhardiman645@gmail.com</a>
                 </div>
               </li>
             </ul>
