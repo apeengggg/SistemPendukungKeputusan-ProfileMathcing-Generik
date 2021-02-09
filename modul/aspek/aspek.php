@@ -222,15 +222,15 @@ $act=$_GET["act"];
 		
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot</label>
-												<input type="number" name="bobot" class='form-control' placeholder="Bobot" min="1" max="100" required >
+												<input type="number" autocomplete="off" name="bobot" class='form-control' placeholder="Bobot" min="1" max="100" required >
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot Core</label>
-												<input type="text" name="bobot_core" onkeyup="isi_otomatis()" id="core" class='form-control' placeholder="Bobot Core" required>
+												<input type="number" name="bobot_core" onkeyup="isi_otomatis()" id="core" class='form-control' placeholder="Bobot Core" min="1" max="100" required>
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot Secondary</label>
-												<input type="text" name="bobot_secondary" id="second" class='form-control' placeholder="Bobot Secondary" required readonly value="Bobot Secondary = 100 - Bobot Core">
+												<input type="number" name="bobot_secondary" id="second" class='form-control' placeholder="Bobot Secondary" required readonly value="Bobot Secondary = 100 - Bobot Core">
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Nama Singkat/Inisial</label>
@@ -272,6 +272,7 @@ $act=$_GET["act"];
 					}
 					$edit=mysqli_query($koneksi,"SELECT * FROM aspek, spk where aspek.id_aspek='$_GET[id]' AND aspek.id_spk=spk.id_spk");
 					$r=mysqli_fetch_array($edit);
+					$bobot = $r['bobot']*100;
 					?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
@@ -290,16 +291,16 @@ $act=$_GET["act"];
 												<input type="text" name="nama_aspek" class='form-control' value="<?php echo $r[nama_aspek] ?>" required>
 											</div>
 											<div class="input-group">
-												<label class="col-sm-4 control-label text-left">Nama Aspek</label>
-												<input type="text" name="bobot" class='form-control' value="<?php echo $r[bobot] ?>" required>
+												<label class="col-sm-4 control-label text-left">Bobot</label>
+												<input type="text" name="bobot" class='form-control' value="<?php echo $bobot ?>"  required>
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot Core</label>
-												<input type="text" name="bobot_core" class='form-control' value="<?php echo $r[bobot_core] ?>" required>
+												<input type="text" name="bobot_core" class='form-control' value="<?php echo $r[bobot_core] ?>" min="1" max="100" required>
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Bobot Secondary</label>
-												<input type="text" name="bobot_secondary" class='form-control' value="<?php echo $r[bobot_secondary] ?>" required>
+												<input type="number" name="bobot_secondary" class='form-control' placeholder="100 - Bobot Core" min="1" max="100" required readonly>
 											</div>
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Nama Singakt/Inisial</label>

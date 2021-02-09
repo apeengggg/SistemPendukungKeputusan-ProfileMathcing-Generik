@@ -69,19 +69,25 @@ $act=$_GET["act"];
 					                          <i class="fa fa-plus-square-o"> </i> Tambah Data Faktor
 					                        </button>
 										</a>
-										<a href="?module=bobot&id=<?=$id_?>&jenis=baru">
+										<!-- <a href="?module=bobot&id=<?=$id_?>&jenis=baru">
 											<button class="btn  btn-primary">
 												Lanjut Isi Bobot >>
 											</button>
-										</a>
+										</a> -->
 									<?php
 									}else{
 										?>
+										<a href="?module=aspek&id=<?=$id_?>">
+											<button class="btn  btn-warning">
+												<< Kembali Aspek
+											</button>
+										</a>
 										<a href="?module=faktor&act=tambah_detail&id_aspek=<?=$id?>&id_spk=<?=$id_?>">
 											<button class="btn  btn-youtube">
 					                          <i class="fa fa-plus-square-o"> </i> Tambah Data Faktor
 					                        </button>
 										</a>
+
 									<?php
 									}		
 								}else{
@@ -248,7 +254,7 @@ $act=$_GET["act"];
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Target</label>
-														<input type="text" name="target" class="form-control" min="1" max="5" placeholder="Angka 1-5" required>
+														<input type="text" name="target" class="form-control" min="1" max="5" placeholder="Nilai 1-5... 1=Sangat Kurang 2=Kurang 3=cukup 4=Baik 5=Sangat Baik" required>
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Jenis</label>

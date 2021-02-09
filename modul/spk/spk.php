@@ -52,10 +52,10 @@ $act=$_GET["act"];
 											<tr>
 												<th width=''>No</th>
 												<th>Nama Pembuat</th>
-												<th>Tgl Dibuat</th>
 												<th>Nama SPK</th>
 												<th>Keterangan</th>
 												<th>Jenis SPK</th>
+												<th>Tgl Dibuat</th>
 												<th width='110px'>Aksi</th>
 											</tr>
 										</thead>
@@ -76,10 +76,10 @@ $act=$_GET["act"];
 								       echo "<tr>
 								       			<td>$no</td>
 												<td>$r[nama]</td>
-												<td>$r[tanggal]</td>
 												<td>$r[nama_spk]</td>
 												<td width='200px'>$r[keterangan]</td>
-												<td>$jenis</td>												
+												<td>$jenis</td>
+												<td>$r[tanggal]</td>												
 												<td width='110px'>";
 										if ($b == $id_user) {
 											?>
@@ -96,7 +96,7 @@ $act=$_GET["act"];
 												   </center>
 												   <?php 
 										}else{
-											echo "Tidak Memiliki Hak Akses Untuk Mengubah";
+											echo "Tidak Memiliki Hak Akses";
 										}
 												   echo "
 												</td>
@@ -173,12 +173,27 @@ $act=$_GET["act"];
 												<td width='110px'>";
 												?>
 													 <center>
-													 <a href="?module=spk&act=edit&id=<?php echo $r[id_spk] ?>" class="btn-sm btn-primary">
+													 <a href="?module=spk&act=edit&id=<?php echo $r[id_spk] ?>&id_user=<?=$r[id_user]?>" class="btn-sm btn-primary">
 													 	<i class="fa fa-edit"></i>
 													 </a>
-													 <a href="modul/spk/aksi_spk.php?module=spk&act=hapus&id=<?php echo $r[id_spk] ?>" class="btn-sm btn-danger" onclick='return confirm("Anda yakin mau menghapus item ini? Aspek, Faktor, Bobot, Alternatif, Nilai, dan History Akan Terhapus!")'>
+													 <a href="modul/spk/aksi_spk.php?module=spk&act=hapus&id=<?php echo $r[id_spk] ?>&id_user=<?=$r[id_user]?>" class="btn-sm btn-danger" onclick='return confirm("Anda yakin mau menghapus item ini? Aspek, Faktor, Bobot, Alternatif, Nilai, dan History Akan Terhapus!")'>
 													 	<i class="fa fa-trash"></i>
 													 </a>
+													 <?php
+													if ($r['status_verif']==0) {
+														# code...
+													}else{
+									   				if ($r['jenis']==='0') {
+														  ?>
+													<a href='modul/spk/aksi_spk.php?module=spk&act=private&id=<?=$r[id_spk]?>&status=1&id_user=<?= $_SESSION[id_user]?>' class='btn btn-success btn-just-icon check'><i class='material-icons' rel='tooltip' title='Private'>vpn_key</i></a>
+														  <?php
+													   }else{
+														?>
+													<a href='modul/spk/aksi_spk.php?module=spk&act=publish&id=<?=$r[id_spk]?>&status=0&id_user=<?= $_SESSION[id_user]?>' class='btn btn-default btn-just-icon check'><i class='material-icons' rel='tooltip' title='Publish'>arrow_upward</i></a>
+														<?php
+													   }
+													}
+													 ?>
 													 <!-- <a href='?module=spk&act=edit&id=<?php echo $r[id_spk] ?>' class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>  
 													 <a href='modul/spk/aksi_spk.php?module=spk&act=hapus&id=<?php echo $r[id_spk] ?>'  class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a> -->
 														
@@ -210,9 +225,9 @@ $act=$_GET["act"];
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 									<?php 
 									$no=1;
-									$tampil = mysqli_query($koneksi, "SELECT * FROM spk INNER JOIN user ON user.id_user=spk.id_user  WHERE spk.jenis=0 AND spk.id_user !='$_SESSION[id_user]' ORDER BY id_spk DESC");
+									$tampil = mysqli_query($koneksi, "SELECT DISTINCT u.nama, s.tanggal, s.nama_spk, s.keterangan, s.jenis, u.id_user, s.id_spk, s.status_verif FROM spk s LEFT JOIN user u ON u.id_user=s.id_user LEFT JOIN aspek a ON a.id_spk=s.id_spk LEFT JOIN faktor f ON f.aspek=a.id_aspek WHERE s.jenis=0 AND s.id_user !='$_SESSION[id_user]' AND a.id_aspek IS NOT NULL AND f.id_faktor IS NOT NULL ORDER BY id_spk DESC");
 								      echo "
-								          <thead align='center'>
+								          <thead>
 											<tr>
 											<th width=''>No</th>
 											<th>Nama Pembuat</th>
@@ -256,15 +271,15 @@ $act=$_GET["act"];
 													<?php
 														if ($r[status_verif]==="0") {
 															?>
-														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-default btn-just-icon check'><i class='material-icons' rel='tooltip' title='Aktifasi'>check</i></a>
+														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-default btn-just-icon check'><i class='material-icons' rel='tooltip' title='Approved'>check</i></a>
 														<?php
 														}elseif($r[status_verif]==="1"){
 															?>
-														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=2' class='btn  btn-danger btn-just-icon check'><i class='material-icons' rel='tooltip' title='Deaktifasi'>delete</i></a>
+														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=2' class='btn  btn-success btn-just-icon check'><i class='material-icons' rel='tooltip' title='Disapproved'>check</i></a>
 														<?php
 														}else{
 															?>
-														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-success btn-just-icon check'><i class='material-icons' rel='tooltip' title='Deaktifasi'>check</i></a>
+														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-danger btn-just-icon check'><i class='material-icons' rel='tooltip' title='Deaktifasi'>check</i></a>
 														<?php
 														}													
 													?>						
@@ -343,16 +358,16 @@ $act=$_GET["act"];
 												<div class="input-group">
 													<span class="input-group-addon">	
 													</span>
-													<input type="text" name="keterangan" class='form-control' placeholder="Keterangan SPK ..." required>
+													<input type="text" autocomplete="off" name="keterangan" class='form-control' placeholder="Keterangan SPK ..." required>
 												</div>
 												<div class="input-group">
 												<span class="input-group-addon">	
 												</span>
-												<select name="jenis" id="jenis" class="form-control" requried>
+												<!-- <select name="jenis" id="jenis" class="form-control" requried>
 													<option value="">Pilih Jenis SPK ...</option>
 													<option value="0"><b>Umum</b> [Bisa Digunakan Oleh User Lain, Dengan Persetujuan Awal Oleh Admin]</option>
 													<option value="1"><b>Private</b> [Hanya Bisa Digunakan Oleh Anda, Tanpa Persetujuan Admin]</option>
-												</select>
+												</select> -->
 											</div>
 											</div>
 	
@@ -368,7 +383,6 @@ $act=$_GET["act"];
 						break;
 
 					case "edit" :
-
 					$edit=mysqli_query($koneksi,"SELECT * FROM spk where id_spk='$_GET[id]'");
 					$r=mysqli_fetch_array($edit);
 					?>
@@ -381,6 +395,7 @@ $act=$_GET["act"];
 		                <div class="card-body ">
 									<form class="form" method="post" enctype="multipart/form-data" action="modul/spk/aksi_spk.php?module=spk&act=update">
 										<input type="hidden" name="id_spk" value="<?php echo $r[id_spk] ?>">
+										<input type="hidden" name="id_user" value="<?= $_GET[id_user] ?>">
 										<div class="content">
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Nama SPK</label>

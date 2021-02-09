@@ -139,8 +139,8 @@ include "config/koneksi.php";
               </li>   
               <li class="nav-item ">
                 <a class="nav-link" href="?module=spk&act=verif_spk">
-                  <i class="material-icons">gear</i>
-                  <p> Verifikasi SPK Baru </p>
+                  <i class="material-icons">equalizer</i>
+                  <p> SPK User </p>
                 </a>
               </li>             
               <li class="nav-item ">
@@ -185,11 +185,6 @@ include "config/koneksi.php";
                     <p> Operator </p>
                   </a>
               </li>
-              <li class="nav-item ">
-                  <a class="nav-link" href="?module=user">
-                    <i class="material-icons">people</i>
-                  </a>
-              </li>
             </ul>
             <?php 
           }elseif($_SESSION["level"]=="user"){
@@ -202,13 +197,13 @@ include "config/koneksi.php";
                             </a>
                             <li class="nav-item ">
                             <a class="nav-link" href="?module=alternatif_user">
-                              <i class="material-icons">star</i>
-                              <p> Perhitungan </p>
+                              <i class="material-icons">person</i>
+                              <p> Kandidat </p>
                             </a>
                           </li> 
                           <li class="nav-item ">
                             <a class="nav-link" href="?module=spk&act=operator&id_user=<?=$_SESSION[id_user]?>">
-                              <i class="material-icons">person</i>
+                              <i class="material-icons">equalizer</i>
                               <p> SPK </p>
                             </a>
                           </li>  

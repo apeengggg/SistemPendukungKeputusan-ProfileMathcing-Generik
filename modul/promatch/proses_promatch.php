@@ -24,7 +24,7 @@ if($jumlah>0)
 /////////////////////////// normalisasi aspek dulu //////////////////////////////////////////////////////////
 $ambil_aspek = mysqli_query($koneksi, "SELECT bobot, id_aspek, (SELECT SUM(bobot) FROM aspek WHERE id_spk='$data[id_spk]') as jumlah FROM aspek WHERE id_spk='$data[id_spk]'");
 foreach ($ambil_aspek as $key => $value) {
-	print_r($value);
+	// print_r($value);
 	$hasil = $value['bobot']/$value['jumlah'];
 	// $hasil_ = floor($hasil);
 	$update_bobot = mysqli_query($koneksi, "UPDATE aspek SET bobot='$hasil' WHERE id_aspek='$value[id_aspek]'");
@@ -38,11 +38,11 @@ foreach ($ambil_aspek as $key => $value) {
 // // echo $k ; die;
 // if ($k > 100 OR $k < 100) {
 // 	?>
-//             <script type="text/javascript">
-//                 window.alert("Gagal Melakukan Perhitungan, Jumlah Bobot Aspek Tidak Sama Dengan 100");
+             <!-- <script type="text/javascript"> -->
+<!-- //                 window.alert("Gagal Melakukan Perhitungan, Jumlah Bobot Aspek Tidak Sama Dengan 100");
 //                 window.location="?module=promatch";
-//             </script>
-// 		<?php 
+// -->             </script>
+ 		<?php 
 // 		die;
 // }
 

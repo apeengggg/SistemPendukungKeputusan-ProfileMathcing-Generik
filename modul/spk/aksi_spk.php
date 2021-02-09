@@ -13,20 +13,38 @@ else{
 
 	// Hapus spk
 	if ($module=='spk' AND $act=='hapus'){
-		$hapus =mysqli_query($koneksi,"DELETE spk, aspek, faktor, bobot, hasil, nilai, spk_user, alternatif FROM spk 
-										INNER JOIN aspek ON aspek.id_spk=spk.id_spk 
-										INNER JOIN faktor ON faktor.aspek=aspek.id_aspek 
-										INNER JOIN bobot ON bobot.id_spk=spk.id_spk 
-										INNER JOIN spk_user ON spk_user.id_spk=spk.id_spk 
-										INNER JOIN hasil ON hasil.id_spkuser=spk_user.id_spkuser 
-										INNER JOIN nilai ON nilai.id_spkuser=spk_user.id_spkuser 
-										INNER JOIN alternatif ON alternatif.id_spkuser=spk_user.id_spkuser 
+		if ($_SESSION['level']==='user') {
+				$id_user = $_GET['id_user'];
+		}
+		$hapus =mysqli_query($koneksi,"	DELETE spk, aspek, faktor, hasil, nilai, spk_user, alternatif FROM spk 
+										LEFT JOIN aspek ON aspek.id_spk=spk.id_spk 
+										LEFT JOIN faktor ON faktor.aspek=aspek.id_aspek  
+										LEFT JOIN spk_user ON spk_user.id_spk=spk.id_spk 
+										LEFT JOIN hasil ON hasil.id_spkuser=spk_user.id_spkuser 
+										LEFT JOIN nilai ON nilai.id_spkuser=spk_user.id_spkuser 
+										LEFT JOIN alternatif ON alternatif.id_spkuser=spk_user.id_spkuser 
 										WHERE spk.id_spk='$_GET[id]'");
-
-		if ($hapus) {
+		if ($_SESSION['level']==='user') {
+			if ($hapus) {
 			?>
 	  		<script type="text/javascript">
 					window.alert("Data berhasil dihapus");
+					window.location="../../dashboard.php?module=spk&act=operator&id_user=<?=$id_user?>";
+			</script>
+	  		<?php
+	  		}else{
+	  		?>
+	  		<script type="text/javascript">
+					window.alert("Data gagal dihapus");
+					window.location="../../dashboard.php?module=spk&act=operator&id_user=<?=$id_user?>";
+		</script>
+	  	<?php
+	}
+		}else{
+			if ($hapus) {
+			?>
+	  		<script type="text/javascript">
+					window.alert("Data berhasil dihapus oleh admin");
 					window.location="../../dashboard.php?module=spk";
 			</script>
 	  		<?php
@@ -38,7 +56,7 @@ else{
 		</script>
 	  	<?php
 	}
-			  
+		}		  
 }
 
 	// tambah spk
@@ -47,23 +65,17 @@ else{
 		$id = $_GET["id"];
 		$nama_spk 		= $_POST["nama_spk"];
 		$keterangan 	= $_POST["keterangan"];
-		$jenis			= $_POST["jenis"];
+		// $jenis			= $_POST["jenis"];
+		$status			= '0';
 		$tgl 			= date("Y-m-d");
-		if ($jenis == 0) {
-			$status = "0";
-		}else{
-			$status = "1";
-		}
 		$query = mysqli_query($koneksi, "INSERT INTO spk (nama_spk, 
 														  keterangan, 
 														  tanggal,
-														  jenis,
-														  status_verif, 
+														  status_verif,
 														  id_user)
 													VALUES('$nama_spk',
 														  '$keterangan', 
-														  '$tgl', 
-														  '$jenis',
+														  '$tgl',
 														  '$status',
 														  '$_SESSION[id_user]')") or die(mysqli_error($koneksi));
 		$id_spk = mysqli_insert_id($koneksi);
@@ -91,14 +103,10 @@ else{
 		$query = mysqli_query($koneksi, "INSERT INTO spk (nama_spk, 
 														  keterangan, 
 														  tanggal,
-														  jenis,
-														  status_verif,
 														  id_user)
 													VALUES('$nama_spk',
 														  '$keterangan', 
 														  '$tgl', 
-														  '$jenis',
-														  '$status',
 														  '$_SESSION[id_user]')") or die(mysqli_error($koneksi));
 		$id_spk = mysqli_insert_id($koneksi);
 		if($query){
@@ -121,28 +129,46 @@ else{
 
 	// edit spk
 	elseif ($module=='spk' AND $act=='update'){
-		
+			$id_user = $_POST['id_user'];
 			$id_spk=$_POST["id_spk"];
 		 	$nama_spk=$_POST["nama_spk"];
 		 	$keterangan=$_POST["keterangan"];
 			$query = mysqli_query($koneksi, "UPDATE spk SET nama_spk='$nama_spk', 
 															keterangan='$keterangan' 
 													    WHERE id_spk='$id_spk'") or die(mysqli_error($koneksi));
-			if($query){
-				?>
-					<script type="text/javascript">
-						window.alert("Data berhasil diubah");
-						window.location="../../dashboard.php?module=spk";
-					</script>
-				<?php 
-			}else{
-				?>
-					<script type="text/javascript">
-						window.alert("Data gagal diubah");
-						window.location="../../dashboard.php?module=spk";
-					</script>
-				<?php 
-			}
+			if ($_SESSION['level']==='user') {
+			if ($query) {
+			?>
+	  		<script type="text/javascript">
+					window.alert("Data berhasil diubah");
+					window.location="../../dashboard.php?module=spk&act=operator&id_user=<?=$id_user?>";
+			</script>
+	  		<?php
+	  		}else{
+	  		?>
+	  		<script type="text/javascript">
+					window.alert("Data gagal diubah");
+					window.location="../../dashboard.php?module=spk&act=operator&id_user=<?=$id_user?>";
+		</script>
+	  	<?php
+	}
+		}else{
+			if ($query) {
+			?>
+	  		<script type="text/javascript">
+					window.alert("Data berhasil diubah");
+					window.location="../../dashboard.php?module=spk";
+			</script>
+	  		<?php
+	  		}else{
+	  		?>
+	  		<script type="text/javascript">
+					window.alert("Data gagal diubah");
+					window.location="../../dashboard.php?module=spk";
+		</script>
+	  	<?php
+	}
+		}
 		}
 
 		// edit spk
@@ -161,6 +187,50 @@ else{
 				<script type="text/javascript">
 					window.alert("Status Verifikasi Gagal Diubah");
 					window.location="../../dashboard.php?module=spk&act=verif_spk";
+				</script>
+			<?php 
+		}
+	}
+
+		// edit spk
+		elseif ($module=='spk' AND $act=='publish'){
+			$id = $_GET['id_user'];
+			$query = mysqli_query($koneksi, "UPDATE spk SET jenis='$_GET[status]'
+													WHERE id_spk='$_GET[id]'") or die(mysqli_error($koneksi));
+		if($query){
+			?>
+				<script type="text/javascript">
+					window.alert("Status SPK Berhasil DIubah Menjadi Publish/Umum");
+					window.location="../../dashboard.php?module=spk&act=operator&id_user=<?=$id?>";
+				</script>
+			<?php 
+		}else{
+			?>
+				<script type="text/javascript">
+					window.alert("Status SPK Gagal Diubah Menjadi Publish/Umum");
+					window.location="../../dashboard.php?module=spk&act=operator&id_user=<?=$id?>";
+				</script>
+			<?php 
+		}
+	}
+
+		// edit spk
+		elseif ($module=='spk' AND $act=='private'){
+			$id = $_GET['id_user'];
+			$query = mysqli_query($koneksi, "UPDATE spk SET jenis='$_GET[status]'
+													WHERE id_spk='$_GET[id]'") or die(mysqli_error($koneksi));
+		if($query){
+			?>
+				<script type="text/javascript">
+					window.alert("Status SPK Berhasil DIubah Menjadi Private");
+					window.location="../../dashboard.php?module=spk&act=operator&id_user=<?=$id?>";
+				</script>
+			<?php 
+		}else{
+			?>
+				<script type="text/javascript">
+					window.alert("Status SPK Berhasil Diubah Menjadi Private");
+					window.location="../../dashboard.php?module=spk&act=operator&id_user=<?=$id?>";
 				</script>
 			<?php 
 		}

@@ -295,7 +295,7 @@ $act=$_GET["act"];
 											</div>
 										    <div class="input-group">
 												<label class="col-sm-4 control-label text-left">Keterangan SPK</label>
-												<input type="text" name="keterangan" class='form-control' placeholder=" Contoh :'Promosi Jabatan Untuk Kantor A'" required>
+												<input type="text" autocomplete="off" name="keterangan" class='form-control' placeholder=" Contoh :'Studi Kasus'" required>
 											</div>
 										</div>
 										<div class="footer text-center">
@@ -325,7 +325,7 @@ $act=$_GET["act"];
 											
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Keterangan</label>
-												<input type="text" name="keterangan" placeholder="ket" class='form-control' value="<?php echo $r[ket] ?>" required>
+												<input type="text" autocomplete="off" name="keterangan" placeholder="ket" class='form-control' value="<?php echo $r[ket] ?>" required>
 											</div>
 										</div>
 										<div class="footer text-center">
@@ -363,7 +363,7 @@ $act=$_GET["act"];
                                                 </div>
                                             </div>
                                             <div class="footer text-center">
-                                                <input type="submit" value="Ubah" class="btn btn-primary pull-left">
+                                                <input type="submit" value="Tambah" class="btn btn-primary pull-left">
                                                 <input name="action" type="button" value="Cancel" onclick="window.history.back();" class="btn btn-danger pull-left">
                                             </div>
                                         </form>
@@ -418,7 +418,7 @@ $act=$_GET["act"];
                                                             <div class="input-group">
                                                                 <input type="hidden" name="faktor[]" value="<?php echo $r[id_faktor] ?>">
                                                                 <label class="col-sm-4 control-label text-left"><?php echo $no2.". ".$r["nama_faktor"]; ?></label>
-                                                                    <input type="number" name="nilai[]" required class="form-control" placeholder="Nilai 1-5" min="1" max="5">
+                                                                    <input type="number" name="nilai[]" required class="form-control" placeholder="Nilai 1-5...1=Sangat Kurang 2=Kurang 3=Cukup 4=Baik 5=Sangat Baik " min="1" max="5">
                                                             </div>     
                                                         <?php 
                                                         $no++;

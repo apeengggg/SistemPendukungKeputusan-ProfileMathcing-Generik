@@ -13,11 +13,10 @@ $act=$_GET["act"];
 											?>
 												<div class="card-header card-header-rose card-header-text">
 								                  <div class="card-text">
-							
+								                    <h4 class="card-title">Data User</h4>
 								                  </div>
-								                </div>
-								                
-								                <div class="card-body ">
+								              </div>
+								               <div class="card-body ">
 													<a href="?module=user&act=tambah">
 														<button class="btn  btn-youtube">
 								                          <i class="fa fa-plus-square-o"> </i> Tambah Data User
@@ -65,7 +64,7 @@ $act=$_GET["act"];
 																		 	";
 																		 }else{
 																		 	echo "
-																		 		<a href='' class='btn  btn-default btn-just-icon check'><i class='material-icons' rel='tooltip' title='Sudah diaktifasi'>check</i></a>
+																		 		<a href='' class='btn  btn-success btn-just-icon check'><i class='material-icons' rel='tooltip' title='Sudah diaktifasi'>check</i></a>
 																		 	";
 																		 }
 																		 ?>

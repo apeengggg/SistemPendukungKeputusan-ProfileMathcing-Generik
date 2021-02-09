@@ -53,14 +53,22 @@ else{
 						</script>";
 						die;
 		}
-		if ($b > 100 OR $c > 100) {
+		if ($_POST['bobot'] > 100) {
 			echo "
 						<script type='text/javascript'>
-							window.alert('Jumlah Dari Bobot Aspek Lebih Dari 100, Gagal Menambahkan Aspek!');
+							window.alert('Bobot Lebih Dari 100, Gagal Menambahkan Aspek Baru');
 							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
 						</script>";
 						die;
 		}
+		// if ($b > 100 OR $c > 100) {
+		// 	echo "
+		// 				<script type='text/javascript'>
+		// 					window.alert('Jumlah Dari Bobot Aspek Lebih Dari 100, Gagal Menambahkan Aspek!');
+		// 					window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
+		// 				</script>";
+		// 				die;
+		// }
 		// var_dump($_POST); die;
 		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
@@ -131,13 +139,27 @@ else{
 		$idspk = $_POST['id_spk'];
 		$id_aspekk = $_POST['id_aspek'];
 		$init = $_POST['nama_singkat'];
-		// var_dump($_GET); 
-		// var_dump($_POST); die;
+		$bobot_sec = 100-$_POST['bobot_core'];
+		$bobot = $_POST['bobot']/100;
+		if ($_POST['bobot_core'] > 100) {
+			echo "
+						<script type='text/javascript'>
+							window.alert('Bobot Core Lebih Dari 100, Gagal Menambahkan Aspek Baru');
+							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
+						</script>";
+						die;
+		}
+		if ($_POST['bobot'] > 100) {
+			echo "
+						<script type='text/javascript'>
+							window.alert('Bobot Lebih Dari 100, Gagal Menambahkan Aspek Baru');
+							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
+						</script>";
+						die;
+		}
 		$aspek_lama = mysqli_query($koneksi, "SELECT nama_aspek FROM aspek WHERE id_spk='$idspk' AND id_aspek='$id_aspekk'");
 		$res_aspek = mysqli_fetch_array($aspek_lama);
 		$aspek_l = $res_aspek['nama_aspek'];
-		// echo $name; 
-		// echo $aspek_l; die;
 		if ($name != $aspek_l) {
 		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' AND nama_singkat='$init') AND id_spk=$idspk");
 		if (mysqli_num_rows($ceknama)>0) {
@@ -148,12 +170,10 @@ else{
 			</script>
 		<?php
 		}else{
-		 if(($_POST["bobot_core"]+$_POST["bobot_secondary"])==100)
-			{
-				  $query=mysqli_query($koneksi,"UPDATE aspek SET nama_aspek 		= '$_POST[nama_aspek]', 
-				  												 bobot 				='$_POST[bobot]',  
+		  $query=mysqli_query($koneksi,"UPDATE aspek SET nama_aspek 		= '$_POST[nama_aspek]', 
+				  												 bobot 				='$bobot',  
 				  												 bobot_core 		='$_POST[bobot_core]', 
-				  												 bobot_secondary	='$_POST[bobot_secondary]',  
+				  												 bobot_secondary	='$bobot_sec',  
 				  												 nama_singkat 		='$_POST[nama_singkat]'
 									   						  	 WHERE  id_aspek    	= '$_POST[id_aspek]'")or die (mysqli_error($koneksi));
 				  if($query){
@@ -172,31 +192,20 @@ else{
 						<?php 
 					}
 				//header('location:../../dashboard.php?module='.$module);
-		}else{
-				?>
-				<script type="text/javascript">
-					window.alert("Simpan data gagal. Bobot Core + Bobot Secondary Kurang dari 100%");
-					window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
-				</script>
-			<?php 
-	}
 		}
 	}else{
 		// $ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
 		// if (mysqli_num_rows($ceknama)>0) {
 		// 	?>
-		// 	<script type="text/javascript">
-		// 		window.alert("Nama Aspek Sudah Ada, Gagal Merubah Aspek!");
-		// 		window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
-		// 	</script>
-		// <?php
-		// }else{
-		if(($_POST["bobot_core"]+$_POST["bobot_secondary"])==100)
-			{
+		 	<!-- <script type="text/javascript"> -->
+		 		<!-- window.alert("Nama Aspek Sudah Ada, Gagal Merubah Aspek!"); -->
+		 		<!-- window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>"; -->
+		 	</script>
+		 <?php
 				  $query=mysqli_query($koneksi,"UPDATE aspek SET nama_aspek 		= '$_POST[nama_aspek]', 
-				  												 bobot 				='$_POST[bobot]',  
+				  												 bobot 				='$bobot',  
 				  												 bobot_core 		='$_POST[bobot_core]', 
-				  												 bobot_secondary	='$_POST[bobot_secondary]',  
+				  												 bobot_secondary	='$bobot_sec',  
 				  												 nama_singkat 		='$_POST[nama_singkat]'
 									   						  WHERE  id_aspek    	= '$_POST[id_aspek]'")or die (mysqli_error($koneksi));
 				  if($query){
@@ -214,15 +223,6 @@ else{
 							</script>
 						<?php 
 					}
-				//header('location:../../dashboard.php?module='.$module);
-		}else{
-				?>
-				<script type="text/javascript">
-					window.alert("Simpan data gagal. Bobot Core + Bobot Secondary Kurang dari 100%");
-					window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
-				</script>
-			<?php 
-	}
 	}
 }
 	}

@@ -96,7 +96,7 @@ $act=$_GET["act"];
 											<div class="input-group">
 												<span class="input-group-addon">	
 												</span>
-												<input type="text" name="keterangan" class='form-control' placeholder="Keterangan SPK ..." required>
+												<input type="text" autocomplete="off" name="keterangan" class='form-control' placeholder="Keterangan SPK ..." required>
 											</div>
 										</div>
 
@@ -135,7 +135,7 @@ $act=$_GET["act"];
 										<div class="content">
 											<div class="input-group">
 												<label class="col-sm-4 control-label text-left">Keterangan</label>
-												<input type="text" name="keterangan" placeholder="Keterangan SPK ..." class='form-control' value="<?php echo $r[keterangan] ?>" required>
+												<input type="text" autocomplete="off" name="keterangan" placeholder="Keterangan SPK ..." class='form-control' value="<?php echo $r[keterangan] ?>" required>
 											</div>
 										</div>
 
