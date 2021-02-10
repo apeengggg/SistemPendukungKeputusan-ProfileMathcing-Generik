@@ -66,7 +66,7 @@ else{
 		$nama_spk 		= $_POST["nama_spk"];
 		$keterangan 	= $_POST["keterangan"];
 		// $jenis			= $_POST["jenis"];
-		$status			= '0';
+		$status			= '-';
 		$tgl 			= date("Y-m-d");
 		$query = mysqli_query($koneksi, "INSERT INTO spk (nama_spk, 
 														  keterangan, 
@@ -103,10 +103,14 @@ else{
 		$query = mysqli_query($koneksi, "INSERT INTO spk (nama_spk, 
 														  keterangan, 
 														  tanggal,
+														  jenis,
+														  status_verif,
 														  id_user)
 													VALUES('$nama_spk',
 														  '$keterangan', 
 														  '$tgl', 
+														  '$jenis',
+														  '$status',
 														  '$_SESSION[id_user]')") or die(mysqli_error($koneksi));
 		$id_spk = mysqli_insert_id($koneksi);
 		if($query){
@@ -191,11 +195,41 @@ else{
 			<?php 
 		}
 	}
+		// edit spk
+		elseif ($module=='spk' AND $act=='deactive'){
+			$query = mysqli_query($koneksi, "UPDATE spk SET status_verif='$_GET[status]', jenis=1
+													WHERE id_spk='$_GET[id]'") or die(mysqli_error($koneksi));
+		if($query){
+			?>
+				<script type="text/javascript">
+					window.alert("Status Verifikasi SPK Berhasil Diubah");
+					window.location="../../dashboard.php?module=spk&act=verif_spk";
+				</script>
+			<?php 
+		}else{
+			?>
+				<script type="text/javascript">
+					window.alert("Status Verifikasi Gagal Diubah");
+					window.location="../../dashboard.php?module=spk&act=verif_spk";
+				</script>
+			<?php 
+		}
+	}
 
 		// edit spk
 		elseif ($module=='spk' AND $act=='publish'){
 			$id = $_GET['id_user'];
-			$query = mysqli_query($koneksi, "UPDATE spk SET jenis='$_GET[status]'
+			$id_spk = $_GET['id'];
+			$cek_aspek = mysqli_query($koneksi, "SELECT * FROM aspek INNER JOIN faktor ON faktor.aspek=aspek.id_aspek WHERE aspek.id_spk='$id_spk'");
+			if (mysqli_num_rows($cek_aspek) === 0) {
+				?>
+				<script type="text/javascript">
+					window.alert("Aspek dan Atau Faktor Belum Terisi Cek Aspek dan Faktor Pada SPK Ini!");
+					window.location="../../dashboard.php?module=spk&act=operator&id_user=<?=$id?>";
+				</script>
+			<?php 
+			}else{
+			$query = mysqli_query($koneksi, "UPDATE spk SET jenis='$_GET[status]', status_verif='Menunggu'
 													WHERE id_spk='$_GET[id]'") or die(mysqli_error($koneksi));
 		if($query){
 			?>
@@ -213,6 +247,7 @@ else{
 			<?php 
 		}
 	}
+}
 
 		// edit spk
 		elseif ($module=='spk' AND $act=='private'){

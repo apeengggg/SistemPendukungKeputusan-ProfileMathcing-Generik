@@ -149,18 +149,23 @@ $act=$_GET["act"];
 								    while ($r=mysqli_fetch_array($tampil)){
 									   $j = $r["jenis"];
 									   $s = $r["status_verif"];
+									  
 										if ($j == 0) {
 										   $jenis = "Umum";
 									   }else{
 										   $jenis = "Private";
 									   }
 
-									   if ($s == 0) {
+									   if ($s ==='0') {
 										   $status = "Menunggu Verifikasi Admin";
-									   }elseif ($s == 1){
-											$status = "Disetujui Admin";
+									   }elseif ($s ==='1'){
+											$status = "Approved";
+									   }elseif ($s === 'Menunggu'){
+										   $status = "Waiting";
+									   }elseif ($s === '-'){
+										   $status = '-';
 									   }else{
-											$status = "Ditolak Admin";
+										   $status = 'SPK Anda Di Deaktivasi';
 									   }
 
 								       echo "<tr>
@@ -180,19 +185,14 @@ $act=$_GET["act"];
 													 	<i class="fa fa-trash"></i>
 													 </a>
 													 <?php
-													if ($r['status_verif']==0) {
-														# code...
-													}else{
-									   				if ($r['jenis']==='0') {
+									   				if ($r['status_verif']==='1') {
 														  ?>
-													<a href='modul/spk/aksi_spk.php?module=spk&act=private&id=<?=$r[id_spk]?>&status=1&id_user=<?= $_SESSION[id_user]?>' class='btn btn-success btn-just-icon check'><i class='material-icons' rel='tooltip' title='Private'>vpn_key</i></a>
 														  <?php
 													   }else{
 														?>
 													<a href='modul/spk/aksi_spk.php?module=spk&act=publish&id=<?=$r[id_spk]?>&status=0&id_user=<?= $_SESSION[id_user]?>' class='btn btn-default btn-just-icon check'><i class='material-icons' rel='tooltip' title='Publish'>arrow_upward</i></a>
 														<?php
 													   }
-													}
 													 ?>
 													 <!-- <a href='?module=spk&act=edit&id=<?php echo $r[id_spk] ?>' class='btn  btn-info btn-just-icon edit'><i class='material-icons' rel='tooltip' title='Edit'>edit</i></a>  
 													 <a href='modul/spk/aksi_spk.php?module=spk&act=hapus&id=<?php echo $r[id_spk] ?>'  class='btn  btn-danger btn-just-icon remove' onclick='return confirm("Anda yakin mau menghapus item ini ?")'><i class='material-icons' rel='tooltip' title='Hapus'>close</i></a> -->
@@ -225,7 +225,7 @@ $act=$_GET["act"];
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 									<?php 
 									$no=1;
-									$tampil = mysqli_query($koneksi, "SELECT DISTINCT u.nama, s.tanggal, s.nama_spk, s.keterangan, s.jenis, u.id_user, s.id_spk, s.status_verif FROM spk s LEFT JOIN user u ON u.id_user=s.id_user LEFT JOIN aspek a ON a.id_spk=s.id_spk LEFT JOIN faktor f ON f.aspek=a.id_aspek WHERE s.jenis=0 AND s.id_user !='$_SESSION[id_user]' AND a.id_aspek IS NOT NULL AND f.id_faktor IS NOT NULL ORDER BY id_spk DESC");
+									$tampil = mysqli_query($koneksi, "SELECT DISTINCT u.nama, s.tanggal, s.nama_spk, s.keterangan, s.jenis, u.id_user, s.id_spk, s.status_verif FROM spk s LEFT JOIN user u ON u.id_user=s.id_user LEFT JOIN aspek a ON a.id_spk=s.id_spk LEFT JOIN faktor f ON f.aspek=a.id_aspek WHERE s.jenis=0 AND s.id_user !='$_SESSION[id_user]' AND (status_verif=0 OR status_verif=1) AND a.id_aspek IS NOT NULL AND f.id_faktor IS NOT NULL ORDER BY id_spk DESC");
 								      echo "
 								          <thead>
 											<tr>
@@ -250,7 +250,7 @@ $act=$_GET["act"];
 									   }
 
 									   if ($s == 0) {
-										   $status = "Menunggu Verifikasi Admin";
+										   $status = "Menunggu";
 									   }elseif ($s == 1){
 											$status = "Disetujui";
 									   }else{
@@ -271,15 +271,15 @@ $act=$_GET["act"];
 													<?php
 														if ($r[status_verif]==="0") {
 															?>
-														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-default btn-just-icon check'><i class='material-icons' rel='tooltip' title='Approved'>check</i></a>
+														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-default btn-just-icon check'><i class='material-icons' rel='tooltip' title='Approve'>check</i></a>
 														<?php
 														}elseif($r[status_verif]==="1"){
 															?>
-														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=2' class='btn  btn-success btn-just-icon check'><i class='material-icons' rel='tooltip' title='Disapproved'>check</i></a>
+														<a href='modul/spk/aksi_spk.php?module=spk&act=deactive&id=<?=$r[id_spk]?>&status=2' class='btn  btn-danger btn-just-icon check'><i class='material-icons' rel='tooltip' title='DisApprove'>check</i></a>
 														<?php
 														}else{
 															?>
-														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-danger btn-just-icon check'><i class='material-icons' rel='tooltip' title='Deaktifasi'>check</i></a>
+														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-success btn-just-icon check'><i class='material-icons' rel='tooltip' title='Approve'>check</i></a>
 														<?php
 														}													
 													?>						
