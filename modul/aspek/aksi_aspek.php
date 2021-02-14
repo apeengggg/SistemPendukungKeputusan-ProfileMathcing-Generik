@@ -44,6 +44,7 @@ else{
 		$a = mysqli_fetch_array($ceklebih);
 		$b = $a['jumlah'];
 		$c = $b + $_POST['bobot'];
+		$bobot_a = $_POST['bobot']/100;
 		$bobot_sec = 100-$_POST['bobot_core'];
 		if ($_POST['bobot_core'] > 100) {
 			echo "
@@ -93,7 +94,7 @@ else{
 										 				 nama_singkat,
 										 				 id_spk) 
 								   				  VALUES('$_POST[nama_aspek]',
-														'$_POST[bobot]', 
+														'$bobot_a', 
 														'$_POST[bobot_core]', 
 														'$bobot_sec', 
 														'$_POST[Inisial]',
@@ -171,11 +172,11 @@ else{
 		<?php
 		}else{
 		  $query=mysqli_query($koneksi,"UPDATE aspek SET nama_aspek 		= '$_POST[nama_aspek]', 
-				  												 bobot 				='$bobot',  
-				  												 bobot_core 		='$_POST[bobot_core]', 
-				  												 bobot_secondary	='$bobot_sec',  
-				  												 nama_singkat 		='$_POST[nama_singkat]'
-									   						  	 WHERE  id_aspek    	= '$_POST[id_aspek]'")or die (mysqli_error($koneksi));
+				  										bobot 				='$bobot',  
+				  										bobot_core 		='$_POST[bobot_core]', 
+				  										bobot_secondary	='$bobot_sec',  
+				  										nama_singkat 		='$_POST[nama_singkat]'
+									   					WHERE  id_aspek    	= '$_POST[id_aspek]'")or die (mysqli_error($koneksi));
 				  if($query){
 					?>
 						<script type="text/javascript">

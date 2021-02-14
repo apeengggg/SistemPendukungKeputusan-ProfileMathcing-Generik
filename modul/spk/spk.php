@@ -279,7 +279,7 @@ $act=$_GET["act"];
 														<?php
 														}else{
 															?>
-														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-success btn-just-icon check'><i class='material-icons' rel='tooltip' title='Approve'>check</i></a>
+														<a href='modul/spk/aksi_spk.php?module=spk&act=active&id=<?=$r[id_spk]?>&status=1' class='btn  btn-success															 btn-just-icon check'><i class='material-icons' rel='tooltip' title='Approve'>check</i></a>
 														<?php
 														}													
 													?>						

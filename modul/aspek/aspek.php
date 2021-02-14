@@ -89,10 +89,11 @@ $act=$_GET["act"];
 								    while ($r=mysqli_fetch_array($tampil)){
 									   $a = $r['id_user'];
 									   $u = $_SESSION['id_user'];
+									   $bbt = $r['bobot']*100;
 								       echo "<tr>
 								       			<td>$no</td>
 								       			<td><a href='?module=faktor&id=$r[id_aspek]&id_spk=$_GET[id]'>$r[nama_aspek]</a></td>
-												<td>$r[bobot]</td>
+												<td>$bbt</td>
 												<td>$r[bobot_core]</td>
 												<td>$r[bobot_secondary]</td>
 												<td>$r[nama_singkat]</td>
