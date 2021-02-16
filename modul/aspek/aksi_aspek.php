@@ -71,7 +71,7 @@ else{
 		// 				die;
 		// }
 		// var_dump($_POST); die;
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' AND id_spk=$idspk) OR (nama_singkat='$init' AND id_spk=$idspk)");
 		if (mysqli_num_rows($ceknama)>0) {
 			if (isset($_GET["jenis"])) {
 					echo "
@@ -158,18 +158,23 @@ else{
 						</script>";
 						die;
 		}
-		$aspek_lama = mysqli_query($koneksi, "SELECT nama_aspek FROM aspek WHERE id_spk='$idspk' AND id_aspek='$id_aspekk'");
+		$aspek_lama = mysqli_query($koneksi, "SELECT nama_aspek, nama_singkat FROM aspek WHERE id_spk='$idspk' AND id_aspek='$id_aspekk'");
 		$res_aspek = mysqli_fetch_array($aspek_lama);
+		$init_l = $res_aspek['nama_singkat'];
 		$aspek_l = $res_aspek['nama_aspek'];
-		if ($name != $aspek_l) {
-		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' AND nama_singkat='$init') AND id_spk=$idspk");
+		// cek apakah data baru sama dengan data lama?
+		if ($name != $aspek_l OR $init != $init_l) {
+		$ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' AND id_spk=$idspk) OR (nama_singkat='$init' AND id_spk=$idspk)");
+		// cek lagi ada ga data baru itu di aspek?
 		if (mysqli_num_rows($ceknama)>0) {
 		?>
+		<!-- kalau iya -->
 			<script type="text/javascript">
 				window.alert("Nama Aspek Sudah Ada, Gagal Merubah Aspek!");
 				window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 			</script>
 		<?php
+		// kalo engga
 		}else{
 		  $query=mysqli_query($koneksi,"UPDATE aspek SET nama_aspek 		= '$_POST[nama_aspek]', 
 				  										bobot 				='$bobot',  
@@ -194,15 +199,8 @@ else{
 					}
 				//header('location:../../dashboard.php?module='.$module);
 		}
+		// kalau data aspek nama, dan initial sama dengan data lama langsung ubah gakperlu dicek
 	}else{
-		// $ceknama=mysqli_query($koneksi,"SELECT * FROM aspek WHERE (nama_aspek='$name' OR nama_singkat='$init') AND id_spk=$idspk");
-		// if (mysqli_num_rows($ceknama)>0) {
-		// 	?>
-		 	<!-- <script type="text/javascript"> -->
-		 		<!-- window.alert("Nama Aspek Sudah Ada, Gagal Merubah Aspek!"); -->
-		 		<!-- window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>"; -->
-		 	</script>
-		 <?php
 				  $query=mysqli_query($koneksi,"UPDATE aspek SET nama_aspek 		= '$_POST[nama_aspek]', 
 				  												 bobot 				='$bobot',  
 				  												 bobot_core 		='$_POST[bobot_core]', 

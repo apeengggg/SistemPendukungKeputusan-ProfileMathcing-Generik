@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-include "./config/koneksi.php";
+include "config/koneksi.php";
 /*function anti_injection($data){
   $filter = mysql_real_escape_string(stripslashes(strip_tags(htmlspecialchars($data,ENT_QUOTES))));
   return $filter;
