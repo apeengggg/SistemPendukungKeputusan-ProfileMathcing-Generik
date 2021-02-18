@@ -99,7 +99,6 @@ $act=$_GET["act"];
 												<input type="text" autocomplete="off" name="keterangan" class='form-control' placeholder="Keterangan SPK ..." required>
 											</div>
 										</div>
-
 										<div class="footer text-center">
 											<input type="submit" value="Simpan" class="btn btn-primary pull-left">
 											<input name="action" type="button" value="Cancel" onclick="window.history.back();" class="btn btn-danger pull-left">
@@ -121,7 +120,6 @@ $act=$_GET["act"];
 		                    <h4 class="card-title">Form SPK</h4>
 		                  </div>
 		                </div>
-		                
 		                <div class="card-body ">
 									<form class="form" method="post" enctype="multipart/form-data" action="modul/spk/aksi_spk.php?module=spk&act=update">
 										<input type="hidden" name="id_spk" value="<?php echo $r[id_spk] ?>">
