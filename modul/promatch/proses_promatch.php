@@ -14,7 +14,7 @@ if($jumlah>0)
 	{
 		?>
             <script type="text/javascript">
-                window.alert("Data untuk id_spk objek spk tidak ditemukan");
+                window.alert("Tidak Ada Data Alternatif!");
                 window.location="?module=promatch";
             </script>
         <?php 

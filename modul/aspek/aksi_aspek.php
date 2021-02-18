@@ -46,18 +46,19 @@ else{
 		$c = $b + $_POST['bobot'];
 		$bobot_a = $_POST['bobot']/100;
 		$bobot_sec = 100-$_POST['bobot_core'];
-		if ($_POST['bobot_core'] > 100) {
+		$bobot_angka = is_numeric($_POST['bobot']);
+		if ($_POST['bobot_core'] > 100 $_POST['bobot_core'] === 0 OR $_POST['bobot_core'] < 0) {
 			echo "
 						<script type='text/javascript'>
-							window.alert('Bobot Core Lebih Dari 100, Gagal Menambahkan Aspek Baru');
+							window.alert('Bobot Core Lebih Dari 100 atau kurang dari sama dengan 0, Gagal Menambahkan Aspek Baru');
 							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
 						</script>";
 						die;
 		}
-		if ($_POST['bobot'] > 100) {
+		if ($_POST['bobot'] > 100 OR $_POST['bobot'] === 0 OR $_POST['bobot'] < 0) {
 			echo "
 						<script type='text/javascript'>
-							window.alert('Bobot Lebih Dari 100, Gagal Menambahkan Aspek Baru');
+							window.alert('Bobot Lebih Dari 100 atau kurang dari sama dengan 0, Gagal Menambahkan Aspek Baru');
 							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
 						</script>";
 						die;
@@ -142,18 +143,18 @@ else{
 		$init = $_POST['nama_singkat'];
 		$bobot_sec = 100-$_POST['bobot_core'];
 		$bobot = $_POST['bobot']/100;
-		if ($_POST['bobot_core'] > 100) {
+		if ($_POST['bobot_core'] > 100 OR $_POST['bobot_core'] === 0 OR $_POST['bobot_cores'] < 0) {
 			echo "
 						<script type='text/javascript'>
-							window.alert('Bobot Core Lebih Dari 100, Gagal Menambahkan Aspek Baru');
+							window.alert('Bobot Core Lebih Dari 100, atau kurang dari samadengan 0, Gagal Menambahkan Aspek Baru');
 							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
 						</script>";
 						die;
 		}
-		if ($_POST['bobot'] > 100) {
+		if ($_POST['bobot'] > 100 OR $_POST['bobot'] === 0 OR $_POST['bobot'] < 0) {
 			echo "
 						<script type='text/javascript'>
-							window.alert('Bobot Lebih Dari 100, Gagal Menambahkan Aspek Baru');
+							window.alert('Bobot Lebih Dari 100, atau kurang dari samadengan 0 Gagal Menambahkan Aspek Baru');
 							window.location='../../dashboard.php?module=aspek&act=tambah&id=$idspk';
 						</script>";
 						die;

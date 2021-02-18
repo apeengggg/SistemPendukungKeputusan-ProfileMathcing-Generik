@@ -90,10 +90,15 @@ $act=$_GET["act"];
 									   $a = $r['id_user'];
 									   $u = $_SESSION['id_user'];
 									   $bbt = $r['bobot']*100;
+									   if ($r['bobot'] ==='100') {
+										   $bbt1 =$r['bobot']/1;
+									   }else{
+										   $bbt1 = $bbt;
+									   }
 								       echo "<tr>
 								       			<td>$no</td>
 								       			<td><a href='?module=faktor&id=$r[id_aspek]&id_spk=$_GET[id]'>$r[nama_aspek]</a></td>
-												<td>$bbt</td>
+												<td>$bbt1</td>
 												<td>$r[bobot_core]</td>
 												<td>$r[bobot_secondary]</td>
 												<td>$r[nama_singkat]</td>

@@ -26,7 +26,7 @@ $act=$_GET["act"];
 									$no=1;
 									if($_SESSION["level"]=="admin")
 									{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM spk");
+										$tampil = mysqli_query($koneksi,"SELECT * FROM spk s INNER JOIN user u ON s.id_user=u.id_user");
 									}else{
 										$tampil = mysqli_query($koneksi,"SELECT * FROM spk_user us INNER JOIN spk s ON us.id_spk=s.id_spk INNER JOIN user u ON us.id_user=u.id_user WHERE us.id_user='$_SESSION[id_user]'") or die (mysqli_error($koneksi));
 									}
@@ -38,6 +38,7 @@ $act=$_GET["act"];
 												<th>Nama SPK</th>
 												<th>Keterangan</th>
 												<th>Tanggal Pembuatan</th>
+												<th>Nama Pembuat</th>
 											</tr>
 										</thead>
 									<tbody>";
@@ -49,6 +50,7 @@ $act=$_GET["act"];
 												<th>Nama SPK</th>
 												<th>Keterangan</th>
 												<th>Tgl Pembuatan</th>
+												<th>Nama Pembuat</th>
 											</tr>
 										</thead>
 									<tbody>";
@@ -61,6 +63,7 @@ $act=$_GET["act"];
 														<td><a href='?module=hasil&act=user&id_spk=$r[id_spk]'>$r[nama_spk]</a></td>
 														<td> $r[keterangan] </td>
 														<td> $r[tanggal] </td>
+														<td> $r[nama] </td>
 													</tr>";
 											$no++;
 										}
@@ -74,6 +77,7 @@ $act=$_GET["act"];
 														<td><a href='?module=hasil&act=detail&id_spkuser=$r[id_spkuser]'>$r[nama_spk]</a></td>
 														<td> $r[ket] </td>
 														<td> $r[tgl] </td>
+														<td> $r[nama] </td>
 													</tr>";
 											$no++;
 										}

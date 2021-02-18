@@ -17,10 +17,10 @@ $act=$_GET["act"];
 								                  </div>
 								              </div>
 								               <div class="card-body ">
-													<a href="?module=user&act=tambah">
+													<!-- <a href="?module=user&act=tambah">
 														<button class="btn  btn-youtube">
 								                          <i class="fa fa-plus-square-o"> </i> Tambah Data User
-								                        </button></a>
+								                        </button></a> -->
 													<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 														<?php 
 														$no=1;
@@ -29,7 +29,6 @@ $act=$_GET["act"];
 													          <thead>
 																<tr>
 																	<th>No</th>
-																	<th>User Name</th>
 																	<th>Nama</th>
 																	<th>Level</th>
 																	<th>Foto</th>
@@ -42,7 +41,6 @@ $act=$_GET["act"];
 													       
 													       echo "<tr>
 													       			<td>$no</td>
-													       			<td>$r[username]</td>
 																	<td>$r[nama]</td>
 																	<td>$r[level]</td>
 																	<td>";

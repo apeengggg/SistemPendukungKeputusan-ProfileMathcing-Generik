@@ -486,15 +486,7 @@ $act=$_GET["act"];
                                                                 <div class="input-group">
                                                                     <input type="hidden" name="faktor[]" value="<?php echo $r[id_faktor] ?>">
                                                                     <label class="col-sm-4 control-label text-left"><?php echo $no2.". ".$r["nama_faktor"]; ?></label>
-                                                                        <!-- <input type="number" name="nilai[]" required class="form-control" value="<?=$r['nilai']?>" placeholder="1-5" min="1" max="5"> -->
-																		<select name="nilai[]" id="nilai[]" class="form-control">
-																		<option value="<?=$r['nilai']?>"><?=$r['nilai']?></option>
-																		<option value="1">1 [Sangat Kurang]</option>
-																		<option value="2">2 [Kurang]</option>
-																		<option value="3">3 [Cukup]</option>
-																		<option value="4">4 [Baik]</option>
-																		<option value="5">5 [Sangat Baik]</option>
-																	</select>
+                                                                        <input type="number" name="nilai[]" required class="form-control" value="<?=$r['nilai']?>" placeholder="1-5" min="1" max="5">
                                                                 </div>     
                                                             <?php 
                                                             $no++;

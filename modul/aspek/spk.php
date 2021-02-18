@@ -36,9 +36,9 @@ $act=$_GET["act"];
 									$no=1;
 									if($_SESSION["level"]=="admin")
 									{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM spk WHERE status_verif=1 ORDER BY id_spk ASC");
+										$tampil = mysqli_query($koneksi,"SELECT * FROM spk INNER JOIN user ON spk.id_user=user.id_user WHERE spk.status_verif=1 ORDER BY id_spk ASC");
 									}else{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM spk WHERE id_user='$_SESSION[id_user]' ORDER BY id_spk ASC");
+										$tampil = mysqli_query($koneksi,"SELECT * FROM spk INNER JOIN user ON spk.id_user=user.id_user WHERE id_user='$_SESSION[id_user]' ORDER BY id_spk ASC");
 									?>
 	<!-- 									<a href="?module=spk&act=tambah">
 									<button class="btn  btn-youtube">
@@ -53,6 +53,7 @@ $act=$_GET["act"];
 												<th width=''>No</th>
 												<th>Nama SPK</th>
 												<th>Keterangan</th>
+												<th>Nama Pembuat</th>
 											</tr>
 										</thead>
 									<tbody>"; 
@@ -63,6 +64,7 @@ $act=$_GET["act"];
 								       			<td>$no</td>
 												<td><a href=?module=aspek&id=$r[id_spk]>$r[nama_spk]</a></td>
 												<td>$r[keterangan]</td>
+												<td>$r[nama]</td>
 											</tr>";
 								      $no++;
 								    }

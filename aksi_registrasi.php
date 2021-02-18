@@ -17,11 +17,22 @@ $date = date('Y-m-d');
 $code = md5($email.$date);
 $nama = $_POST["nama"];
 $uname = $_POST["username"];
+$hitungpwd = count($_POST['password']);
+$hitungpwd_u = count($_POST['password_u']);
+if ($hitungpwd < 5 OR $hitungpwd_u < 5) {
+	?>
+	<script type="text/javascript">
+			window.alert("Password minimal 5 karakter!");
+			window.location="register.php";
+	</script>
+<?php
+die;
+}
 if ($pwd1 != $pwd2) {
 	?>
 	<script type="text/javascript">
 			window.alert("Kolom Password dan Kolom Ulangi Password Tidak Sama!!");
-			window.location="registrasi.php";
+			window.location="register.php";
 		</script>
 <?php
 }else{
@@ -34,7 +45,7 @@ if (mysqli_num_rows($query2)>0) {
 	?>
 	<script type="text/javascript">
 			window.alert("Username Sudah Terdaftar!");
-			window.location="registrasi.php";
+			window.location="register.php";
 		</script>
 <?php
 }else{
@@ -42,7 +53,7 @@ if (mysqli_num_rows($query1)>0) {
 	?>
 	<script type="text/javascript">
 			window.alert("Email Sudah Terdaftar!");
-			window.location="registrasi.php";
+			window.location="register.php";
 		</script>
 <?php
 	}else{
@@ -133,14 +144,14 @@ if (!$mail->send()) {
 // if($query){
 // 	?>
 // 		<script type="text/javascript">
-// 			window.alert("Registrasi berhasil");
+// 			window.alert("register berhasil");
 // 			window.location="index.php";
 // 		</script>
 // 	<?php 
 // }else{
 // 	?>
 // 		<script type="text/javascript">
-// 			window.alert("Registrasi gagal");
+// 			window.alert("register gagal");
 // 			window.location="index.php";
 // 		</script>
 // 	<?php 
