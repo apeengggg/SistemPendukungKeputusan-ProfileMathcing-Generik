@@ -21,7 +21,7 @@ $act=$_GET["act"];
 		                <div class="card-body ">
 							<a href="?module=alternatif_user&act=tambah">
 								<button class="btn  btn-youtube">
-	                          		<i class="fa fa-plus-square-o"> </i> Tambah SPK Baru
+	                          		<i class="fa fa-plus-square-o"> </i> Tambah Studi Kasus
 	                        	</button>
 	                       	</a>
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
@@ -137,14 +137,14 @@ $act=$_GET["act"];
 						?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
-		                    <h4 class="card-title">Data Alternatif</h4>
+		                    <h4 class="card-title">Data Kandidat</h4>
 		                  </div>
 		                </div>
 		                
 		                <div class="card-body ">
                         <a href="?module=alternatif_user&act=tambah_alt&id_spkuser=<?=$idspkuser?>&id_spk=<?=$idspk?>">
 								<button class="btn  btn-youtube">
-	                          		<i class="fa fa-plus-square-o"> </i> Tambah Alternatif Baru
+	                          		<i class="fa fa-plus-square-o"> </i> Tambah Kandidat
 	                        	</button>
                          </a>
 							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
@@ -156,7 +156,7 @@ $act=$_GET["act"];
 									}else{
                                         $id_user = $_SESSION['id_user']; 
                                         // echo $id_user; die;
-										$tampil = mysqli_query($koneksi,"SELECT a.nama_alternatif, a.id_alternatif, s.id_spk, n.nilai, u.id_spkuser FROM alternatif a LEFT JOIN spk_user u ON a.id_spkuser=u.id_spkuser LEFT JOIN spk s ON u.id_spk=s.id_spk LEFT JOIN nilai n ON a.id_alternatif=n.id_alternatif WHERE a.id_spkuser='$idspkuser' GROUP BY a.nama_alternatif");
+										$tampil = mysqli_query($koneksi,"SELECT a.nama_alternatif, a.id_alternatif, s.id_spk, n.nilai, u.id_spkuser FROM alternatif a INNER JOIN spk_user u ON a.id_spkuser=u.id_spkuser INNER JOIN spk s ON u.id_spk=s.id_spk INNER JOIN nilai n ON a.id_alternatif=n.id_alternatif WHERE a.id_spkuser='$idspkuser' GROUP BY a.id_alternatif");
 									}
 									if($_SESSION["level"]=="admin") {
 								      echo "
@@ -224,13 +224,13 @@ $act=$_GET["act"];
                                            if ($nilai == 0 OR $nilai == "") {
                                            ?>
                                             <td align="center">
-                                                <a href="?module=alternatif_user&act=tambahdetail&id_spkuser=<?=$idspkuser?>&id_alt=<?=$r[id_alternatif]?>&id_spk=<?=$r[id_spk]?>"><span class="badge badge-danger">Nilai Belum Disii</span></a>
+                                                <a href="?module=alternatif_user&act=tambahdetail&id_spkuser=<?=$idspkuser?>&id_alt=<?=$r[id_alternatif]?>&id_spk=<?=$r[id_spk]?>"><span class="badge badge-danger">Nilai Belum Diisi</span></a>
                                             </td>
                                            <?php
                                         }else{
                                             ?>
                                            <td align="center">
-                                           <a href="?module=alternatif_user&act=editnilai&id_spkuser=<?=$idspkuser?>&id_alt=<?=$r[id_alternatif]?>&id_spk=<?=$r[id_spk]?>"><span class="badge badge-success">Lihat Nilai</span></a>
+                                           <a href="?module=alternatif_user&act=editnilai&id_spkuser=<?=$idspkuser?>&id_alt=<?=$r[id_alternatif]?>&id_spk=<?=$r[id_spk]?>"><span class="badge badge-success">Lihat atau Ubah Nilai</span></a>
                                             </td>
                                             <?php
                                         }
@@ -266,7 +266,7 @@ $act=$_GET["act"];
 					?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
-		                    <h4 class="card-title">Form Tambah SPK Baru</h4>
+		                    <h4 class="card-title">Form Tambah Kasus</h4>
 		                  </div>
 		                </div>
 		                
@@ -294,8 +294,8 @@ $act=$_GET["act"];
 												</select>
 											</div>
 										    <div class="input-group">
-												<label class="col-sm-4 control-label text-left">Keterangan SPK</label>
-												<input type="text" autocomplete="off" name="keterangan" class='form-control' placeholder=" Contoh :'Studi Kasus'" required>
+												<label class="col-sm-4 control-label text-left">Studi Kasus</label>
+												<input type="text" autocomplete="off" name="keterangan" class='form-control' placeholder="masukkan studi kasus" required>
 											</div>
 										</div>
 										<div class="footer text-center">
@@ -313,7 +313,7 @@ $act=$_GET["act"];
 					?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
-		                    <h4 class="card-title">Form Alternatif</h4>
+		                    <h4 class="card-title">Form Kandidat</h4>
 		                  </div>
 		                </div>
 		                
@@ -347,7 +347,7 @@ $act=$_GET["act"];
                         ?>
                             <div class="card-header card-header-rose card-header-text">
                               <div class="card-text">
-                                <h4 class="card-title">Form Alternatif</h4>
+                                <h4 class="card-title">Form Kandidat</h4>
                               </div>
                             </div>
                             
@@ -358,8 +358,8 @@ $act=$_GET["act"];
                                                 <input type="hidden" name="id_spkuser" placeholder="Kode Alternatif" class='form-control' value="<?php echo $idspkuser ?>">
                                                 
                                                 <div class="input-group">
-                                                    <label class="col-sm-4 control-label text-left">Alternatif</label>
-                                                    <input type="text" name="nama_alternatif" placeholder="Nama Alternatif" class='form-control' value="<?php echo $r[nama_alternatif] ?>" required>
+                                                    <label class="col-sm-4 control-label text-left">Kandidat</label>
+                                                    <input type="text" name="nama_alternatif" placeholder="Nama Kandidat" class='form-control' value="<?php echo $r[nama_alternatif] ?>" required>
                                                 </div>
                                             </div>
                                             <div class="footer text-center">
@@ -385,7 +385,7 @@ $act=$_GET["act"];
                             ?>
                                 <div class="card-header card-header-rose card-header-text">
                                   <div class="card-text">
-                                    <h4 class="card-title">Form Data alternatif</h4>
+                                    <h4 class="card-title">Form Data Kandidat</h4>
                                   </div>
                                 </div>
                                 
@@ -453,7 +453,7 @@ $act=$_GET["act"];
                                 ?>
                                     <div class="card-header card-header-rose card-header-text">
                                       <div class="card-text">
-                                        <h4 class="card-title">Form Ubah Data alternatif</h4>
+                                        <h4 class="card-title">Form Ubah Nilai Kandidat</h4>
                                       </div>
                                     </div>
                                     
@@ -486,7 +486,7 @@ $act=$_GET["act"];
                                                                 <div class="input-group">
                                                                     <input type="hidden" name="faktor[]" value="<?php echo $r[id_faktor] ?>">
                                                                     <label class="col-sm-4 control-label text-left"><?php echo $no2.". ".$r["nama_faktor"]; ?></label>
-                                                                        <input type="number" name="nilai[]" required class="form-control" value="<?=$r['nilai']?>" placeholder="1-5" min="1" max="5">
+                                                                        <input type="number" name="nilai[]" required class="form-control" placeholder="Nilai 1-5...1=Sangat Kurang 2=Kurang 3=Cukup 4=Baik 5=Sangat Baik" value="<?=$r['nilai']?>" min="1" max="5">
                                                                 </div>     
                                                             <?php 
                                                             $no++;
@@ -498,7 +498,7 @@ $act=$_GET["act"];
                                                     <input type="hidden" name="jumlah_faktor" value="<?php echo $no; ?>"> 
                                                     </div>
                                                     <div class="footer text-center">
-                                                        <input type="submit" value="Simpan" class="btn btn-primary pull-left">
+                                                        <input type="submit" value="Ubah" class="btn btn-primary pull-left">
                                                         <input name="action" type="button" value="Cancel" onclick="window.history.back();" class="btn btn-danger pull-left">
                                                     </div>
                                                 </form>

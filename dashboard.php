@@ -204,7 +204,13 @@ include "config/koneksi.php";
                           <li class="nav-item ">
                             <a class="nav-link" href="?module=spk&act=operator&id_user=<?=$_SESSION[id_user]?>">
                               <i class="material-icons">equalizer</i>
-                              <p> SPK </p>
+                              <p> SPK Baru</p>
+                            </a>
+                          </li> 
+                           <li class="nav-item ">
+                            <a class="nav-link" href="?module=spk&act=daftar_spk">
+                              <i class="material-icons">equalizer</i>
+                              <p> Daftar SPK</p>
                             </a>
                           </li>  
                           <!-- <li class="nav-item ">
@@ -312,6 +318,10 @@ include "config/koneksi.php";
                          3.Masukan Nilai Untuk Kandidat Yang Akan Diseleksi Sesuai Dengan Kriteria Yang Ada <br />
                          4.Pilih Menu Seleksi<br/>
                          5.Hasil Keputusan Menggunakan Metode Profile Matching Dapat Dilihat Pada Menu History Atau Setelah Anda Melakukan Penyeleksian Pada Menu Seleksi<br/>
+                         <div><font face="Times">Buat SPK sesuai dengan keinginan anda dengan cara :</font></div>
+                     <p><font face= "Times">
+                         1.Pilih Menu SPK Baru <br />
+                         2.Isi Aspek dan Faktor<br />
                          </font></p>
                          <hr color="black"/>
                          <center>

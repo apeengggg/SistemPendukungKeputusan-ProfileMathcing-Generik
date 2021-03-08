@@ -46,7 +46,6 @@ $act=$_GET["act"];
 								          <thead>
 											<tr>
 												<th width=''>No</th>
-												<th>Nama SPK</th>
 												<th>Selisih</th>
 												<th>Bobot</th>
 												<th>Keterangan</th>
@@ -60,8 +59,7 @@ $act=$_GET["act"];
 								       
 								       echo "<tr>
 								       			<td>$no</td>
-								       			<td>$r[nama_spk]</td>
-								       			<td>$r[selisih]</td>
+								   				<td>$r[selisih]</td>
 												<td>$r[bobot]</td>
 												<td>$r[keterangan]</td>
 												
@@ -109,7 +107,7 @@ $act=$_GET["act"];
 											</div>
 											<label for="keterangan">Bobot</label>
 											<select name="keterangan" id="keterangan" class='form-control' required>
-												<option value="">Pilih Keterangan ...</option>
+												<option value="">Masukkan Semua Keterangan Bobot ...</option>
 												<option value="0">-4 [Kompetensi Individu Kekurangan 4 Level/Tingkat]</option>
 												<option value="1">-3 [Kompetensi Individu Kekurangan 3 Level/Tingkat]</option>
 												<option value="2">-2 [Kompetensi Individu Kekurangan 2 Level/Tingkat]</option>

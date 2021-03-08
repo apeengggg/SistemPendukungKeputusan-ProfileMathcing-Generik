@@ -301,6 +301,79 @@ $act=$_GET["act"];
 						<?php
 					break;
 
+					case "daftar_spk" :
+						?>
+						<div class="card-header card-header-rose card-header-text">
+		                  <div class="card-text">
+		                    <h4 class="card-title">Daftar SPK Yang Dapat Digunakan</h4>
+		                  </div>
+		                </div>
+		                <div class="card-body ">
+							<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+									<?php 
+									$no=1;
+									$tampil = mysqli_query($koneksi, "SELECT DISTINCT u.nama, s.tanggal, s.nama_spk, s.keterangan, s.jenis, u.id_user, s.id_spk, s.status_verif FROM spk s LEFT JOIN user u ON u.id_user=s.id_user LEFT JOIN aspek a ON a.id_spk=s.id_spk LEFT JOIN faktor f ON f.aspek=a.id_aspek WHERE s.jenis=0 AND status_verif=1 AND a.id_aspek IS NOT NULL AND f.id_faktor IS NOT NULL ORDER BY id_spk DESC");
+								      echo "
+								          <thead>
+											<tr>
+											<th width=''>No</th>
+											<th>Nama Pembuat</th>
+											<th>Tgl Dibuat</th>
+											<th>Nama SPK</th>
+											<th>Keterangan</th>
+											<th>Jenis SPK</th>
+											<th>Aspek</th>
+
+											</tr>
+										</thead>
+									<tbody>"; 
+								    $no=1;
+								    while ($r=mysqli_fetch_array($tampil)){
+									   $j = $r["jenis"];
+									   $s = $r["status_verif"];
+										if ($j == 0) {
+										   $jenis = "Umum";
+									   }else{
+										   $jenis = "Private";
+									   }
+
+									   if ($s == 0) {
+										   $status = "Menunggu";
+									   }elseif ($s == 1){
+											$status = "Disetujui";
+									   }else{
+											$status = "Ditolak";
+									   }
+
+								       echo "<tr>
+								       			<td>$no</td>
+												<td>$r[nama]</td>
+												<td>$r[tanggal]</td>
+												<td>$r[nama_spk]</td>
+												<td>$r[keterangan]</td>
+												<td>$jenis</td>
+												<td width='110px'>";
+												?>
+													 <center>
+													 <a href='?module=aspek&id=<?=$r[id_spk]?>'>Lihat Aspek</a><br>			
+												   </center>
+												   <?php 
+												   echo "
+												</td>
+											</tr>";
+								      $no++;
+								    }
+								    echo "</tbody>
+											
+										</table>";
+									?>
+									</div>
+								</div>
+							</div>
+
+						<?php
+					break;
+
 					case "tambah":
 					?>
 						<div class="card-header card-header-rose card-header-text">

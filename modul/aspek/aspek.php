@@ -18,9 +18,8 @@ $act=$_GET["act"];
 						$result = mysqli_fetch_array($query);
 						$r = $result['id_user'];
 						$user = $_SESSION['id_user'];
-					}
-					
-						?>
+						// print_r($r); die;
+					}						?>
 						<div class="card-header card-header-rose card-header-text">
 		                  <div class="card-text">
 		                    <h4 class="card-title">Data Aspek</h4>

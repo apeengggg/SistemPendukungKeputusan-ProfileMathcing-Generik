@@ -47,7 +47,7 @@ else{
 		$bobot_a = $_POST['bobot']/100;
 		$bobot_sec = 100-$_POST['bobot_core'];
 		$bobot_angka = is_numeric($_POST['bobot']);
-		if ($_POST['bobot_core'] > 100 $_POST['bobot_core'] === 0 OR $_POST['bobot_core'] < 0) {
+		if ($_POST['bobot_core'] > 100 OR $_POST['bobot_core'] === 0 OR $_POST['bobot_core'] < 0) {
 			echo "
 						<script type='text/javascript'>
 							window.alert('Bobot Core Lebih Dari 100 atau kurang dari sama dengan 0, Gagal Menambahkan Aspek Baru');
@@ -143,7 +143,7 @@ else{
 		$init = $_POST['nama_singkat'];
 		$bobot_sec = 100-$_POST['bobot_core'];
 		$bobot = $_POST['bobot']/100;
-		if ($_POST['bobot_core'] > 100 OR $_POST['bobot_core'] === 0 OR $_POST['bobot_cores'] < 0) {
+		if ($_POST['bobot_core'] > 100 OR $_POST['bobot_core'] === 0 OR $_POST['bobot_core'] < 0) {
 			echo "
 						<script type='text/javascript'>
 							window.alert('Bobot Core Lebih Dari 100, atau kurang dari samadengan 0, Gagal Menambahkan Aspek Baru');
@@ -171,7 +171,7 @@ else{
 		?>
 		<!-- kalau iya -->
 			<script type="text/javascript">
-				window.alert("Nama Aspek Sudah Ada, Gagal Merubah Aspek!");
+				window.alert("Nama Aspek atau inisial Sudah Ada, Gagal Merubah Aspek!");
 				window.location="../../dashboard.php?module=aspek&id=<?=$idspk?>";
 			</script>
 		<?php

@@ -14,7 +14,7 @@ if($jumlah>0)
 	{
 		?>
             <script type="text/javascript">
-                window.alert("Tidak Ada Data Alternatif!");
+                window.alert("Tidak Ada Data Kandidat!");
                 window.location="?module=promatch";
             </script>
         <?php 

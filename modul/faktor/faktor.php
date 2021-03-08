@@ -254,7 +254,7 @@ $act=$_GET["act"];
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Target</label>
-														<input type="text" name="target" class="form-control" min="1" max="5" placeholder="Nilai 1-5... 1=Sangat Kurang 2=Kurang 3=cukup 4=Baik 5=Sangat Baik" required>
+														<input type="number" name="target" class="form-control" min="1" max="5" placeholder="Nilai 1-5... 1=Sangat Kurang 2=Kurang 3=cukup 4=Baik 5=Sangat Baik" required>
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Jenis</label>
@@ -302,14 +302,15 @@ $act=$_GET["act"];
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Target</label>
-														<select name="target" class='form-control' required>
+														<input type="number" name="target" value="<?php echo $r['target'] ?>" class='form-control' placeholder="target" min='1' max='5' required>
+														<!-- <select name="target" class='form-control' required>
 								                            <option value='<?=$r['target']?>'><?=$r['target']?></option>
 								                            <option value='1'>1 = Sangat Kurang</option>
 								                            <option value='2'>2 = Kurang</option>
 								                            <option value='3'>3 = Cukup</option>
 								                            <option value='4'>4 = Baik</option>
 								                            <option value='5'>5 = Sangat Baik</option>
-														</select>
+														</select> -->
 													</div>
 													<div class="input-group">
 														<label class="col-sm-4 control-label text-left">Jenis</label>

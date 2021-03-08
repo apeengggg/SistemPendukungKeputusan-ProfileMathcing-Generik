@@ -19,16 +19,15 @@ $act=$_GET["act"];
 			</div>
 
 			<div class="card-body ">
-
 				<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
 					width="100%" style="width:100%">
 					<?php 
 									$no=1;
 									if($_SESSION["level"]=="admin")
 									{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM spk s INNER JOIN user u ON s.id_user=u.id_user");
+										$tampil = mysqli_query($koneksi,"SELECT * FROM spk s INNER JOIN spk_user su ON s.id_spk=su.id_spk INNER JOIN hasil h ON su.id_spkuser=h.id_spkuser INNER JOIN user u ON su.id_user=u.id_user GROUP BY h.id_spkuser");
 									}else{
-										$tampil = mysqli_query($koneksi,"SELECT * FROM spk_user us INNER JOIN spk s ON us.id_spk=s.id_spk INNER JOIN user u ON us.id_user=u.id_user WHERE us.id_user='$_SESSION[id_user]'") or die (mysqli_error($koneksi));
+										$tampil = mysqli_query($koneksi,"SELECT * FROM spk_user us INNER JOIN spk s ON us.id_spk=s.id_spk INNER JOIN user u ON us.id_user=u.id_user INNER JOIN hasil h ON us.id_spkuser=h.id_spkuser WHERE us.id_user='$_SESSION[id_user]' GROUP BY h.id_spkuser") or die (mysqli_error($koneksi));
 									}
 									if($_SESSION["level"]=="admin"){
 										echo "

@@ -191,14 +191,14 @@ else{
 			?>
 				<script type="text/javascript">
 					window.alert("Data berhasil ditambah");
-					window.location="../../dashboard.php?module=alternatif_user";
+					window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$ambil_id?>&id_spk=<?=$_POST[id_spk]?>";
 				</script>
 			<?php 
 			}else{
 				?>
 					<script type="text/javascript">
 						window.alert("Data gagal ditambah");
-						window.location="../../dashboard.php?module=alternatif_user";
+						window.location="../../dashboard.php?module=alternatif_user&act=view_alt&id_spkuser=<?=$ambil_id?>&id_spk=<?=$_POST[id_spk]?>";
 					</script>
 				<?php 
 			}

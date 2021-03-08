@@ -82,7 +82,7 @@ else{
 							   					VALUES('$_POST[nama_faktor]',
 							   						   '$_POST[id_aspek]',
 													   '$_POST[target]', 
-													   '$_POST[jenis]')") or die (mysql_error());
+													   '$_POST[jenis]')") or die (mysqli_error($koneksi));
 
 				if($query){
 					if (isset($_GET["jenis"])) {
@@ -153,11 +153,12 @@ else{
 				</script>
 			<?php
 			}else{
-		  $query=mysqli_query($koneksi,"UPDATE faktor SET nama_faktor 		= '$_POST[nama_faktor]', 
-		  										   aspek 			= '$_POST[id_aspek]', 
-		  										   target 			= '$_POST[target]', 
-		  										   jenis			= '$_POST[jenis]'
-				                            WHERE  id_faktor    	= '$_POST[id_faktor]'")or die (mysql_error());
+		  $query=mysqli_query($koneksi,"UPDATE faktor SET 
+		  										nama_faktor 		= '$_POST[nama_faktor]', 
+		  										aspek 			= '$_POST[id_aspek]', 
+		  										target 			= '$_POST[target]', 
+		  										jenis			= '$_POST[jenis]'
+				                         WHERE  id_faktor    	= '$_POST[id_faktor]'")or die (mysql_error());
 		  	if($query){
 					?>
 						<script type="text/javascript">
@@ -180,16 +181,16 @@ else{
 	// $ceknama=mysqli_query($koneksi,"SELECT * FROM faktor WHERE nama_faktor='$name' AND id_spk=$idspk AND aspek='$idaspek'");
 	// if (mysqli_num_rows($ceknama)>0) {
 	// 	?>
-	// 			<script type="text/javascript">
-	// 				window.alert("Nama Faktor Sudah Ada, Gagal Mengubah Faktor!");
-	// 				window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>";
-	// 			</script>
-	// 		<?php
+	 			<!-- <script type="text/javascript"> -->
+	 				<!-- window.alert("Nama Faktor Sudah Ada, Gagal Mengubah Faktor!"); -->
+	 				<!-- window.location="../../dashboard.php?module=faktor&id=<?=$idaspek?>&id_spk=<?=$idspk?>"; -->
+				<!-- </script> -->
+	 		<?php
 	// }else{
 	$query=mysqli_query($koneksi,"UPDATE faktor SET aspek 			= '$_POST[id_aspek]', 
 		  										   target 			= '$_POST[target]', 
 		  										   jenis			= '$_POST[jenis]'
-				                            WHERE  id_faktor    	= '$_POST[id_faktor]'")or die (mysql_error());
+				                            WHERE  id_faktor    	= '$_POST[id_faktor]'")or die (mysqli_error($koneksi));
 		  	if($query){
 					?>
 						<script type="text/javascript">

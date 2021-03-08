@@ -44,7 +44,7 @@ else{
 			if ($hapus) {
 			?>
 	  		<script type="text/javascript">
-					window.alert("Data berhasil dihapus oleh admin");
+					window.alert("Data berhasil dihapus");
 					window.location="../../dashboard.php?module=spk";
 			</script>
 	  		<?php
@@ -69,13 +69,11 @@ else{
 		$status			= '-';
 		$tgl 			= date("Y-m-d");
 		$query = mysqli_query($koneksi, "INSERT INTO spk (nama_spk, 
-														  keterangan, 
-														  tanggal,
+														  keterangan,
 														  status_verif,
 														  id_user)
 													VALUES('$nama_spk',
-														  '$keterangan', 
-														  '$tgl',
+														  '$keterangan',
 														  '$status',
 														  '$_SESSION[id_user]')") or die(mysqli_error($koneksi));
 		$id_spk = mysqli_insert_id($koneksi);
@@ -102,13 +100,11 @@ else{
 		$status			= "1";
 		$query = mysqli_query($koneksi, "INSERT INTO spk (nama_spk, 
 														  keterangan, 
-														  tanggal,
 														  jenis,
 														  status_verif,
 														  id_user)
 													VALUES('$nama_spk',
 														  '$keterangan', 
-														  '$tgl', 
 														  '$jenis',
 														  '$status',
 														  '$_SESSION[id_user]')") or die(mysqli_error($koneksi));
